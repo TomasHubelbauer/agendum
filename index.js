@@ -13,6 +13,11 @@ window.addEventListener('load', _ => {
     }
   });
   
+  function onDeleteButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    localStorage.removeItem(id);
+  }
+  
   function submit() {
     if (!editorInput.value) {
       return;
@@ -27,8 +32,15 @@ window.addEventListener('load', _ => {
   function render() {
     itemsUl.innerHTML = '';
     Object.keys(localStorage).forEach(key => {
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '×';
+      deleteButton.dataset['id'] = key;
+      deleteButton.addEventListener('click', onDeleteButtonClick);
+      
       const itemLi = document.createElement('li');
       itemLi.textContent = localStorage.getItem(key);
+      itemLi.appendChild(deleteButton);
+
       itemsUl.appendChild(itemLi);
     });
   }
