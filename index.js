@@ -23,8 +23,9 @@ E-Tag: ${eTag}
   
   logDetails.open = localStorage.getItem('_') === 'true';
 
-  logDetails.addEventListener('click', event => {
+  logDetails.addEventListener('mouseup', event => {
     localStorage.setItem('_', event.currentTarget.open);
+    render();
   });
   
   submitButton.addEventListener('click', _ => {
