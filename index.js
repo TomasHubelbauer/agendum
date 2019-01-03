@@ -20,6 +20,12 @@ window.addEventListener('load', _ => {
     render();
   }
   
+  function onEditButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    localStorage.setItem(id, prompt(localStorage.getItem(id)));
+    render();
+  }
+  
   function iterate() {
     return Object.keys(localStorage).map(Number).filter(Number.isSafeInteger).sort();
   }
@@ -44,8 +50,14 @@ window.addEventListener('load', _ => {
       deleteButton.dataset['id'] = key;
       deleteButton.addEventListener('click', onDeleteButtonClick);
       
+      const editButton = document.createElement('button');
+      editButton.textContent = '✎';
+      editButton.dataset['id'] = key;
+      editButton.addEventListener('click', onEditButtonClick);
+      
       const itemLi = document.createElement('li');
       itemLi.textContent = `${localStorage.getItem(key)} (${key})`;
+      itemLi.appendChild(editButton);
       itemLi.appendChild(deleteButton);
 
       itemsUl.appendChild(itemLi);
