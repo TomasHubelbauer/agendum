@@ -43,5 +43,10 @@
 @media only screen and (orientation: portrait) {
   .itemSpan {
     display: block;
+    /* TODO: Get rid of this and instead find out how to hide the arrow, then use `details[open] summary` for own arrow */
+    height: 0;
+    padding: 0 0 0 1em;
+    position: relative;
+    top: -1em;
   }
 }
