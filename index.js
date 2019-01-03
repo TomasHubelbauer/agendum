@@ -117,7 +117,16 @@ window.addEventListener('load', _ => {
       
       for (const line of description) {
         const lineP = document.createElement('p');
-        lineP.textContent = line;
+        // Recognize lines that are a link as a whole
+        if ((line.startsWith('http://') || line.startsWith('https://')) && line.endsWith('/')) {
+          const linkA = document.createElement('a');
+          linkA.textContent = line;
+          linkA.href = line;
+          lineP.appendChild(linkA);
+        } else {
+          lineP.textContent = line;
+        }
+        
         itemDetails.appendChild(lineP);
       }
       
