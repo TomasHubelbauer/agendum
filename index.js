@@ -44,6 +44,31 @@ window.addEventListener('load', _ => {
     downloadA.href = `data:application/json,` + JSON.stringify(data, null, 2);
     downloadA.click();
   });
+  
+  importButton.addEventListener('click', _ => {
+    const fileInput = document.createElement('input');
+    fileInput.accept = 'application/json';
+    fileInput.addEventListener('change', event => {
+      if (event.currentTarget.files.length === 0) {
+        return;
+      }
+      
+      const fileReader = new FileReader();
+      
+      fileReader.addEventListener('load', event => {
+        
+      });
+      
+      fileReader.addEventListener('error', event => {
+        const data = JSON.parse(event.currentTarget.result);
+        console.log(data);
+      });
+      
+      fileReader.readAsText(event.currentTarget.files[0]);
+    });
+    
+    fileInput.click();
+  });
 
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
