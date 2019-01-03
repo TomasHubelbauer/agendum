@@ -21,11 +21,10 @@ See [**online demo**](https://agendum.today) here.
   - [ ] Display preview for image links
 - [ ] Consider switching to IndexedDB, e.g.: [Storing images and files in IndexedDB](https://hacks.mozilla.org/2012/02/storing-images-and-files-in-indexeddb/)
 - [ ] Create and add a favicon
-- [ ] Get a custom domain to have own local storage, not `github.io` one
 - [ ] Convert to a PWA: [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
 - [ ] Validate PWA pinning to home screen works on iOS, with icons and standalone window
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
-- [ ] Add offline support: https://www.javascriptjanuary.com/blog/lets-take-this-offline
+- [ ] Fix service worker offline serving not working in Firefox
 - [ ] Display item button flexed to the right on desktop, on their own line on mobile
 - [ ] Implement import/export
 - [ ] Consider support for recurrent tasks
