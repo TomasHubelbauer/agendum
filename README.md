@@ -18,6 +18,7 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 - [ ] Add a button for attaching images using file picket reusing the infrastructure for image pasting
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
+  - [ ] Display preview for image links
 - [ ] Consider switching to IndexedDB for more appropriate storage for attachments or all data
 - [ ] Create and add a favicon
 - [ ] Get a custom domain to have own local storage, not `github.io` one
