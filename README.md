@@ -15,8 +15,9 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 ### Roadmap
 
 - Address [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously
-- [ ] Implement attaching images (maybe check for size for now to not bust local cache)
-- [ ] Implement recognizing links in the plain text (only whole-line links are recognized right now)
+- [ ] Add a button for attaching images using file picket reusing the infrastructure for image pasting
+- [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
+- [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
 - [ ] Consider switching to IndexedDB for more appropriate storage for attachments or all data
 - [ ] Create and add a favicon
 - [ ] Get a custom domain to have own local storage, not `github.io` one
