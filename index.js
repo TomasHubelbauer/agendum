@@ -13,13 +13,7 @@ window.addEventListener('load', _ => {
       submit();
     }
   });
-  
-  function onDeleteButtonClick(event) {
-    const id = event.currentTarget.dataset['id'];
-    localStorage.removeItem(id);
-    render();
-  }
-  
+
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     const text = prompt('', localStorage.getItem(id));
@@ -28,6 +22,24 @@ window.addEventListener('load', _ => {
     }
     
     localStorage.setItem(id, text);
+    render();
+  }
+  
+  function onDeleteButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    localStorage.removeItem(id);
+    render();
+  }
+  
+  function onMoveUpButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    alert('up');
+    render();
+  }
+  
+  function onMoveDownButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    alert('down');
     render();
   }
   
@@ -49,21 +61,36 @@ window.addEventListener('load', _ => {
   
   function render() {
     itemsUl.innerHTML = '';
-    for (const key of iterate()) {
-      const deleteButton = document.createElement('button');
-      deleteButton.textContent = '🗑';
-      deleteButton.dataset['id'] = key;
-      deleteButton.addEventListener('click', onDeleteButtonClick);
-      
+    const ids = iterate();
+    for (let index = 0; index < ids.length; index++) {
+      const id = ids[index];
+
       const editButton = document.createElement('button');
       editButton.textContent = '✎';
-      editButton.dataset['id'] = key;
+      editButton.dataset['id'] = id;
       editButton.addEventListener('click', onEditButtonClick);
       
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '🗑';
+      deleteButton.dataset['id'] = id;
+      deleteButton.addEventListener('click', onDeleteButtonClick);
+      
+      const moveUpButton = document.createElement('button');
+      moveUpButton.textContent = '▲';
+      moveUpButton.dataset['id'] = id;
+      moveUpButton.addEventListener('click', onMoveUpButtonClick);
+
+      const moveDownButton = document.createElement('button');
+      moveDownButton.textContent = '▼';
+      moveDownButton.dataset['id'] = id;
+      moveDownButton.addEventListener('click', onMoveDownButtonClick);
+      
       const itemLi = document.createElement('li');
-      itemLi.textContent = `${localStorage.getItem(key)} (${key})`;
+      itemLi.textContent = `${localStorage.getItem(id)} (${id})`;
       itemLi.appendChild(editButton);
       itemLi.appendChild(deleteButton);
+      if (index > 0) itemLi.appendChild(moveUpButton);
+      if (index < ids.length - 1) itemLi.appendChild(moveDownButton);
 
       itemsUl.appendChild(itemLi);
     }
