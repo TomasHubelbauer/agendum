@@ -38,7 +38,7 @@ window.addEventListener('load', _ => {
   function onMoveUpButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     const ids = iterate();
-    const index = ids.findIndex(Number(id));
+    const index = ids.indexOf(Number(id));
     const otherId = ids[index - 1].toString();
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
@@ -48,7 +48,12 @@ window.addEventListener('load', _ => {
   
   function onMoveDownButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    alert('down');
+    const ids = iterate();
+    const index = ids.indexOf(Number(id));
+    const otherId = ids[index + 1].toString();
+    const other = localStorage.getItem(otherId);
+    localStorage.setItem(otherId, localStorage.getItem(id));
+    localStorage.setItem(id, other);
     render();
   }
   
