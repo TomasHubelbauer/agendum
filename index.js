@@ -1,7 +1,16 @@
 window.addEventListener('load', _ => {
+  const debugDiv = document.querySelector('#debugDiv');
   const editorInput = document.querySelector('#editorInput');
   const submitButton = document.querySelector('#submitButton');
   const itemsUl = document.querySelector('#itemsUl');
+  
+  // Display cache information as a stand-in for version
+  fetch('index.js').then(response => {
+    const age = response.headers.get('age');
+    const expires = Date(response.headers.get('expires'));
+    const lastModified = Date(response.headers.get('last-modified'));
+    debugDiv.textContent = `Age: ${age}; Expires: ${expires}; LastModified: ${lastModified}`;
+  })
 
   submitButton.addEventListener('click', _ => {
     submit();
