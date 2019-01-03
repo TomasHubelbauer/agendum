@@ -88,8 +88,7 @@ window.addEventListener('load', _ => {
   });
   
   bustButton.addEventListener('click', async _ => {
-    await caches.delete('agendum');
-    location.reload();
+    navigation.serviceWorker.controller.postMessage('bust');
   });
 
   function onEditButtonClick(event) {
