@@ -15,7 +15,7 @@ window.addEventListener('load', _ => {
   });
   
   editorTextArea.addEventListener('keypress', event => {
-    if (event.key === '\n' && (event.ctrlKey || event.metaKey)) {
+    if ((event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) && (event.ctrlKey || event.metaKey)) {
       submit();
     }
   });
