@@ -33,7 +33,12 @@ window.addEventListener('load', _ => {
   
   function onMoveUpButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    alert('up');
+    const ids = iterate();
+    const index = ids.findIndex(Number(id));
+    const otherId = ids[index - 1].toString();
+    const other = localStorage.getItem(otherId);
+    localStorage.setItem(otherId, localStorage.getItem(id));
+    localStorage.setItem(id, other);
     render();
   }
   
