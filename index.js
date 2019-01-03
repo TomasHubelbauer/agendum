@@ -21,7 +21,7 @@ E-Tag: ${eTag}
 `;
   });
   
-  logDetails.open = localStorage.getItem('_') || false;
+  logDetails.open = localStorage.getItem('_') === 'true';
 
   logDetails.addEventListener('click', event => {
     localStorage.setItem('_', event.currentTarget.open);
