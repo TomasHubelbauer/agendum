@@ -83,7 +83,7 @@ window.addEventListener('load', _ => {
     
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, editorTextArea.value);
+    localStorage.setItem(id, editorTextArea.value.trim());
     editorTextArea.value = '';
     render();
   }
