@@ -27,7 +27,8 @@ window.addEventListener('load', _ => {
   
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    if (!confirm(`Delete item '${localStorage.getItem(id)}'?`)) {
+    const [text] = localStorage.getItem(id).split('\n', 1);
+    if (!confirm(`Delete item '${text}'?`)) {
       return;
     }
     
