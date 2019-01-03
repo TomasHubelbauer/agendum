@@ -1,4 +1,6 @@
 window.addEventListener('load', _ => {
+  navigator.serviceWorker.register('worker.js');
+  
   const debugDiv = document.querySelector('#debugDiv');
   const editorTextArea = document.querySelector('#editorTextArea');
   const attachmentInput = document.querySelector('#attachmentInput');
