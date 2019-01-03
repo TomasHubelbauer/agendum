@@ -88,7 +88,7 @@ window.addEventListener('load', _ => {
   });
   
   bustButton.addEventListener('click', async _ => {
-    navigation.serviceWorker.controller.postMessage('bust');
+    navigator.serviceWorker.controller.postMessage('bust');
   });
 
   function onEditButtonClick(event) {
