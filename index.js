@@ -18,8 +18,8 @@ window.addEventListener('load', _ => {
       return;
     }
     
-    // TODO: Calculate +1 instead of `length` so that keys are always-growing even after implementing deletion
-    localStorage.setItem(localStorage.length, editorInput.value);
+    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number)) + 1;
+    localStorage.setItem(id, editorInput.value);
     editorInput.value = '';
     render();
   }
