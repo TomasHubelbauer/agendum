@@ -11,6 +11,8 @@ window.addEventListener('load', _ => {
   const exportButton = document.querySelector('#exportButton');
   const importInput = document.querySelector('#importInput');
   const importButton = document.querySelector('#importButton');
+  const clearButton = document.querySelector('#clearButton');
+  const bustButton = document.querySelector('#bustButton');
   
   attachButton.addEventListener('click', _ => {
     attachmentInput.click();
@@ -73,6 +75,21 @@ window.addEventListener('load', _ => {
   
   importButton.addEventListener('click', _ => {
     importInput.click();
+  });
+  
+  clearButton.addEventListener('click', _ => {
+    if (confirm('This will remove all your to-do items. Really continue?')) {
+      for (const id of iterate()) {
+        localStorage.remove(id);
+      }
+      
+      render();
+    }
+  });
+  
+  bustButton.addEventListener('click', async _ => {
+    await caches.delete('agendum');
+    location.reload();
   });
 
   function onEditButtonClick(event) {
