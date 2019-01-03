@@ -8,7 +8,7 @@ window.addEventListener('load', _ => {
   fetch('index.js').then(response => {
     const age = Number(response.headers.get('age'));
     if (age < 60) {
-      debugDiv.textContent = 'Just deployed!';
+      debugDiv.textContent = `Just deployed ${age} seconds ago!`;
     }
   });
   
