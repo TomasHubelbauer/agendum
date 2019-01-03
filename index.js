@@ -21,7 +21,7 @@ window.addEventListener('load', _ => {
   }
   
   function iterate() {
-    return Object.keys(localStorage)..map(Number).filter(Number.isSafeInteger);
+    return Object.keys(localStorage).map(Number).filter(Number.isSafeInteger);
   }
   
   function submit() {
