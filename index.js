@@ -109,8 +109,8 @@ window.addEventListener('load', _ => {
       if (index < ids.length - 1) itemSummary.appendChild(moveDownButton);
       
       const itemDetails = document.createElement('details');
-      itemDetails.appendChild(itemSummary);
       itemDetails.textContent = 'TODO: Images & rich content';
+      itemDetails.appendChild(itemSummary);
 
       fragment.appendChild(itemDetails);
     }
