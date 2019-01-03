@@ -7,7 +7,9 @@ window.addEventListener('load', _ => {
   const attachButton = document.querySelector('#attachButton');
   const submitButton = document.querySelector('#submitButton');
   const itemsDiv = document.querySelector('#itemsDiv');
+  const exportA = document.querySelector('#exportA');
   const exportButton = document.querySelector('#exportButton');
+  const importInput = document.querySelector('#importInput');
   const importButton = document.querySelector('#importButton');
   
   attachButton.addEventListener('click', _ => {
@@ -39,42 +41,38 @@ window.addEventListener('load', _ => {
       data[id] = localStorage.getItem(id);
     }
     
-    const downloadA = document.createElement('a');
-    downloadA.download = `Agendum-${new Date().toISOString()}.json`;
-    downloadA.href = `data:application/json,` + JSON.stringify(data, null, 2);
-    downloadA.click();
+    exportA.download = `Agendum-${new Date().toISOString()}.json`;
+    exportA.href = `data:application/json,` + JSON.stringify(data, null, 2);
+    exportA.click();
+  });
+  
+  importInput.addEventListener('change', event => {
+    if (event.currentTarget.files.length === 0) {
+      return;
+    }
+
+    const fileReader = new FileReader();
+
+    fileReader.addEventListener('load', event => {
+      const { timestamp, ...data } = JSON.parse(event.currentTarget.result);
+      const ids = Object.keys(data).map(Number).filter(Number.isSafeInteger);
+      for (const id of ids) {
+        // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
+        localStorage.setItem(id, data[id.toString()]);
+      }
+
+      render();
+    });
+
+    fileReader.addEventListener('error', event => {
+      alert(event.currentTarget.error);
+    });
+
+    fileReader.readAsText(event.currentTarget.files[0]);
   });
   
   importButton.addEventListener('click', _ => {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'application/json';
-    fileInput.addEventListener('change', event => {
-      if (event.currentTarget.files.length === 0) {
-        return;
-      }
-      
-      const fileReader = new FileReader();
-      
-      fileReader.addEventListener('load', event => {
-        const { timestamp, ...data } = JSON.parse(event.currentTarget.result);
-        const ids = Object.keys(data).map(Number).filter(Number.isSafeInteger);
-        for (const id of ids) {
-          // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
-          localStorage.setItem(id, data[id.toString()]);
-        }
-        
-        render();
-      });
-      
-      fileReader.addEventListener('error', event => {
-        alert(event.currentTarget.error);
-      });
-      
-      fileReader.readAsText(event.currentTarget.files[0]);
-    });
-    
-    fileInput.click();
+    importInput.click();
   });
 
   function onEditButtonClick(event) {
