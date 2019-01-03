@@ -20,12 +20,17 @@ window.addEventListener('load', _ => {
     render();
   }
   
+  function iterate() {
+    return Object.keys(localStorage)..map(Number).filter(Number.isSafeInteger);
+  }
+  
   function submit() {
     if (!editorInput.value) {
       return;
     }
     
-    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number).filter(Number.isSafeInteger)) + 1;
+    const ids = iterate();
+    const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
     localStorage.setItem(id, editorInput.value);
     editorInput.value = '';
     render();
@@ -33,7 +38,7 @@ window.addEventListener('load', _ => {
   
   function render() {
     itemsUl.innerHTML = '';
-    Object.keys(localStorage).forEach(key => {
+    for (const key of iterate()) {
       const deleteButton = document.createElement('button');
       deleteButton.textContent = '×';
       deleteButton.dataset['id'] = key;
@@ -44,7 +49,7 @@ window.addEventListener('load', _ => {
       itemLi.appendChild(deleteButton);
 
       itemsUl.appendChild(itemLi);
-    });
+    }
   }
   
   render();
