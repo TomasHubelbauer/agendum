@@ -1,29 +1,15 @@
 window.addEventListener('load', _ => {
-  const logDetails = document.querySelector('#logDetails');
   const debugDiv = document.querySelector('#debugDiv');
   const editorInput = document.querySelector('#editorInput');
   const submitButton = document.querySelector('#submitButton');
   const itemsUl = document.querySelector('#itemsUl');
   
-  // Display cache information as a stand-in for version
+  // Indicate cache having been invalidated after changes have been made
   fetch('index.js').then(response => {
-    const age = response.headers.get('age');
-    const eTag = response.headers.get('etag');
-    debugDiv.textContent = `
-Age: ${age} seconds
-E-Tag: ${eTag}
-`;
-  });
-  
-  fetch('https://api.github.com/repos/tomashubelbauer/agenda/commits')
-    .then(response => response.json())
-    .then(json => debugDiv.textContent += json[0].commit.message);
-  
-  logDetails.open = localStorage.getItem('_') === 'true';
-
-  logDetails.addEventListener('click', event => {
-    localStorage.setItem('_', !event.currentTarget.open);
-    render();
+    const age = Number(response.headers.get('age'));
+    if (age < 60) {
+      debugDiv.textContent = 'Just deployed!';
+    }
   });
   
   submitButton.addEventListener('click', _ => {
@@ -47,7 +33,7 @@ E-Tag: ${eTag}
       return;
     }
     
-    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number).filter(n => n !== NaN)) + 1;
+    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number)) + 1;
     localStorage.setItem(id, editorInput.value);
     editorInput.value = '';
     render();
