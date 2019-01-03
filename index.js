@@ -47,6 +47,7 @@ window.addEventListener('load', _ => {
   
   importButton.addEventListener('click', _ => {
     const fileInput = document.createElement('input');
+    fileInput.type = 'file';
     fileInput.accept = 'application/json';
     fileInput.addEventListener('change', event => {
       if (event.currentTarget.files.length === 0) {
@@ -56,12 +57,18 @@ window.addEventListener('load', _ => {
       const fileReader = new FileReader();
       
       fileReader.addEventListener('load', event => {
+        const { timestamp, ...data } = JSON.parse(event.currentTarget.result);
+        const ids = Object.keys(data).map(Number).filter(Number.isSafeInteger);
+        for (const id of ids) {
+          // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
+          localStorage.setItem(id, data[id.toString()]);
+        }
         
+        render();
       });
       
       fileReader.addEventListener('error', event => {
-        const data = JSON.parse(event.currentTarget.result);
-        console.log(data);
+        alert(event.currentTarget.error);
       });
       
       fileReader.readAsText(event.currentTarget.files[0]);
@@ -140,11 +147,11 @@ window.addEventListener('load', _ => {
       const fileReader = new FileReader();
 
       fileReader.addEventListener('load', event => {
-        editorTextArea.value += `\n<img src="${fileReader.result}" />\n`;
+        editorTextArea.value += `\n<img src="${event.currentTarget.result}" />\n`;
       });
       
       fileReader.addEventListener('error', event => {
-        alert(fileReader.error);
+        alert(event.currentTarget.error);
       });
       
       fileReader.readAsDataURL(file);
