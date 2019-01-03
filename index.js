@@ -51,7 +51,7 @@ window.addEventListener('load', _ => {
     itemsUl.innerHTML = '';
     for (const key of iterate()) {
       const deleteButton = document.createElement('button');
-      deleteButton.textContent = '×';
+      deleteButton.textContent = '🗑';
       deleteButton.dataset['id'] = key;
       deleteButton.addEventListener('click', onDeleteButtonClick);
       
