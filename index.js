@@ -11,7 +11,7 @@ window.addEventListener('load', _ => {
     const now = new Date();
     const expires = Date(response.headers.get('expires'));
     const lastModified = Date(response.headers.get('last-modified'));
-    const eTag = Date(response.headers.get('etag'));
+    const eTag = response.headers.get('etag');
     debugDiv.textContent = `
 Age: ${age} seconds
 Now: ${now}
