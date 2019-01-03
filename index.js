@@ -48,7 +48,7 @@ window.addEventListener('load', _ => {
       deleteButton.addEventListener('click', onDeleteButtonClick);
       
       const itemLi = document.createElement('li');
-      itemLi.textContent = localStorage.getItem(key);
+      itemLi.textContent = `${localStorage.getItem(key)} (${key})`;
       itemLi.appendChild(deleteButton);
 
       itemsUl.appendChild(itemLi);
