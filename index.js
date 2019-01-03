@@ -21,6 +21,10 @@ E-Tag: ${eTag}
 `;
   });
   
+  fetch('https://api.github.com/repos/tomashubelbauer/agenda/commits')
+    .then(response => response.json())
+    .then(json => debugDiv.textContent += json[0].commit.message);
+  
   logDetails.open = localStorage.getItem('_') === 'true';
 
   logDetails.addEventListener('click', event => {
