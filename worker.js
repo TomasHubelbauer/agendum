@@ -1,6 +1,6 @@
 self.addEventListener('install', async event => {
   const cache = await caches.open('agendum');
-  cache.addAll(['/', '/index.html', '/index.js', '/index.css']);
+  cache.addAll(['/', '/index.html', '/index.js', '/index.css', '/manifest.json']);
 });
 
 self.addEventListener('fetch', event => {
