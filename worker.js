@@ -4,5 +4,7 @@ self.addEventListener('install', async event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(caches.match(event.request));
+  const match = caches.match(event.request);
+  console.log('match', match);
+  event.respondWith(match);
 });
