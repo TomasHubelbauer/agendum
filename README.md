@@ -26,8 +26,8 @@ See [**online demo**](https://agendum.today) here.
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
 - [ ] Fix service worker offline serving not working in Firefox
 - [ ] Display item button flexed to the right on desktop, on their own line on mobile
-- [ ] Implement import/export
 - [ ] Consider support for recurrent tasks
 - [ ] Implement the distinction between archiving and deleting
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
+- [ ] Detect conflicts during import (non-equal) and offer a UI for resolution (keep old, keep new, keep both)
