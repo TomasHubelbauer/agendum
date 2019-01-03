@@ -6,7 +6,7 @@
   display: flex;
 }
 
-#editorInput {
+#editorTextArea {
   flex: 1;
   /* Prevent mobile input zoom by setting the font size large enough (16px+) */
   font-size: 16px;
