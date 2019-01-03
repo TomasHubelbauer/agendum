@@ -209,12 +209,12 @@ window.addEventListener('load', _ => {
       moveDownButton.dataset['id'] = id;
       moveDownButton.addEventListener('click', onMoveDownButtonClick);
       
-      const titleSpan = document.createElement('span');
-      titleSpan.textContent = title;
-      titleSpan.className = 'itemSpan';
+      const itemSpan = document.createElement('span');
+      itemSpan.textContent = title;
+      itemSpan.className = 'itemSpan';
       
       const itemSummary = document.createElement('summary');
-      itemSummary.appendChild(titleSpan);
+      itemSummary.appendChild(itemSpan);
       itemSummary.appendChild(editButton);
       itemSummary.appendChild(deleteButton);
       itemSummary.appendChild(moveUpButton);
