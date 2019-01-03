@@ -21,7 +21,7 @@ window.addEventListener('load', _ => {
         continue;
       }
       
-      alert(typeof file);
+      editorTextArea.value += `\n<img src="${URL.createObjectURL(file)}" />\n`;
     }
   });
 
