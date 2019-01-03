@@ -24,3 +24,4 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 - [ ] Convert to a PWA: [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
 - [ ] Validate PWA pinning to home screen works on iOS, with icons and standalone window
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
+- [ ] Implement ordering by updating IDs
