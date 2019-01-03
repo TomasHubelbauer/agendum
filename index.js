@@ -68,7 +68,7 @@ window.addEventListener('load', _ => {
     
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, editorInput.value);
+    localStorage.setItem(id, editorTextArea.value);
     editorInput.value = '';
     render();
   }
