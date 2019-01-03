@@ -102,14 +102,14 @@ window.addEventListener('load', _ => {
       moveDownButton.addEventListener('click', onMoveDownButtonClick);
       
       const itemSummary = document.createElement('summary');
-      itemSummary.textContent = `${localStorage.getItem(id)} (${id})`;
+      itemSummary.textContent = localStorage.getItem(id);
       itemSummary.appendChild(editButton);
       itemSummary.appendChild(deleteButton);
       if (index > 0) itemSummary.appendChild(moveUpButton);
       if (index < ids.length - 1) itemSummary.appendChild(moveDownButton);
       
       const itemDetails = document.createElement('details');
-      itemDetails.textContent = 'TODO: Images & rich content';
+      itemDetails.textContent = 'ID: ' + id;
       itemDetails.appendChild(itemSummary);
 
       fragment.appendChild(itemDetails);
