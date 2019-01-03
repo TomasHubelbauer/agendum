@@ -33,7 +33,7 @@ window.addEventListener('load', _ => {
       return;
     }
     
-    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number)) + 1;
+    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number).filter(Number.isSafeInteger)) + 1;
     localStorage.setItem(id, editorInput.value);
     editorInput.value = '';
     render();
