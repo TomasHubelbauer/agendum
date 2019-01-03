@@ -28,3 +28,20 @@
 #importInput {
   display: none;
 }
+
+@media only screen and (orientation: landscape) {
+  #itemsDiv details {
+    display: flex;
+  }
+  
+  .itemSpan {
+    flex: 1;
+  }
+}
+
+
+@media only screen and (orientation: portrait) {
+  .itemSpan {
+    display: block;
+  }
+}
