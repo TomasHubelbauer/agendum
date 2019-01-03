@@ -21,7 +21,11 @@ window.addEventListener('load', _ => {
         continue;
       }
       
-      editorTextArea.value += `\n<img src="${URL.createObjectURL(file)}" />\n`;
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener('load', event => {
+        editorTextArea.value += `\n<img src="${fileReader.result}" />\n`;
+      });
     }
   });
 
