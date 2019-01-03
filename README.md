@@ -26,7 +26,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Validate PWA pinning to home screen works on iOS, with icons and standalone window
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
 - [ ] Fix service worker offline serving not working in Firefox
-- [ ] Display item button flexed to the right on desktop, on their own line on mobile
 - [ ] Consider support for recurrent tasks
 - [ ] Implement the distinction between archiving and deleting
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
