@@ -10,5 +10,5 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('message', async event => {
   await caches.delete('agendum');
-  self.postMessage('reload');
+  event.source.postMessage('reload');
 });
