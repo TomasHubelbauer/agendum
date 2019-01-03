@@ -22,5 +22,4 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 - [ ] Create and add an icon
 - [ ] Add application manifest for PWA
 - [ ] Validate pinning to home screen works on iOS
-- [ ] Fix the subsequent ID calculation in Safari (gives `NaN`)
 - [ ] Get a custom domain to have own local storage, not `github.io` one
