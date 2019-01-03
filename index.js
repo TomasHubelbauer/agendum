@@ -112,8 +112,17 @@ window.addEventListener('load', _ => {
       itemSummary.appendChild(moveDownButton);
       
       const itemDetails = document.createElement('details');
-      itemDetails.textContent = description.join('\n') + '\nID: ' + id;
       itemDetails.appendChild(itemSummary);
+      
+      for (const line of description) {
+        const lineP = document.createElement('p');
+        lineP.textContent = line;
+        itemDetails.appendChild(lineP);
+      }
+      
+      const debugLineP = document.createElement('p');
+      debugLineP.textContent = `ID: ${id}`;
+      itemDetails.appendChild(debugLineP);
 
       fragment.appendChild(itemDetails);
     }
