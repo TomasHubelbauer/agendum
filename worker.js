@@ -3,7 +3,7 @@ self.addEventListener('install', async event => {
   cache.addAll(['/', '/index.html', '/index.js', '/index.css']);
 });
 
-self.addEventListener('fetch', async event => {
-  const response = await caches.match(event.request);
-  event.respondWith(response || fetch(event.request));
+self.addEventListener('fetch', event => {
+  // Note that this needs to be called synchronously, so no async/await
+  event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
 });
