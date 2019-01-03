@@ -32,4 +32,4 @@ See [**online demo**](http://agendum.today) here.
 - [ ] Implement the distinction between archiving and deleting
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
-- [ ] Enforce HTTPS for the custom domain once available and fix links in repo and README
+- [ ] Wait and see if the HTTPS certificate fixes itself and fix URLs or contact GitHub Support
