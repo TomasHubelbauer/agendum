@@ -13,6 +13,17 @@ window.addEventListener('load', _ => {
       submit();
     }
   });
+  
+  editorTextArea.addEventListener('paste', event => {
+    for (const file of event.clipboardData.files) {
+      // Skip the images for now, we'll do attachments later
+      if (!file.type.startsWith('image/')) {
+        continue;
+      }
+      
+      alert(typeof file);
+    }
+  });
 
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
