@@ -80,7 +80,7 @@ window.addEventListener('load', _ => {
   clearButton.addEventListener('click', _ => {
     if (confirm('This will remove all your to-do items. Really continue?')) {
       for (const id of iterate()) {
-        localStorage.remove(id);
+        localStorage.deleteItem(id);
       }
       
       render();
