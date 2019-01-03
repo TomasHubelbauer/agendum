@@ -7,9 +7,15 @@ window.addEventListener('load', _ => {
   // Display cache information as a stand-in for version
   fetch('index.js').then(response => {
     const age = response.headers.get('age');
+    cosnt now = new Date();
     const expires = Date(response.headers.get('expires'));
     const lastModified = Date(response.headers.get('last-modified'));
-    debugDiv.textContent = `Age: ${age}; Expires: ${expires}; LastModified: ${lastModified}`;
+    debugDiv.textContent = `
+Age: ${age} seconds
+Now: ${now}
+Expires: ${expires}
+LastModified: ${lastModified}
+`;
   })
 
   submitButton.addEventListener('click', _ => {
