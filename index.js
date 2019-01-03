@@ -7,6 +7,8 @@ window.addEventListener('load', _ => {
   const attachButton = document.querySelector('#attachButton');
   const submitButton = document.querySelector('#submitButton');
   const itemsDiv = document.querySelector('#itemsDiv');
+  const exportButton = document.querySelector('#exportButton');
+  const importButton = document.querySelector('#importButton');
   
   attachButton.addEventListener('click', _ => {
     attachmentInput.click();
@@ -28,6 +30,19 @@ window.addEventListener('load', _ => {
   
   attachmentInput.addEventListener('change', event => {
     attach(event.currentTarget.files);
+  });
+  
+  exportButton.addEventListener('click', _ => {
+    const data = {};
+    data.timestamp = Date.now();
+    for (const id of iterate()) {
+      data[id] = localStorage.getItem(id);
+    }
+    
+    const downloadA = document.createElement('a');
+    downloadA.download = `Agendum-${new Date().toISOString()}.json`;
+    downloadA.href = `data:application/json,` + JSON.stringify(data, null, 2);
+    downloadA.click();
   });
 
   function onEditButtonClick(event) {
