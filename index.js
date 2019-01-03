@@ -90,6 +90,12 @@ window.addEventListener('load', _ => {
   bustButton.addEventListener('click', async _ => {
     navigator.serviceWorker.controller.postMessage('bust');
   });
+  
+  navigator.serviceWorker.addEventListener('message', event => {
+    if (event.data === 'reload') {
+      location.reload();
+    }
+  });
 
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
