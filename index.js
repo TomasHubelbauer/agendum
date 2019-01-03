@@ -2,8 +2,13 @@ window.addEventListener('load', _ => {
   const debugDiv = document.querySelector('#debugDiv');
   const editorTextArea = document.querySelector('#editorTextArea');
   const attachmentInput = document.querySelector('#attachmentInput');
+  const attachButton = document.querySelector('#attachButton');
   const submitButton = document.querySelector('#submitButton');
   const itemsDiv = document.querySelector('#itemsDiv');
+  
+  attachButton.addEventListener('click', _ => {
+    attachmentInput.click();
+  });
   
   submitButton.addEventListener('click', _ => {
     submit();
