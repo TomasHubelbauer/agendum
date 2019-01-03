@@ -14,7 +14,8 @@ See [**online demo**](https://agendum.today) here.
 
 ### Roadmap
 
-- Address [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously
+Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
+
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
 - [ ] Implement attaching non-images with an option to download
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
@@ -31,3 +32,4 @@ See [**online demo**](https://agendum.today) here.
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
 - [ ] Detect conflicts during import (non-equal) and offer a UI for resolution (keep old, keep new, keep both)
+- [ ] Consider adding support for import from pasted text for iOS Safari import
