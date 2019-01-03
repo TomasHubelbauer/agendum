@@ -22,7 +22,12 @@ window.addEventListener('load', _ => {
   
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    localStorage.setItem(id, prompt(localStorage.getItem(id)));
+    const text = prompt('', localStorage.getItem(id));
+    if (text === null) {
+      return;
+    }
+    
+    localStorage.setItem(id, text);
     render();
   }
   
