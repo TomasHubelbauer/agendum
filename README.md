@@ -16,7 +16,7 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 
 - Address [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously
 - [ ] Implement attaching images (maybe check for size for now to not bust local cache)
-- [ ] Implement recognizing links in the plain text (maybe just whole-line ones for now)
+- [ ] Implement recognizing links in the plain text (only whole-line links are recognized right now)
 - [ ] Consider switching to IndexedDB for more appropriate storage for attachments or all data
 - [ ] Create and add a favicon
 - [ ] Get a custom domain to have own local storage, not `github.io` one
