@@ -9,7 +9,7 @@ window.addEventListener('load', _ => {
   });
   
   editorTextArea.addEventListener('keypress', event => {
-    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+    if (event.key === '\n' && (event.ctrlKey || event.metaKey)) {
       submit();
     }
   });
