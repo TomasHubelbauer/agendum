@@ -1,14 +1,14 @@
-# Agenda
+# [Agendum](http://agendum.today)
 
 > A to-do list
 
-Agenda is a to-do list which uses local storage on the device it runs on to store its data. No backup.
+Agendum is a to-do list which uses local storage on the device it runs on to store its data. No backup.
 
 ## Running
 
 Run `index.html`.
 
-See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
+See [**online demo**](http://agendum.today) here.
 
 ## Contributing
 
@@ -32,3 +32,4 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 - [ ] Implement the distinction between archiving and deleting
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
+- [ ] Enforce HTTPS for the custom domain once available and fix links in repo and README
