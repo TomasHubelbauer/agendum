@@ -4,14 +4,6 @@ window.addEventListener('load', _ => {
   const submitButton = document.querySelector('#submitButton');
   const itemsUl = document.querySelector('#itemsUl');
   
-  // Indicate cache having been invalidated after changes have been made
-  fetch('index.js').then(response => {
-    const age = Number(response.headers.get('age'));
-    if (age < 60) {
-      debugDiv.textContent = `Just deployed ${age} seconds ago!`;
-    }
-  });
-  
   submitButton.addEventListener('click', _ => {
     submit();
   });
