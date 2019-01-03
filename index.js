@@ -16,6 +16,7 @@ window.addEventListener('load', _ => {
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     localStorage.removeItem(id);
+    render();
   }
   
   function submit() {
