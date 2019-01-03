@@ -1,6 +1,7 @@
 window.addEventListener('load', _ => {
   const debugDiv = document.querySelector('#debugDiv');
   const editorTextArea = document.querySelector('#editorTextArea');
+  const attachmentInput = document.querySelector('#attachmentInput');
   const submitButton = document.querySelector('#submitButton');
   const itemsDiv = document.querySelector('#itemsDiv');
   
@@ -15,18 +16,11 @@ window.addEventListener('load', _ => {
   });
   
   editorTextArea.addEventListener('paste', event => {
-    for (const file of event.clipboardData.files) {
-      // Skip the images for now, we'll do attachments later
-      if (!file.type.startsWith('image/')) {
-        continue;
-      }
-      
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.addEventListener('load', event => {
-        editorTextArea.value += `\n<img src="${fileReader.result}" />\n`;
-      });
-    }
+    attach(event.clipboardData.files);
+  });
+  
+  attachmentInput.addEventListener('change', event => {
+    attach(event.currentTarget.files);
   });
 
   function onEditButtonClick(event) {
@@ -87,6 +81,21 @@ window.addEventListener('load', _ => {
     localStorage.setItem(id, editorTextArea.value);
     editorTextArea.value = '';
     render();
+  }
+  
+  function attach(files) {
+    for (const file of files) {
+      // Skip the images for now, we'll do attachments later
+      if (!file.type.startsWith('image/')) {
+        continue;
+      }
+      
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener('load', event => {
+        editorTextArea.value += `\n<img src="${fileReader.result}" />\n`;
+      });
+    }
   }
   
   function render() {
