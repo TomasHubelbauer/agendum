@@ -93,11 +93,13 @@ window.addEventListener('load', _ => {
       
       const moveUpButton = document.createElement('button');
       moveUpButton.textContent = '▲';
+      moveUpButton.disabled = index === 0;
       moveUpButton.dataset['id'] = id;
       moveUpButton.addEventListener('click', onMoveUpButtonClick);
 
       const moveDownButton = document.createElement('button');
       moveDownButton.textContent = '▼';
+      moveDownButton.disabled = index === ids.length - 1;
       moveDownButton.dataset['id'] = id;
       moveDownButton.addEventListener('click', onMoveDownButtonClick);
       
@@ -105,8 +107,8 @@ window.addEventListener('load', _ => {
       itemSummary.textContent = localStorage.getItem(id);
       itemSummary.appendChild(editButton);
       itemSummary.appendChild(deleteButton);
-      if (index > 0) itemSummary.appendChild(moveUpButton);
-      if (index < ids.length - 1) itemSummary.appendChild(moveDownButton);
+      itemSummary.appendChild(moveUpButton);
+      itemSummary.appendChild(moveDownButton);
       
       const itemDetails = document.createElement('details');
       itemDetails.textContent = 'ID: ' + id;
