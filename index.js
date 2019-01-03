@@ -140,7 +140,8 @@ window.addEventListener('load', _ => {
           linkA.target = '_blank';
           lineP.appendChild(linkA);
         } else {
-          lineP.textContent = line;
+          // Interpret as raw HTML to correctly render data URI image tags
+          lineP.innerHTML = line;
         }
         
         itemDetails.appendChild(lineP);
