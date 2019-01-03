@@ -96,10 +96,16 @@ window.addEventListener('load', _ => {
       }
       
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+
       fileReader.addEventListener('load', event => {
         editorTextArea.value += `\n<img src="${fileReader.result}" />\n`;
       });
+      
+      fileReader.addEventListener('error', event => {
+        alert(fileReader.error);
+      });
+      
+      fileReader.readAsDataURL(file);
     }
   }
   
