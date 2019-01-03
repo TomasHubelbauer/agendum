@@ -1,6 +1,6 @@
 window.addEventListener('load', _ => {
   const debugDiv = document.querySelector('#debugDiv');
-  const editorInput = document.querySelector('#editorInput');
+  const editorTextArea = document.querySelector('#editorTextArea');
   const submitButton = document.querySelector('#submitButton');
   const itemsDiv = document.querySelector('#itemsDiv');
   
@@ -8,8 +8,8 @@ window.addEventListener('load', _ => {
     submit();
   });
   
-  editorInput.addEventListener('keypress', event => {
-    if (event.key === 'Enter') {
+  editorTextArea.addEventListener('keypress', event => {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
       submit();
     }
   });
@@ -62,7 +62,7 @@ window.addEventListener('load', _ => {
   }
   
   function submit() {
-    if (!editorInput.value) {
+    if (!editorTextArea.value) {
       return;
     }
     
@@ -80,6 +80,7 @@ window.addEventListener('load', _ => {
     const ids = iterate();
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
+      const [title, ...description] = localStorage.getItem(id).split('\n');
 
       const editButton = document.createElement('button');
       editButton.textContent = '✎';
@@ -104,14 +105,14 @@ window.addEventListener('load', _ => {
       moveDownButton.addEventListener('click', onMoveDownButtonClick);
       
       const itemSummary = document.createElement('summary');
-      itemSummary.textContent = localStorage.getItem(id);
+      itemSummary.textContent = title;
       itemSummary.appendChild(editButton);
       itemSummary.appendChild(deleteButton);
       itemSummary.appendChild(moveUpButton);
       itemSummary.appendChild(moveDownButton);
       
       const itemDetails = document.createElement('details');
-      itemDetails.textContent = 'ID: ' + id;
+      itemDetails.textContent = description.join('\n') + '\nID: ' + id;
       itemDetails.appendChild(itemSummary);
 
       fragment.appendChild(itemDetails);
