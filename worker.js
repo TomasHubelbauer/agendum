@@ -4,5 +4,6 @@ self.addEventListener('install', async event => {
 });
 
 self.addEventListener('fetch', async event => {
-  event.respondWith(await caches.match(event.request));
+  const cache = await caches.open('agendum');
+  event.respondWith(await cache.match(event.request));
 });
