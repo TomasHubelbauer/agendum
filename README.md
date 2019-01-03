@@ -19,7 +19,7 @@ See [**online demo**](https://tomashubelbauer.github.io/agenda/) here.
 - [ ] Implement attaching non-images with an option to download
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
   - [ ] Display preview for image links
-- [ ] Consider switching to IndexedDB for more appropriate storage for attachments or all data
+- [ ] Consider switching to IndexedDB, e.g.: [Storing images and files in IndexedDB](https://hacks.mozilla.org/2012/02/storing-images-and-files-in-indexeddb/)
 - [ ] Create and add a favicon
 - [ ] Get a custom domain to have own local storage, not `github.io` one
 - [ ] Convert to a PWA: [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
