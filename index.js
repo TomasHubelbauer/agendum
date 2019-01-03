@@ -1,4 +1,5 @@
 window.addEventListener('load', _ => {
+  const logDetails = document.querySelector('#logDetails');
   const debugDiv = document.querySelector('#debugDiv');
   const editorInput = document.querySelector('#editorInput');
   const submitButton = document.querySelector('#submitButton');
@@ -18,8 +19,14 @@ Expires: ${expires}
 LastModified: ${lastModified}
 E-Tag: ${eTag}
 `;
-  })
+  });
+  
+  logDetails.open = localStorage.getItem('_') || false;
 
+  logDetails.addEventListener('click', event => {
+    localStorage.setItem('_', event.currentTarget.open);
+  });
+  
   submitButton.addEventListener('click', _ => {
     submit();
   });
@@ -41,7 +48,7 @@ E-Tag: ${eTag}
       return;
     }
     
-    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number)) + 1;
+    const id = localStorage.length === 0 ? 1 : Math.max(...Object.keys(localStorage).map(Number).filter(n => n !== NaN)) + 1;
     localStorage.setItem(id, editorInput.value);
     editorInput.value = '';
     render();
