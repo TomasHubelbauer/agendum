@@ -122,6 +122,7 @@ window.addEventListener('load', _ => {
           const linkA = document.createElement('a');
           linkA.textContent = line;
           linkA.href = line;
+          linkA.target = '_blank';
           lineP.appendChild(linkA);
         } else {
           lineP.textContent = line;
