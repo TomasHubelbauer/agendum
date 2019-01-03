@@ -30,7 +30,7 @@
 }
 
 @media only screen and (orientation: landscape) {
-  #itemsDiv details {
+  #itemsDiv summary {
     display: flex;
   }
   
