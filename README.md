@@ -1,4 +1,4 @@
-# [Agendum](http://agendum.today)
+# [Agendum](https://agendum.today)
 
 > A to-do list
 
@@ -8,7 +8,7 @@ Agendum is a to-do list which uses local storage on the device it runs on to sto
 
 Run `index.html`.
 
-See [**online demo**](http://agendum.today) here.
+See [**online demo**](https://agendum.today) here.
 
 ## Contributing
 
@@ -32,4 +32,3 @@ See [**online demo**](http://agendum.today) here.
 - [ ] Implement the distinction between archiving and deleting
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
-- [ ] Wait and see if the HTTPS certificate fixes itself and fix URLs or contact GitHub Support
