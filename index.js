@@ -2,7 +2,7 @@ window.addEventListener('load', _ => {
   const debugDiv = document.querySelector('#debugDiv');
   const editorInput = document.querySelector('#editorInput');
   const submitButton = document.querySelector('#submitButton');
-  const itemsUl = document.querySelector('#itemsUl');
+  const itemsDiv = document.querySelector('#itemsDiv');
   
   submitButton.addEventListener('click', _ => {
     submit();
@@ -74,7 +74,9 @@ window.addEventListener('load', _ => {
   }
   
   function render() {
-    itemsUl.innerHTML = '';
+    itemsDiv.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    
     const ids = iterate();
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
@@ -99,15 +101,21 @@ window.addEventListener('load', _ => {
       moveDownButton.dataset['id'] = id;
       moveDownButton.addEventListener('click', onMoveDownButtonClick);
       
-      const itemLi = document.createElement('li');
-      itemLi.textContent = `${localStorage.getItem(id)} (${id})`;
-      itemLi.appendChild(editButton);
-      itemLi.appendChild(deleteButton);
-      if (index > 0) itemLi.appendChild(moveUpButton);
-      if (index < ids.length - 1) itemLi.appendChild(moveDownButton);
+      const itemSummary = document.createElement('summary');
+      itemSummary.textContent = `${localStorage.getItem(id)} (${id})`;
+      itemSummary.appendChild(editButton);
+      itemSummary.appendChild(deleteButton);
+      if (index > 0) itemSummary.appendChild(moveUpButton);
+      if (index < ids.length - 1) itemSummary.appendChild(moveDownButton);
+      
+      const itemDetails = document.createElement('details');
+      itemDetails.appendChild(itemSummary);
+      itemDetails.textContent = 'TODO: Images & rich content';
 
-      itemsUl.appendChild(itemLi);
+      fragment.appendChild(itemDetails);
     }
+    
+    itemsDiv.appendChild(fragment);
   }
   
   render();
