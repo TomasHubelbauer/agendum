@@ -16,6 +16,13 @@ See [**online demo**](https://agendum.today) here.
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
+- [ ] Improve the editor experience to help with speed:
+  - Display the editor as an input with an option to switch to a textarea
+  - In input editor, Enter submits and ctrl/cmd+Enter expands to textarea
+  - In textarea editor, Enter creates a newline and ctrl/cmd+enter submits
+  - Put this information into the input editor placeholder: *Do this/that… meta+Enter to expand* where meta is ctrl/cmd per platform
+  - In textarea editor, display a small note underneath that meta+Enter can be used to submit it
+  - On mobile, where meta+Enter cannot be typed, a button for expanding the editor is shown and the placeholder doesn't say the shortcut
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
 - [ ] Implement attaching non-images with an option to download
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
