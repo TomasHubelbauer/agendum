@@ -106,6 +106,9 @@ window.addEventListener('load', _ => {
     
     localStorage.setItem(id, text);
     render();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
   }
   
   function onDeleteButtonClick(event) {
@@ -117,6 +120,9 @@ window.addEventListener('load', _ => {
     
     localStorage.removeItem(id);
     render();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
   }
   
   function onMoveUpButtonClick(event) {
@@ -128,6 +134,9 @@ window.addEventListener('load', _ => {
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
     render();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
   }
   
   function onMoveDownButtonClick(event) {
@@ -139,6 +148,9 @@ window.addEventListener('load', _ => {
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
     render();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
   }
   
   function iterate() {
@@ -179,75 +191,31 @@ window.addEventListener('load', _ => {
   }
   
   function render() {
-    itemsDiv.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    
-    const ids = iterate();
-    for (let index = 0; index < ids.length; index++) {
-      const id = ids[index];
-      const [title, ...description] = localStorage.getItem(id).split('\n');
+    reconcile(
+      itemsDiv,
+      ...iterate().map((id, index, { length }) => {
+        const [title, ...description] = localStorage.getItem(id).split('\n');
+        return details(
+          summary(
+            span({ class: 'itemSpan' }, title),
+            button({ ['data-id']: id, onclick: onEditButtonClick }, '✎'),
+            button({ ['data-id']: id, onclick: onDeleteButtonClick }, '🗑'),
+            button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled': undefined }, '▲'),
+            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined }, '▼'),
+          ),
+          ...description.map(line => {
+            // Recognize lines that are a link as a whole
+            if ((line.startsWith('http://') || line.startsWith('https://')) && line.endsWith('/')) {
+              return p(a({ href: line, target: '_blank' }, line));
+            }
 
-      const editButton = document.createElement('button');
-      editButton.textContent = '✎';
-      editButton.dataset['id'] = id;
-      editButton.addEventListener('click', onEditButtonClick);
-      
-      const deleteButton = document.createElement('button');
-      deleteButton.textContent = '🗑';
-      deleteButton.dataset['id'] = id;
-      deleteButton.addEventListener('click', onDeleteButtonClick);
-      
-      const moveUpButton = document.createElement('button');
-      moveUpButton.textContent = '▲';
-      moveUpButton.disabled = index === 0;
-      moveUpButton.dataset['id'] = id;
-      moveUpButton.addEventListener('click', onMoveUpButtonClick);
-
-      const moveDownButton = document.createElement('button');
-      moveDownButton.textContent = '▼';
-      moveDownButton.disabled = index === ids.length - 1;
-      moveDownButton.dataset['id'] = id;
-      moveDownButton.addEventListener('click', onMoveDownButtonClick);
-      
-      const itemSpan = document.createElement('span');
-      itemSpan.textContent = title;
-      itemSpan.className = 'itemSpan';
-      
-      const itemSummary = document.createElement('summary');
-      itemSummary.appendChild(itemSpan);
-      itemSummary.appendChild(editButton);
-      itemSummary.appendChild(deleteButton);
-      itemSummary.appendChild(moveUpButton);
-      itemSummary.appendChild(moveDownButton);
-      
-      const itemDetails = document.createElement('details');
-      itemDetails.appendChild(itemSummary);
-      
-      for (const line of description) {
-        const lineP = document.createElement('p');
-        // Recognize lines that are a link as a whole
-        if ((line.startsWith('http://') || line.startsWith('https://')) && line.endsWith('/')) {
-          const linkA = document.createElement('a');
-          linkA.textContent = line;
-          linkA.href = line;
-          linkA.target = '_blank';
-          lineP.appendChild(linkA);
-        } else {
-          // Interpret as raw HTML to correctly render data URI image tags
-          lineP.innerHTML = line;
-        }
-        
-        itemDetails.appendChild(lineP);
-      }
-      
-      const debugLineP = document.createElement('p');
-      debugLineP.textContent = `ID: ${id}`;
-      itemDetails.appendChild(debugLineP);
-
-      fragment.appendChild(itemDetails);
-    }
-    
-    itemsDiv.appendChild(fragment);
+            // TODO: Interpret as raw HTML to correctly render data URI image tags
+            return p(line);
+          }),
+          p(`ID: ${id}`)
+        ); 
+      })
+    );
   }
   
   render();

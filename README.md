@@ -43,4 +43,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Focus editor upon tab focus
 - [ ] Collect drafts upon tab blur with restore/discard button for each and clear button for all
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
-- [ ] Migrate the UI to [Fragment](https://github.com/TomasHubelbauer/fragment) and improve styling
+- [ ] Use [Fragment](https://github.com/TomasHubelbauer/fragment) for the editor as well
