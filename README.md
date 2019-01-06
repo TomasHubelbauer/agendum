@@ -44,3 +44,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Collect drafts upon tab blur with restore/discard button for each and clear button for all
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
 - [ ] Use [Fragment](https://github.com/TomasHubelbauer/fragment) for the editor as well
+- [ ] Set up a TypeScript type checking pipelines based on QR channel example
