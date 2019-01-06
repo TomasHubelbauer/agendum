@@ -5,10 +5,8 @@ window.addEventListener('load', async _ => {
     // TODO: Handle this at some point
   }
 
-  const editorTextArea = document.querySelector('#editorTextArea');
-  const attachmentInput = document.querySelector('#attachmentInput');
-  const attachButton = document.querySelector('#attachButton');
-  const submitButton = document.querySelector('#submitButton');
+  const editorDiv = document.querySelector('#editorDiv');
+  const hintDiv = document.querySelector('#hintDiv');
   const itemsDiv = document.querySelector('#itemsDiv');
   const exportA = document.querySelector('#exportA');
   const exportButton = document.querySelector('#exportButton');
@@ -17,27 +15,53 @@ window.addEventListener('load', async _ => {
   const clearButton = document.querySelector('#clearButton');
   const bustButton = document.querySelector('#bustButton');
 
-  attachButton.addEventListener('click', _ => {
-    attachmentInput.click();
-  });
+  function onAttachButtonClick() {
+    document.querySelector('#attachmentInput').click();
+  }
 
-  submitButton.addEventListener('click', _ => {
+  function onSubmitButtonClick() {
     submit();
-  });
+  }
 
-  editorTextArea.addEventListener('keypress', event => {
-    if ((event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) && (event.ctrlKey || event.metaKey)) {
-      submit();
+  let useRichEditor = false;
+
+  function onEditorInputKeypress(event) {
+    if (event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) {
+      if (event.ctrlKey || event.metaKey) {
+        useRichEditor = true;
+        // TODO: Preserve the cursor position as well
+        const value = document.querySelector('#editorInput').value;
+        renderEditor();
+        const editorTextArea = document.querySelector('#editorTextArea');
+        editorTextArea.value = value;
+        if (value) {
+          editorTextArea.value += '\n';
+        }
+
+        editorTextArea.focus();
+      } else {
+        submit();
+      }
     }
-  });
+  }
 
-  editorTextArea.addEventListener('paste', event => {
+  function onEditorTextAreaKeypress(event) {
+    if (event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) {
+      if (event.ctrlKey || event.metaKey) {
+        submit();
+        useRichEditor = false;
+        renderEditor();
+      }
+    }
+  }
+
+  function onEditorInputOrTextAreaPaste(event) {
     attach(event.clipboardData.files);
-  });
+  }
 
-  attachmentInput.addEventListener('change', event => {
+  function onAttachmentInputChange(event) {
     attach(event.currentTarget.files);
-  });
+  }
 
   exportButton.addEventListener('click', _ => {
     const data = {};
@@ -66,7 +90,7 @@ window.addEventListener('load', async _ => {
         localStorage.setItem(id, data[id.toString()]);
       }
 
-      render();
+      renderItems();
     });
 
     fileReader.addEventListener('error', event => {
@@ -86,7 +110,7 @@ window.addEventListener('load', async _ => {
         localStorage.removeItem(id);
       }
 
-      render();
+      renderItems();
     }
   });
 
@@ -108,7 +132,7 @@ window.addEventListener('load', async _ => {
     }
 
     localStorage.setItem(id, text);
-    render();
+    renderItems();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -122,7 +146,7 @@ window.addEventListener('load', async _ => {
     }
 
     localStorage.removeItem(id);
-    render();
+    renderItems();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -136,7 +160,7 @@ window.addEventListener('load', async _ => {
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
-    render();
+    renderItems();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -150,7 +174,7 @@ window.addEventListener('load', async _ => {
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
-    render();
+    renderItems();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -161,15 +185,25 @@ window.addEventListener('load', async _ => {
   }
 
   function submit() {
-    if (!editorTextArea.value) {
+    let value;
+    if (useRichEditor) {
+      const editorTextArea = document.querySelector('#editorTextArea');
+      value = editorTextArea.value;
+      editorTextArea.value = '';
+    } else {
+      const editorInput = document.querySelector('#editorInput');
+      value = editorInput.value;
+      editorInput.value = '';
+    }
+
+    if (!value) {
       return;
     }
 
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, editorTextArea.value.trim());
-    editorTextArea.value = '';
-    render();
+    localStorage.setItem(id, value.trim());
+    renderItems();
   }
 
   function attach(files) {
@@ -193,7 +227,53 @@ window.addEventListener('load', async _ => {
     }
   }
 
-  function render() {
+  function renderEditor() {
+    editorDiv.innerHTML = '';
+    hintDiv.innerHTML = '';
+
+    let meta;
+    switch (navigator.platform) {
+      case 'Win32': meta = 'Win'; hintDiv.innerHTML = 'Press <kbd>Win+.</kbd> for emoji keyboard.'; break;
+      case 'MacIntel': meta = 'Cmd'; hintDiv.innerHTML = 'Press <kbd>Cmd+Ctrl+ </kbd> (space) for emoji keyboard.'; break;
+    }
+
+    if (useRichEditor) {
+      const editorTextArea = document.createElement('textarea');
+      editorTextArea.id = 'editorTextArea'; // For styling & `submit`
+      editorTextArea.placeholder = 'Do this/that…';
+      editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
+      editorTextArea.addEventListener('paste', onEditorInputOrTextAreaPaste);
+      editorDiv.appendChild(editorTextArea);
+
+      hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to submit.`;
+    } else {
+      const editorInput = document.createElement('input');
+      editorInput.id = 'editorInput'; // For styling & `submit`
+      editorInput.placeholder = 'Do this/that…';
+      editorInput.addEventListener('keypress', onEditorInputKeypress);
+      editorInput.addEventListener('paste', onEditorInputOrTextAreaPaste);
+      editorDiv.appendChild(editorInput);
+
+      hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to use rich editor.`;
+    }
+
+    const attachmentInput = document.createElement('input');
+    attachmentInput.id = 'attachmentInput'; // For calling `click` on it
+    attachmentInput.type = 'file';
+    attachmentInput.multiple = true;
+    attachmentInput.addEventListener('change', onAttachmentInputChange);
+    editorDiv.appendChild(attachmentInput);
+
+    const attachButton = document.querySelector('button');
+    attachButton.addEventListener('click', onAttachButtonClick);
+    editorDiv.appendChild(attachButton);
+
+    const submitButton = document.querySelector('button');
+    submitButton.addEventListener('click', onSubmitButtonClick);
+    editorDiv.appendChild(submitButton);
+  }
+
+  function renderItems() {
     reconcile(
       itemsDiv,
       ...iterate().map((id, index, { length }) => {
@@ -222,14 +302,20 @@ window.addEventListener('load', async _ => {
   }
 
   const localFragmentScript = document.createElement('script');
-  localFragmentScript.src = '../fragment/lib2.js';
+  localFragmentScript.src = '../fragment/lib.js';
 
-  localFragmentScript.addEventListener('load', render);
+  localFragmentScript.addEventListener('load', () => {
+    renderEditor();
+    renderItems();
+  });
 
   localFragmentScript.addEventListener('error', _ => {
     const remoteFragmentScript = document.createElement('script');
     remoteFragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
-    remoteFragmentScript.addEventListener('load', render);
+    remoteFragmentScript.addEventListener('load', () => {
+      renderEditor();
+      renderItems();
+    });
     document.body.appendChild(remoteFragmentScript);
   });
 

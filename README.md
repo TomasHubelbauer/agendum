@@ -16,14 +16,8 @@ See [**online demo**](https://agendum.today) here.
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
-- [ ] Improve the editor experience to help with speed once Fragment has support found mounting/unmounting events for refs:
-  - Display the editor as an input with an option to switch to a textarea
-  - In input editor, Enter submits and ctrl/cmd+Enter expands to textarea
-  - In textarea editor, Enter creates a newline and ctrl/cmd+enter submits
-  - Put this information into the input editor placeholder: *Do this/that… meta+Enter to expand* where meta is ctrl/cmd per platform
-  - In textarea editor, display a small note underneath that meta+Enter can be used to submit it on desktop
-  - In textarea editor, also display the emoji keyboard shortcut on the desktop
-  - On mobile, where meta+Enter cannot be typed, a button for expanding the editor is shown and the placeholder doesn't say the shortcut
+- [ ] Rewrite the editor in Fragment once it has support for refs and other neccessary features
+- [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
 - [ ] Implement attaching non-images with an option to download
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
@@ -47,3 +41,5 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Set up a TypeScript type checking pipelines based on QR channel example
 - [ ] See if adding Fragment as a Git submodule would allow us to drop the local/remote select logic and dep on JsDelivr
   - It comes down to seeing whether GitHub Pages download Git submodules and would serve their contents
+- [ ] Write Puppeteer UI tests and run them in the CI
+- [ ] Allow dismissing the editor hints
