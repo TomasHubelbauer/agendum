@@ -16,7 +16,7 @@ See [**online demo**](https://agendum.today) here.
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
-- [ ] Improve the editor experience to help with speed:
+- [ ] Improve the editor experience to help with speed once Fragment has support found mounting/unmounting events for refs:
   - Display the editor as an input with an option to switch to a textarea
   - In input editor, Enter submits and ctrl/cmd+Enter expands to textarea
   - In textarea editor, Enter creates a newline and ctrl/cmd+enter submits
