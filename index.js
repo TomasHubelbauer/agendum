@@ -1,7 +1,6 @@
 window.addEventListener('load', _ => {
   navigator.serviceWorker.register('worker.js');
   
-  const debugDiv = document.querySelector('#debugDiv');
   const editorTextArea = document.querySelector('#editorTextArea');
   const attachmentInput = document.querySelector('#attachmentInput');
   const attachButton = document.querySelector('#attachButton');
@@ -217,6 +216,34 @@ window.addEventListener('load', _ => {
       })
     );
   }
+
+  let hasFragment = false;
   
-  render();
+  const remoteFragmentScript = document.createElement('script');
+  console.log('loading remote');
+  remoteFragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
+
+  remoteFragmentScript.addEventListener('load', _ => {
+    if (!hasFragment) {
+      hasFragment = true;
+      console.log('loaded remote');
+      render();
+    }
+  });
+  
+  document.body.appendChild(remoteFragmentScript);
+
+  const localFragmentScript = document.createElement('script');
+  console.log('loading local');
+  localFragmentScript.src = '../fragment/lib.js';
+
+  localFragmentScript.addEventListener('load', _ => {
+    if (!hasFragment) {
+      hasFragment = true;
+      console.log('loaded local');
+      render();
+    }
+  });
+  
+  document.body.appendChild(localFragmentScript);
 });
