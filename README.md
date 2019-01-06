@@ -43,3 +43,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - It comes down to seeing whether GitHub Pages download Git submodules and would serve their contents
 - [ ] Write Puppeteer UI tests and run them in the CI
 - [ ] Allow dismissing the editor hints
+- [ ] Fix deleting items not updating the item list due to Fragments lack of support for keys

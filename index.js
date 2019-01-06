@@ -274,6 +274,9 @@ window.addEventListener('load', async _ => {
   }
 
   function renderItems() {
+    // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
+    itemsDiv.innerHTML = '';
+
     reconcile(
       itemsDiv,
       ...iterate().map((id, index, { length }) => {
