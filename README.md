@@ -45,3 +45,5 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
 - [ ] Use [Fragment](https://github.com/TomasHubelbauer/fragment) for the editor as well
 - [ ] Set up a TypeScript type checking pipelines based on QR channel example
+- [ ] See if adding Fragment as a Git submodule would allow us to drop the local/remote select logic and dep on JsDelivr
+  - It comes down to seeing whether GitHub Pages download Git submodules and would serve their contents
