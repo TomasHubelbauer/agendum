@@ -33,11 +33,11 @@ void async function() {
   }
 }()
 
-function testLoadingApplication(page) {
+async function testLoadingApplication(page) {
   await page.waitForSelector('#editorInput');
 }
 
-function testCreatingAnItemWithBasicEditor() {
+async function testCreatingAnItemWithBasicEditor() {
   await page.type('#editorInput', 'Test creating an item');
   await page.waitFor(1000);
   await page.click('#submitButton');
