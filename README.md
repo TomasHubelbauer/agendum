@@ -24,6 +24,32 @@ Puppeteer UI tests run in Azure Pipelines:
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
+- [ ] Create UI tests for:
+  - Creating an item with the basic editor
+  - Switching the basic editor into the rich editor
+  - Creating a newline in the rich editor
+  - Creating an item with the rich editor
+  - Attaching an image when not in rich editor yet by pasting
+  - Attaching an image when already in the rich editor by pasting
+  - Preserving text when switching from basic to rich editor
+  - Warning about the loss of images when switching to the basic editor
+  - Creating an item through the submit button for both editor types
+  - Creating a draft by switching from and back to the page
+  - Ignoring a draft when the editor is empty
+  - Recalling a draft
+  - Dismissing a draft
+  - Renaming an item
+  - Archiving an item
+  - Deleting an item
+  - Moving item up
+  - Moving item down
+  - Not being able to move an item
+  - Rendering correct raw HTML in item contents
+  - Exporting
+  - Importing
+  - Resolving import conflicts
+  - Clearing all items
+  - Busting the web worker cache
 - [ ] Pass artifacts directory to the `test` script and upload that
 - [ ] Look into [jUnit UI](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it has support for refs etc.
