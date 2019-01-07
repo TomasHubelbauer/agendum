@@ -27,6 +27,16 @@ window.addEventListener('load', async _ => {
     localStorage.setItem(id, JSON.stringify({ title, description }));
     console.log('Migrated', title);
   }
+  
+  function onRecallDraftButtonClick() {
+    const index = event.currentTarget.dataset['index'];
+    alert(`Recall ${index}`);
+  }
+  
+  function onDismissDraftButtonClick() {
+    const index = event.currentTarget.dataset['index'];
+    alert(`Dismiss ${index}`);
+  }
 
   function onAttachButtonClick() {
     document.querySelector('#attachmentInput').click();
@@ -343,8 +353,8 @@ window.addEventListener('load', async _ => {
       draftsDiv,
       ...drafts.map(draft => {
         return div(
-          button({}, 'Recall'),
-          button({}, 'Dismiss'),
+          button({ ['data-index']: id, onclick: onRecallDraftButtonClick }, 'Recall'),
+          button({ ['data-index']: id, onclick: onDismissDraftButtonClick }, 'Dismiss'),
           span(draft.title),
         );
       })
