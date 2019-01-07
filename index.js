@@ -61,7 +61,7 @@ window.addEventListener('load', async _ => {
       }
       
       const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-      drafts.push({ title:  });
+      drafts.push({ title: value });
       localStorage.setItem('drafts', JSON.stringify(drafts));
       renderDrafts();
       editorTextAreaOrInput.value = '';
