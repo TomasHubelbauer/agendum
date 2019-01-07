@@ -1,6 +1,6 @@
 steps:
 - task: Npm@1
-  displayName: 'Install Puppeteer'
+  displayName: 'Install Puppeteer & TypeScript'
   inputs:
     command: install
 - task: Npm@1
@@ -14,3 +14,5 @@ steps:
   inputs:
     pathtoPublish: screenshots
     artifactName: 'screenshots' 
+- powershell: npx tsc -p .
+  displayName: 'Run type check'
