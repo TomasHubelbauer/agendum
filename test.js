@@ -42,7 +42,7 @@ void async function() {
         console.log(error);
       }
       
-      console.log(`${errors.length} tests out of ${tests.length} have failed.`);
+      console.error(`${errors.length} tests out of ${tests.length} have failed.`);
     }
   } catch (error) {
     console.error(error.message);
@@ -53,7 +53,7 @@ async function testLoadingApplication(page) {
   await page.waitForSelector('#editorInput');
 }
 
-async function testCreatingAnItemWithBasicEditor() {
+async function testCreatingAnItemWithBasicEditor(page) {
   await page.type('#editorInput', 'Test creating an item');
   await page.waitFor(1000);
   await page.click('#submitButton');
