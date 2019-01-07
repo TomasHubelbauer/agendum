@@ -88,3 +88,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Add support for tags once net-tree is in
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
 - [ ] Render inline images and links from backing objects on the item not using `innerHTML`
+- [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
