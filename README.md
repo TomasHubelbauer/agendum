@@ -50,6 +50,9 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Resolving import conflicts
   - Clearing all items
   - Busting the web worker cache
+- [ ] Figure out why the demo failing test doesn't fail the build (maybe need to call `process.exit`?)
+- [ ] Generate an HTML report from the Puppeteer run and display it in the Tests tab in DevOps
+  - [ ] Figure out how to keep displaying it when we have unit tests and Jest HTML report also being shown (join the two files?)
 - [ ] Pass artifacts directory to the `test` script and upload that
 - [ ] Look into [jUnit UI](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it has support for refs etc.
