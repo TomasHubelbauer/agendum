@@ -10,7 +10,8 @@ void async function() {
     const pages = await browser.pages();
     const page = pages[0];
     // TODO: Serve the files on localhost and use that, the `file:///` protocol will have different behavior
-    await page.goto('index.html');
+    // TODO: Figure out why index.html doesn't work here and hangs the agent
+    await page.goto('https://agendum.today');
     await page.waitForSelector('#editorInput');
     await page.screenshot({ path: 'screenshots/test.png' });
     // TODO: Upload screenshots as build artifacts from UI tests
