@@ -10,12 +10,20 @@ Run `index.html`.
 
 See [**online demo**](https://agendum.today) here.
 
+## Testing
+
+[
+  ![](https://tomashubelbauer.visualstudio.com/agendum/_apis/build/status/agendum-CI?branchName=master)
+](https://tomashubelbauer.visualstudio.com/agendum/_build/latest?definitionId=12?branchName=master)
+
 ## Contributing
 
 ### Roadmap
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
+- [ ] Pass artifacts directory to the `test` script and upload that
+- [ ] Look into [jUnit UI](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it has support for refs etc.
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
