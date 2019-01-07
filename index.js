@@ -35,7 +35,9 @@ window.addEventListener('load', async _ => {
   
   function onDismissDraftButtonClick() {
     const index = event.currentTarget.dataset['index'];
-    alert(`Dismiss ${index}`);
+    const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+    drafts.splice(index, 1);
+    localStorage.setItem('drafts', JSON.stringify(drafts));
   }
 
   function onAttachButtonClick() {
