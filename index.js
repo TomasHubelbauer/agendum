@@ -308,7 +308,7 @@ window.addEventListener('load', async _ => {
     reconcile(
       itemsDiv,
       ...iterate().map((id, index, { length }) => {
-        const [title, description] = JSON.parse(localStorage.getItem(id));
+        const { title, description } = JSON.parse(localStorage.getItem(id));
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
