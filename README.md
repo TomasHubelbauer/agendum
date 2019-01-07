@@ -12,11 +12,13 @@ See [**online demo**](https://agendum.today) here.
 
 ## Testing
 
-Puppeteer UI tests run in Azure Pipelines:
+Puppeteer UI tests & TypeScript type check run in Azure Pipelines:
 
 [
   ![](https://tomashubelbauer.visualstudio.com/agendum/_apis/build/status/agendum-CI?branchName=master)
 ](https://tomashubelbauer.visualstudio.com/agendum/_build/latest?definitionId=12?branchName=master)
+
+The badge is red because I am currently working through resolving all the strict mode TypeScript errors and warnings.
 
 ## Contributing
 
