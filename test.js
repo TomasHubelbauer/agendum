@@ -12,4 +12,6 @@ async function ui() {
   await browser.close();
 };
 
-ui().catch(error => throw error);
+ui().catch(error => {
+  throw error;
+});
