@@ -81,3 +81,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Implement task hierarchy using net-tree
 - [ ] Add support for tags once net-tree is in
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
+- [ ] Render inline images and links from backing objects on the item not using `innerHTML`
