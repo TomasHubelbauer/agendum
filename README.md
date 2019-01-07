@@ -16,7 +16,7 @@ See [**online demo**](https://agendum.today) here.
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
-- [ ] Rewrite the editor in Fragment once it has support for refs and other neccessary features
+- [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it has support for refs etc.
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
 - [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
 - [ ] Implement attaching non-images with an option to download
@@ -37,10 +37,9 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Focus editor upon tab focus
 - [ ] Collect drafts upon tab blur with restore/discard button for each and clear button for all
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
-- [ ] Use [Fragment](https://github.com/TomasHubelbauer/fragment) for the editor as well
 - [ ] Set up a TypeScript type checking pipelines based on QR channel example
 - [ ] See if adding Fragment as a Git submodule would allow us to drop the local/remote select logic and dep on JsDelivr
-  - It comes down to seeing whether GitHub Pages download Git submodules and would serve their contents
+  - It comes down to seeing whether GitHub Pages would download Git submodules and would serve their contents
 - [ ] Write Puppeteer UI tests and run them in the CI
 - [ ] Allow dismissing the editor hints
 - [ ] Fix deleting items not updating the item list due to Fragments lack of support for keys
