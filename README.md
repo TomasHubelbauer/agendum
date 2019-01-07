@@ -93,3 +93,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Check for attachment size and kick too big attachments
   - [ ] Consider adding an option for resizing (images, maybe video, too)
 - [ ] Fix offline support not working in Safari
+- [ ] Implement drag & drop on the items
