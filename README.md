@@ -24,6 +24,7 @@ Puppeteer UI tests run in Azure Pipelines:
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
+- [ ] Finalize the TypeScript type checking pipeline and fix TypeScript errors
 - [ ] Create UI tests for:
   - Creating an item with the basic editor
   - Switching the basic editor into the rich editor
