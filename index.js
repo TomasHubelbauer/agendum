@@ -41,7 +41,7 @@ window.addEventListener('load', async _ => {
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
     } else {
-      editorTextAreaOrInput = document.querySelector('#editorInput').focus();
+      editorTextAreaOrInput = document.querySelector('#editorInput');
     }
     
     if (document.hidden) {
