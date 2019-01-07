@@ -4,4 +4,4 @@ steps:
   inputs:
     command: custom
     verbose: false
-customCommand: test
+  customCommand: test
