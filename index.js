@@ -317,7 +317,7 @@ window.addEventListener('load', async _ => {
             button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined }, '▲'),
             button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined }, '▼'),
           ),
-          ...description.map(line => {
+          ...(description || []).map(line => {
             // Recognize lines that are a link as a whole
             if ((line.startsWith('http://') || line.startsWith('https://')) && line.endsWith('/')) {
               return p(a({ href: line, target: '_blank' }, line));
