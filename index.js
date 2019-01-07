@@ -213,7 +213,7 @@ window.addEventListener('load', async _ => {
 
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    const item = localStorage.getItem(id);
+    const item = JSON.parse(localStorage.getItem(id));
     if (!confirm(`Delete item '${item.title}'?`)) {
       return;
     }
