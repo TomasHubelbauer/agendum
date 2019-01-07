@@ -16,7 +16,9 @@ void async function() {
       testCreatingAnItemWithBasicEditor,
     ];
     
-    for (let test of tests) {
+    for (let index = 0; index < tests.length; index++) {
+      const test = tests[index];
+      console.log(`Running test ${test.name}. (${index + 1}/${tests.length})`);
       const page = await browser.newPage();
       // TODO: Serve the files on localhost and use that, the `file:///` protocol will have different behavior
       // TODO: Figure out why index.html doesn't work here and hangs the agent
