@@ -29,8 +29,23 @@ window.addEventListener('load', async _ => {
   }
   
   function onRecallDraftButtonClick() {
+    let editorTextAreaOrInput;
+    if (useRichEditor) {
+      editorTextAreaOrInput = document.querySelector('#editorTextArea');
+    } else {
+      editorTextAreaOrInput = document.querySelector('#editorInput');
+    }
+    
     const index = event.currentTarget.dataset['index'];
-    alert(`Recall ${index}`);
+    const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+    const value = drafts[index].title;
+    if (editorTextAreaOrInput.value && !confirm('You have stuff in the editor, do you want to replace it with the draft?')) {
+      return;
+    }
+    
+    editorTextAreaOrInput.value = ;
+    drafts.splice(index, 1);
+    localStorage.setItem('drafts', JSON.stringify(drafts));
   }
   
   function onDismissDraftButtonClick() {
