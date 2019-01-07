@@ -345,11 +345,13 @@ window.addEventListener('load', async _ => {
     attachmentInput.addEventListener('change', onAttachmentInputChange);
     editorDiv.appendChild(attachmentInput);
 
-    const attachButton = document.querySelector('button');
+    const attachButton = document.createElement('button');
+    attachButton.id = 'attachButton';
     attachButton.addEventListener('click', onAttachButtonClick);
     editorDiv.appendChild(attachButton);
 
-    const submitButton = document.querySelector('button');
+    const submitButton = document.createElement('button');
+    submitButton.id = 'submitButton';
     submitButton.addEventListener('click', onSubmitButtonClick);
     editorDiv.appendChild(submitButton);
   }
