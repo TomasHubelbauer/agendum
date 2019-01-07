@@ -13,8 +13,15 @@ void async function() {
     // TODO: Figure out why index.html doesn't work here and hangs the agent
     await page.goto('https://agendum.today');
     await page.waitForSelector('#editorInput');
-    await page.screenshot({ path: 'screenshots/test.png' });
-    // TODO: Upload screenshots as build artifacts from UI tests
+    await page.screenshot({ path: 'screenshots/enter-application.png' });
+
+    // Test creating an item with the basic editor works
+    await page.type('#editorInput', 'Test creating an item');
+    await page.click('#submitButton');
+    await page.waitFor(1000);
+    // TODO: Verify the item has been created
+    await page.screenshot({ path: 'screenshots/create-item-with-basic-editor.png' });
+    
     await browser.close();
   } catch (error) {
     console.error(error.message);
