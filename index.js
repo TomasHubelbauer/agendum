@@ -45,6 +45,7 @@ window.addEventListener('load', async _ => {
     editorTextAreaOrInput.value = drafts[index].title;
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
+    renderDrafts();
   }
   
   function onDismissDraftButtonClick() {
@@ -52,6 +53,7 @@ window.addEventListener('load', async _ => {
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
+    renderDrafts();
   }
 
   function onAttachButtonClick() {
