@@ -14,6 +14,7 @@ void async function() {
     const tests = [
       testLoadingApplication,
       testCreatingAnItemWithBasicEditor,
+      testFailing,
     ];
     
     const errors = [];
@@ -54,8 +55,13 @@ async function testLoadingApplication(page) {
 }
 
 async function testCreatingAnItemWithBasicEditor(page) {
+  await page.waitForSelector('#editorInput');
   await page.type('#editorInput', 'Test creating an item');
   await page.waitFor(1000);
   await page.click('#submitButton');
   // TODO: Verify the item has been created
+}
+
+async function testFailing(page) {
+  await page.click('#nonExisting');
 }
