@@ -9,3 +9,8 @@ steps:
     command: custom
     verbose: false
     customCommand: test
+- task: PublishBuildArtifacts@1
+  displayName: 'Upload screenshots as artifacts'
+  inputs:
+    pathtoPublish: screenshots
+    artifactName: 'screenshots' 
