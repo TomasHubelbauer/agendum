@@ -351,10 +351,10 @@ window.addEventListener('load', async _ => {
     
     reconcile(
       draftsDiv,
-      ...drafts.map(draft => {
+      ...drafts.map((draft, index) => {
         return div(
-          button({ ['data-index']: id, onclick: onRecallDraftButtonClick }, 'Recall'),
-          button({ ['data-index']: id, onclick: onDismissDraftButtonClick }, 'Dismiss'),
+          button({ ['data-index']: index, onclick: onRecallDraftButtonClick }, 'Recall'),
+          button({ ['data-index']: index, onclick: onDismissDraftButtonClick }, 'Dismiss'),
           span(draft.title),
         );
       })
