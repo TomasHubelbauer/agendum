@@ -94,3 +94,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - [ ] Consider adding an option for resizing (images, maybe video, too)
 - [ ] Fix offline support not working in Safari
 - [ ] Implement drag & drop on the items
+- [ ] Implement editing item contents - recall item in rich editor?
