@@ -14,6 +14,18 @@ window.addEventListener('load', async _ => {
   const importButton = document.querySelector('#importButton');
   const clearButton = document.querySelector('#clearButton');
   const bustButton = document.querySelector('#bustButton');
+  
+  // Migrate from string values to JSON values
+  for (let id of iterate()) {
+    const value = localStorage.getItem(id);
+    if (value.startsWith('{') && value.endsWith('}')) {
+      continue;
+    }
+    
+    const [title, ...description] = value.split('\n');
+    localStorage.setItem(JSON.stringify({ title, description }));
+    console.log('Migrated', title);
+  }
 
   function onAttachButtonClick() {
     document.querySelector('#attachmentInput').click();
@@ -85,9 +97,15 @@ window.addEventListener('load', async _ => {
     fileReader.addEventListener('load', event => {
       const { timestamp, ...data } = JSON.parse(event.currentTarget.result);
       const ids = Object.keys(data).map(Number).filter(Number.isSafeInteger);
+      // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
       for (const id of ids) {
-        // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
-        localStorage.setItem(id, data[id.toString()]);
+        // TODO: Finalize import of JSON exports
+        const value = data[id.toString()];
+        if (typeof value === 'string') {
+          throw new Error('Old type string import file');
+        }
+        
+        localStorage.setItem(id, JSON.stringify(value));
       }
 
       renderItems();
@@ -126,12 +144,14 @@ window.addEventListener('load', async _ => {
 
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    const text = prompt('', localStorage.getItem(id));
-    if (text === null) {
+    const item = JSON.parse(localStorage.getItem(id));
+    const title = prompt('', item.title);
+    if (title === null) {
       return;
     }
 
-    localStorage.setItem(id, text);
+    item.title = title;
+    localStorage.setItem(id, JSON.stringify(item));
     renderItems();
 
     // Do not toggle the `details` element
@@ -140,8 +160,8 @@ window.addEventListener('load', async _ => {
 
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
-    const [text] = localStorage.getItem(id).split('\n', 1);
-    if (!confirm(`Delete item '${text}'?`)) {
+    const item = localStorage.getItem(id);
+    if (!confirm(`Delete item '${item.title}'?`)) {
       return;
     }
 
@@ -202,11 +222,18 @@ window.addEventListener('load', async _ => {
 
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, value.trim());
+    localStorage.setItem(id, JSON.stringify({ title: value.trim() }));
     renderItems();
   }
 
+  // TODO: Split into insertImage and attach, because we want to allow attaching images as well
   function attach(files) {
+    if (!useRichEditor) {
+      useRichEditor = true;
+      // TODO: Preserve text etc., use onChange and keep the text in variable so we don't have to do this in two places
+      renderEditor();
+    }
+    
     for (const file of files) {
       // Skip the images for now, we'll do attachments later
       if (!file.type.startsWith('image/')) {
@@ -216,7 +243,8 @@ window.addEventListener('load', async _ => {
       const fileReader = new FileReader();
 
       fileReader.addEventListener('load', event => {
-        editorTextArea.value += `\n<img src="${event.currentTarget.result}" />\n`;
+        // TODO: Access using the ref
+        document.querySelector('#editorTextArea').value += `\n<img src="${event.currentTarget.result}" />\n`;
       });
 
       fileReader.addEventListener('error', event => {
@@ -280,7 +308,7 @@ window.addEventListener('load', async _ => {
     reconcile(
       itemsDiv,
       ...iterate().map((id, index, { length }) => {
-        const [title, ...description] = localStorage.getItem(id).split('\n');
+        const [title, description] = JSON.parse(localStorage.getItem(id));
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
