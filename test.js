@@ -16,6 +16,7 @@ void async function() {
       testCreatingAnItemWithBasicEditor,
     ];
     
+    const errors = [];
     for (let index = 0; index < tests.length; index++) {
       const test = tests[index];
       console.log(`Running test ${test.name}. (${index + 1}/${tests.length})`);
@@ -24,12 +25,25 @@ void async function() {
       // TODO: Figure out why index.html doesn't work here and hangs the agent
       await page.goto('https://agendum.today');
       // TODO: Race this with a timeout to kill too-long-running tests
-      await test(page);
+      try {
+        await test(page);
+      } catch (error) {
+        errors.push(error);
+      }
+      
       await page.screenshot({ path: `screenshots/${test.name}.png` });
       await page.close();
     }
     
     await browser.close();
+    
+    if (errors.length > 0) {
+      for (const error of errors) {
+        console.log(error);
+      }
+      
+      console.log(`${errors.length} tests out of ${tests.length} have failed.`);
+    }
   } catch (error) {
     console.error(error.message);
   }
