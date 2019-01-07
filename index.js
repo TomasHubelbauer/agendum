@@ -37,14 +37,21 @@ window.addEventListener('load', async _ => {
   }
   
   document.addEventListener('visibilitychange', event => {
-    if (document.hidden) {
-      // TODO: Clear the editor and push its formed content to a list of drafts to recall or dismiss later
+    let editorTextAreaOrInput;
+    if (useRichEditor) {
+      editorTextAreaOrInput = document.querySelector('#editorTextArea');
     } else {
-      if (useRichEditor) {
-        document.querySelector('#editorTextArea').focus();
-      } else {
-        document.querySelector('#editorInput').focus();
-      }
+      editorTextAreaOrInput = document.querySelector('#editorInput').focus();
+    }
+    
+    if (document.hidden) {
+      const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+      drafts.push({ title: editorTextAreaOrInput.value });
+      localStorage.setItem('drafts', JSON.stringify(drafts));
+      renderDrafts();
+      editorTextAreaOrInput.value = '';
+    } else {
+      editorTextAreaOrInput.focus();
     }
   });
 
