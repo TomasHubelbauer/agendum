@@ -391,23 +391,22 @@ window.addEventListener('load', async _ => {
       })
     );
   }
+  
+  function render() {
+    renderEditor();
+    renderDrafts();
+    renderItems();
+  }
 
   const localFragmentScript = document.createElement('script');
   localFragmentScript.src = '../fragment/lib.js';
 
-  localFragmentScript.addEventListener('load', () => {
-    renderEditor();
-    renderDrafts();
-    renderItems();
-  });
+  localFragmentScript.addEventListener('load', render);
 
   localFragmentScript.addEventListener('error', _ => {
     const remoteFragmentScript = document.createElement('script');
     remoteFragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
-    remoteFragmentScript.addEventListener('load', () => {
-      renderEditor();
-      renderItems();
-    });
+    remoteFragmentScript.addEventListener('load', render);
     document.body.appendChild(remoteFragmentScript);
   });
 
