@@ -44,3 +44,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Write Puppeteer UI tests and run them in the CI
 - [ ] Allow dismissing the editor hints
 - [ ] Fix deleting items not updating the item list due to Fragments lack of support for keys
+- [ ] Do some sort of a version call and auto-bust the web worker cache if a new version is found
