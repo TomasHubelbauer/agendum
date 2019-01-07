@@ -23,7 +23,7 @@ window.addEventListener('load', async _ => {
     }
     
     const [title, ...description] = value.split('\n');
-    localStorage.setItem(JSON.stringify({ title, description }));
+    localStorage.setItem(id, JSON.stringify({ title, description }));
     console.log('Migrated', title);
   }
 
