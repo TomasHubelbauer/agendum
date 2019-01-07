@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-void async function() {
+async function ui() {
   const browser = await puppeteer.launch();
   const pages = await browser.pages();
   const page = pages[0];
@@ -10,4 +10,6 @@ void async function() {
   // TODO: Look into Puppeteer giving jUnit results: https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/
   console.log('Puppeteer');
   await browser.close();
-}()
+};
+
+ui().catch(error => throw error);
