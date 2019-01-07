@@ -1,4 +1,8 @@
 steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '>=10' 
+    checkLatest: true
 - task: Npm@1
   displayName: 'Run tests'
   inputs:
