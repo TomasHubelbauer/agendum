@@ -28,7 +28,7 @@ window.addEventListener('load', async _ => {
     console.log('Migrated', title);
   }
   
-  function onRecallDraftButtonClick() {
+  function onRecallDraftButtonClick(event) {
     let editorTextAreaOrInput;
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
@@ -48,7 +48,7 @@ window.addEventListener('load', async _ => {
     renderDrafts();
   }
   
-  function onDismissDraftButtonClick() {
+  function onDismissDraftButtonClick(event) {
     const index = event.currentTarget.dataset['index'];
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     drafts.splice(index, 1);
