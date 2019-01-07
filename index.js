@@ -38,12 +38,11 @@ window.addEventListener('load', async _ => {
     
     const index = event.currentTarget.dataset['index'];
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-    const value = drafts[index].title;
     if (editorTextAreaOrInput.value && !confirm('You have stuff in the editor, do you want to replace it with the draft?')) {
       return;
     }
     
-    editorTextAreaOrInput.value = ;
+    editorTextAreaOrInput.value = drafts[index].title;
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
   }
