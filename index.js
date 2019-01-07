@@ -336,7 +336,7 @@ window.addEventListener('load', async _ => {
     
     reconcile(
       draftsDiv,
-      ...value.map(draft => {
+      ...drafts.map(draft => {
         return div(
           button({}, 'Recall'),
           span(draft.title),
