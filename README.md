@@ -92,3 +92,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Support attaching audio/video recordings as attachments / inline elements
 - [ ] Check for attachment size and kick too big attachments
   - [ ] Consider adding an option for resizing (images, maybe video, too)
+- [ ] Fix offline support not working in Safari
