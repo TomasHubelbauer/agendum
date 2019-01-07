@@ -34,7 +34,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Allow editing the text inline upon click without the `prompt`
 - [ ] Detect conflicts during import (non-equal) and offer a UI for resolution (keep old, keep new, keep both)
 - [ ] Consider adding support for import from pasted text for iOS Safari import
-- [ ] Focus editor upon tab focus
 - [ ] Collect drafts upon tab blur with restore/discard button for each and clear button for all
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
 - [ ] Set up a TypeScript type checking pipelines based on QR channel example
