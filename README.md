@@ -78,3 +78,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Allow dismissing the editor hints
 - [ ] Fix deleting items not updating the item list due to Fragments lack of support for keys
 - [ ] Do some sort of a version call and auto-bust the web worker cache if a new version is found
+- [ ] Implement task hierarchy using net-tree
+- [ ] Add support for tags once net-tree is in
+- [ ] Add support for reminders using desktop notifications for upcoming tasks
