@@ -34,6 +34,18 @@ window.addEventListener('load', async _ => {
   function onSubmitButtonClick() {
     submit();
   }
+  
+  document.addEventListener('visibilitychange', event => {
+    if (document.hidden) {
+      // TODO: Clear the editor and push its formed content to a list of drafts to recall or dismiss later
+    } else {
+      if (useRichEditor) {
+        document.querySelector('#editorTextArea').focus();
+      } else {
+        document.querySelector('#editorInput').focus();
+      }
+    }
+  });
 
   let useRichEditor = false;
 
