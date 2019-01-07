@@ -55,6 +55,8 @@ async function testLoadingApplication(page) {
 }
 
 async function testCreatingAnItemWithBasicEditor(page) {
+  await page.waitForFunction(() => localStorage.clear());
+  await page.reload();
   await page.waitForSelector('#editorInput');
   await page.type('#editorInput', 'Test creating an item');
   await page.waitFor(1000);
