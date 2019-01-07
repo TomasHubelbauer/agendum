@@ -45,8 +45,13 @@ window.addEventListener('load', async _ => {
     }
     
     if (document.hidden) {
+      const value = editorTextAreaOrInput.value;
+      if (!value) {
+        return;
+      }
+      
       const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-      drafts.push({ title: editorTextAreaOrInput.value });
+      drafts.push({ title:  });
       localStorage.setItem('drafts', JSON.stringify(drafts));
       renderDrafts();
       editorTextAreaOrInput.value = '';
@@ -339,6 +344,7 @@ window.addEventListener('load', async _ => {
       ...drafts.map(draft => {
         return div(
           button({}, 'Recall'),
+          button({}, 'Dismiss'),
           span(draft.title),
         );
       })
