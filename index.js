@@ -7,6 +7,7 @@ window.addEventListener('load', async _ => {
 
   const editorDiv = document.querySelector('#editorDiv');
   const hintDiv = document.querySelector('#hintDiv');
+  const draftsDiv = document.querySelector('#draftsDiv');
   const itemsDiv = document.querySelector('#itemsDiv');
   const exportA = document.querySelector('#exportA');
   const exportButton = document.querySelector('#exportButton');
@@ -312,6 +313,30 @@ window.addEventListener('load', async _ => {
     submitButton.addEventListener('click', onSubmitButtonClick);
     editorDiv.appendChild(submitButton);
   }
+  
+  function renderDrafts() {
+    // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
+    draftsDiv.innerHTML = '';
+    
+    const value = localStorage.getItem('drafts');
+    
+    // Bail early if no drafts have been saved
+    if (value === null) {
+      return;
+    }
+    
+    const drafts = JSON.parse(value);
+    
+    reconcile(
+      draftsDiv,
+      ...value.map(draft => {
+        return div(
+          button({}, 'Recall'),
+          span(draft.title),
+        );
+      })
+    );
+  }
 
   function renderItems() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
@@ -349,6 +374,7 @@ window.addEventListener('load', async _ => {
 
   localFragmentScript.addEventListener('load', () => {
     renderEditor();
+    renderDrafts();
     renderItems();
   });
 
