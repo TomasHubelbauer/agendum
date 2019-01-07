@@ -89,3 +89,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
 - [ ] Render inline images and links from backing objects on the item not using `innerHTML`
 - [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
+- [ ] Support attaching audio/video recordings as attachments / inline elements
+- [ ] Check for attachment size and kick too big attachments
+  - [ ] Consider adding an option for resizing (images, maybe video, too)
