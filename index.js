@@ -347,11 +347,13 @@ window.addEventListener('load', async _ => {
 
     const attachButton = document.createElement('button');
     attachButton.id = 'attachButton';
+    attachButton.textContent = 'Attach';
     attachButton.addEventListener('click', onAttachButtonClick);
     editorDiv.appendChild(attachButton);
 
     const submitButton = document.createElement('button');
     submitButton.id = 'submitButton';
+    submitButton.textContent = 'Submit';
     submitButton.addEventListener('click', onSubmitButtonClick);
     editorDiv.appendChild(submitButton);
   }
