@@ -323,7 +323,7 @@ window.addEventListener('load', async _ => {
     }
     
     const item = JSON.parse(localStorage.getItem(id));
-    item.archivedDate = Date.now;
+    item.archivedDate = Date.now();
     localStorage.setItem(id, JSON.stringify(item));
     renderItems();
 
