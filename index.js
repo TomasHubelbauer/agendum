@@ -33,12 +33,16 @@ window.addEventListener('load', async _ => {
   }
   
   function onRecallDraftButtonClick(event) {
-    /* @type{HTMLTextAreaElement|HTMLInputElement} */
+    /** @type{HTMLTextAreaElement|HTMLInputElement} */
     let editorTextAreaOrInput;
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
     } else {
       editorTextAreaOrInput = document.querySelector('#editorInput');
+    }
+    
+    if (editorTextAreaOrInput === undefined) {
+      throw new Error('Failed to find the editor component');
     }
     
     const index = event.currentTarget.dataset['index'];
@@ -62,7 +66,12 @@ window.addEventListener('load', async _ => {
   }
 
   function onAttachButtonClick() {
-    document.querySelector('#attachmentInput').click();
+    const attachmentInput = document.querySelector('#attachmentInput');
+    if (attachmentInput === undefined) {
+      throw new Error('Failed to find the attachment input.');
+    }
+    
+    attachmentInput.click();
   }
 
   function onSubmitButtonClick() {
