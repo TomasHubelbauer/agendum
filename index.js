@@ -530,7 +530,8 @@ window.addEventListener('load', async _ => {
       ...iterate().map((id, index, { length }) => {
         const { title, description, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
         if (showArchivedItems ? archivedDate === undefined : archivedDate !== undefined) {
-          continue;
+          // TODO: Change to null or undefined once Fragment supports it
+          return false;
         }
         
         return details(
