@@ -1,4 +1,4 @@
-self.addEventListener('install', async event => {
+self.addEventListener('install', async _ => {
   const cache = await caches.open('agendum');
   cache.addAll(['/', '/index.html', '/index.js', '/index.css', '/manifest.json']);
 });
