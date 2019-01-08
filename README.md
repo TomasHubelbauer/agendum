@@ -93,3 +93,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
 - [ ] Wrap Puppeteer in Jest for jUnit XML: https://confluence.xpand-it.com/display/XRAY/Headless+testing+web+applications+using+Jest+and+Puppeteer+in+JavaScript
+- [ ] Expand to rich editor if pasting text with line breaks in it
