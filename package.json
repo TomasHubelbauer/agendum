@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test-wip": "jest",
-    "test": "node test.js"
+    "test": "node ui-test.js"
   },
   "devDependencies": {
     "puppeteer": "1.11.0",
