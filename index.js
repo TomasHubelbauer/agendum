@@ -548,11 +548,11 @@ window.addEventListener('load', async _ => {
           ...(description || []).map(line => {
             // Recognize lines that are a link as a whole
             if ((line.startsWith('http://') || line.startsWith('https://')) && line.endsWith('/')) {
-              return p(a({ href: line, target: '_blank' }, line));
+              return div(a({ href: line, target: '_blank' }, line));
             }
 
             // TODO: Interpret as raw HTML to correctly render data URI image tags
-            return p(line);
+            return div(line);
           }),
           p(`ID: ${id}`),
           archivedDate && p('Archived: ' + new Date(archivedDate).toLocaleString())
