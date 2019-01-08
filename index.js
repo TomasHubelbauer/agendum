@@ -1,3 +1,4 @@
+// TODO: Use Fragment types instead because this doesn't work
 /* @function reconcile */
 /* @function p */
 /* @function button */
@@ -13,16 +14,65 @@ window.addEventListener('load', async _ => {
     // TODO: Handle this at some point
   }
 
+  /** @type{HTMLDivElement|null} */
   const editorDiv = document.querySelector('#editorDiv');
+  if (editorDiv == null) {
+    throw new Error('Editor <div> not found');
+  }
+  
+  /** @type{HTMLDivElement|null} */
   const hintDiv = document.querySelector('#hintDiv');
+  if (hintDiv == null) {
+    throw new Error('Hint <div> not found');
+  }
+  
+  /** @type{HTMLDivElement|null} */
   const draftsDiv = document.querySelector('#draftsDiv');
+  if (draftsDiv == null) {
+    throw new Error('Drafts <div> not found');
+  }
+  
+  /** @type{HTMLDivElement|null} */
   const itemsDiv = document.querySelector('#itemsDiv');
+  if (itemsDiv == null) {
+    throw new Error('Items <div> not found');
+  }
+  
+  /** @type{HTMLAnchorElement|null} */
   const exportA = document.querySelector('#exportA');
+  if (exportA == null) {
+    throw new Error('Export <a> not found');
+  }
+  
+  /** @type{HTMLButtonElement|null} */
   const exportButton = document.querySelector('#exportButton');
+  if (exportButton == null) {
+    throw new Error('Export <button> not found');
+  }
+  
+  /** @type{HTMLInputElement|null} */
   const importInput = document.querySelector('#importInput');
+  if (importInput == null) {
+    throw new Error('Import <input> not found');
+  }
+  
+  /** @type{HTMLButtonElement|null} */
   const importButton = document.querySelector('#importButton');
+  if (importButton == null) {
+    throw new Error('Import <button> not found');
+  }
+  
+  /** @type{HTMLButtonElement|null} */
   const clearButton = document.querySelector('#clearButton');
+  if (clearButton == null) {
+    throw new Error('Clear <button> not found');
+  }
+  
+  /** @type{HTMLButtonElement|null} */
   const bustButton = document.querySelector('#bustButton');
+  if (bustButton == null) {
+    throw new Error('Bust <button> not found');
+  }
   
   // Migrate from string values to JSON values
   for (let id of iterate()) {
@@ -198,7 +248,7 @@ window.addEventListener('load', async _ => {
           throw new Error('Old type string import file');
         }
         
-        localStorage.setItem(id, JSON.stringify(value));
+        localStorage.setItem(id.toString(), JSON.stringify(value));
       }
 
       renderItems();
@@ -212,13 +262,17 @@ window.addEventListener('load', async _ => {
   });
 
   importButton.addEventListener('click', _ => {
+    if (importInput === null) {
+      throw new Error('No import input');
+    }
+    
     importInput.click();
   });
 
   clearButton.addEventListener('click', _ => {
     if (confirm('This will remove all your to-do items. Really continue?')) {
       for (const id of iterate()) {
-        localStorage.removeItem(id);
+        localStorage.removeItem(id.toString());
       }
 
       renderItems();
@@ -237,6 +291,10 @@ window.addEventListener('load', async _ => {
 
   function onEditButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
     const item = JSON.parse(localStorage.getItem(id));
     const title = prompt('', item.title);
     if (title === null) {
