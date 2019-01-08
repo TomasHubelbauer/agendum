@@ -33,8 +33,8 @@ window.addEventListener('load', async _ => {
   }
   
   function onRecallDraftButtonClick(event) {
-    /** @type{HTMLTextAreaElement|HTMLInputElement} */
-    let editorTextAreaOrInput;
+    /** @type{HTMLTextAreaElement|HTMLInputElement|null} */
+    let editorTextAreaOrInput = null;
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
     } else {
@@ -66,8 +66,9 @@ window.addEventListener('load', async _ => {
   }
 
   function onAttachButtonClick() {
+    /** @type(HTMLInputElement) */
     const attachmentInput = document.querySelector('#attachmentInput');
-    if (attachmentInput === undefined) {
+    if (attachmentInput === null) {
       throw new Error('Failed to find the attachment input.');
     }
     
@@ -78,12 +79,17 @@ window.addEventListener('load', async _ => {
     submit();
   }
   
-  document.addEventListener('visibilitychange', event => {
-    let editorTextAreaOrInput;
+  document.addEventListener('visibilitychange', _ => {
+    /** @type{HTMLTextAreaElement|HTMLInputElement|null} */
+    let editorTextAreaOrInput = null;
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
     } else {
       editorTextAreaOrInput = document.querySelector('#editorInput');
+    }
+    
+    if (editorTextAreaOrInput === null) {
+      throw new Error('Failed to query the editor textarea of input in the document.');
     }
     
     if (document.hidden) {
