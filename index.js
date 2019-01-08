@@ -387,7 +387,7 @@ window.addEventListener('load', async _ => {
   
   function onToggleViewButtonClick() {
     showArchivedItems = !showArchivedItems;
-    renderItem();
+    renderItems();
   }
 
   function iterate() {
