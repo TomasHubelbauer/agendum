@@ -88,3 +88,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
 - [ ] Expand to rich editor if pasting text with line breaks in it
+- [ ] Implement adding a forgotten task to the Archived tab, probably by adding a Add to Archived editor button when in archive
