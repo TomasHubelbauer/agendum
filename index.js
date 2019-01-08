@@ -1,3 +1,11 @@
+/* @function reconcile */
+/* @function p */
+/* @function button */
+/* @function span */
+/* @function summary */
+/* @function details */
+/* @function div */
+
 window.addEventListener('load', async _ => {
   try {
     await navigator.serviceWorker.register('worker.js');
@@ -422,7 +430,7 @@ window.addEventListener('load', async _ => {
     reconcile(
       itemsDiv,
       ...iterate().map((id, index, { length }) => {
-        const { title, description } = JSON.parse(localStorage.getItem(id));
+        const { title, description } = JSON.parse(localStorage.getItem(id.toString()));
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
