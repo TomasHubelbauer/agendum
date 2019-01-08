@@ -167,6 +167,8 @@ window.addEventListener('load', async _ => {
   });
 
   let useRichEditor = false;
+  
+  let showArchivedItems = false;
 
   function onEditorInputKeypress(event) {
     if (event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) {
@@ -294,7 +296,7 @@ window.addEventListener('load', async _ => {
     }
   });
 
-  function onEditButtonClick(event) {
+  function onRenameButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     if (id === null) {
       throw new Error('ID was not passed');
@@ -314,6 +316,21 @@ window.addEventListener('load', async _ => {
     event.preventDefault();
   }
 
+  function onArchiveButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
+    const item = JSON.parse(localStorage.getItem(id));
+    item.archivedDate = Date.now;
+    localStorage.setItem(id, JSON.stringify(item));
+    renderItems();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
+  }
+  
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     if (id === null) {
@@ -366,6 +383,11 @@ window.addEventListener('load', async _ => {
 
     // Do not toggle the `details` element
     event.preventDefault();
+  }
+  
+  function onToggleViewButtonClick() {
+    showArchivedItems = !showArchivedItems;
+    renderItem();
   }
 
   function iterate() {
@@ -504,13 +526,20 @@ window.addEventListener('load', async _ => {
 
     reconcile(
       itemsDiv,
+      button({ onclick: onToggleViewButtonClick }, showArchivedItems ? 'Show planned items' : 'Show archived items'),
       ...iterate().map((id, index, { length }) => {
-        const { title, description } = JSON.parse(localStorage.getItem(id.toString()));
+        const { title, description, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
+        if (showArchivedItems ? archivedDate === undefined : archivedDate !== undefined) {
+          continue;
+        }
+        
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
-            button({ ['data-id']: id, onclick: onEditButtonClick }, '✎'),
-            button({ ['data-id']: id, onclick: onDeleteButtonClick }, '🗑'),
+            button({ ['data-id']: id, onclick: onRenameButtonClick }, 'Rename'),
+            showArchivedItems
+              ? button({ ['data-id']: id, onclick: onDeleteButtonClick }, 'Delete')
+              : button({ ['data-id']: id, onclick: onArchiveButtonClick }, 'Archive'),
             button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined }, '▲'),
             button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined }, '▼'),
           ),
@@ -523,7 +552,8 @@ window.addEventListener('load', async _ => {
             // TODO: Interpret as raw HTML to correctly render data URI image tags
             return p(line);
           }),
-          p(`ID: ${id}`)
+          p(`ID: ${id}`),
+          archivedDate && p('Archived: ' + new Date(archivedDate).toLocaleString())
         );
       })
     );
