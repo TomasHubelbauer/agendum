@@ -18,17 +18,22 @@ window.addEventListener('load', async _ => {
   
   // Migrate from string values to JSON values
   for (let id of iterate()) {
-    const value = localStorage.getItem(id);
+    const value = localStorage.getItem(id.toString());
+    if (value === null) {
+      throw new Error(`Item disappeared: ${id}`);
+    }
+    
     if (value.startsWith('{') && value.endsWith('}')) {
       continue;
     }
     
     const [title, ...description] = value.split('\n');
-    localStorage.setItem(id, JSON.stringify({ title, description }));
+    localStorage.setItem(id.toString(), JSON.stringify({ title, description }));
     console.log('Migrated', title);
   }
   
   function onRecallDraftButtonClick(event) {
+    /* @type{HTMLTextAreaElement|HTMLInputElement} */
     let editorTextAreaOrInput;
     if (useRichEditor) {
       editorTextAreaOrInput = document.querySelector('#editorTextArea');
