@@ -413,7 +413,7 @@ window.addEventListener('load', async _ => {
     const [title, ...description] = value.trim().split('\n');
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, JSON.stringify({ title, description, createdAt: Date.now() }));
+    localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now() }));
     renderItems();
   }
 
