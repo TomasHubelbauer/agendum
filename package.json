@@ -1,9 +1,11 @@
 {
   "scripts": {
+    "test-wip": "jest",
     "test": "node test.js"
   },
   "devDependencies": {
     "puppeteer": "1.11.0",
-    "typescript": "3.2.2"
+    "typescript": "3.2.2",
+    "jest": "23.6.0"
   }
 }
