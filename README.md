@@ -57,9 +57,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Clearing all items
   - Busting the web worker cache
 - [ ] Figure out why the demo failing test doesn't fail the build (maybe need to call `process.exit`?)
-- [ ] Generate an HTML report from the Puppeteer run and display it in the Tests tab in DevOps
-  - [ ] Figure out how to keep displaying it when we have unit tests and Jest HTML report also being shown (join the two files?)
-- [ ] Pass artifacts directory to the `test` script and save screenshots to that and upload that directory not `screenshots`
+- [ ] Figure out if we can add Puppeteer screenshots to the hTML jUnit report that will come from Jest to combine both into one
+- [ ] Pass artifacts directory path to the `test` script and save screenshots to that and upload that directory not `screenshots`
 - [ ] Add [jPuppeteer jUnit](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports the necessary features (keys)
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
@@ -73,8 +72,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
 - [ ] Fix service worker offline serving not working in Firefox & Safari - web worker says `fetch` timed out
 - [ ] Consider support for recurrent tasks by "archival behavior": delete, archive, clone (with bump for the not-before date)
-- [ ] Implement archiving and deleting with two tabs: Planned & Archived, planned has Archive button, Archived has Delete button
-- [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
+- [ ] Group the archived tab by archival date & reconsider ordering of items on it - drop or support?
+- [ ] Hide item buttons on mobile except for Archive, Edit can be done by clicking, move by dragging when it is done
 - [ ] Allow editing the text inline upon click without the `prompt`
 - [ ] Detect conflicts during import (non-equal) and offer a UI for resolution (keep old, keep new, keep both)
 - [ ] Consider adding support for import from pasted text for iOS Safari import
