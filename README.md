@@ -26,7 +26,7 @@ The badge is red because I am currently working through resolving all the strict
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
-- [ ] Finalize the TypeScript type checking pipeline and fix TypeScript errors
+- [ ] Fix TypeScript pipeline errors
 - [ ] Create UI tests for:
   - Creating an item with the basic editor
   - Switching the basic editor into the rich editor
@@ -56,42 +56,37 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Figure out why the demo failing test doesn't fail the build (maybe need to call `process.exit`?)
 - [ ] Generate an HTML report from the Puppeteer run and display it in the Tests tab in DevOps
   - [ ] Figure out how to keep displaying it when we have unit tests and Jest HTML report also being shown (join the two files?)
-- [ ] Pass artifacts directory to the `test` script and upload that
-- [ ] Look into [jUnit UI](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
-- [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it has support for refs etc.
+- [ ] Pass artifacts directory to the `test` script and save screenshots to that and upload that directory not `screenshots`
+- [ ] Add [jPuppeteer jUnit](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
+- [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports the necessary features (keys)
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
-- [ ] Add a check for image size when attaching to warn about busting through the local storage size limit
-- [ ] Implement attaching non-images with an option to download
-- [ ] Implement recognizing links anywhere in the description plain text not only whole-line links
+- [ ] Implement attaching image or non-image files as attachments, not only inline
+- [ ] Implement recognizing links anywhere in the description plain text not only whole-line links and storing them as link spans/blocks
   - [ ] Display preview for image links
 - [ ] Consider [Storing images and files in IndexedDB](https://hacks.mozilla.org/2012/02/storing-images-and-files-in-indexeddb/)
 - [ ] Create and add a favicon
 - [ ] Utilize [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
 - [ ] Validate PWA pinning to home screen works on iOS, with icons and standalone window
 - [ ] Create iOS home screen icons: https://stackoverflow.com/a/26369790
-- [ ] Fix service worker offline serving not working in Firefox
-- [ ] Consider support for recurrent tasks
-- [ ] Implement the distinction between archiving and deleting
+- [ ] Fix service worker offline serving not working in Firefox & Safari - web worker says `fetch` timed out
+- [ ] Consider support for recurrent tasks by "archival behavior": delete, archive, clone (with bump for the not-before date)
+- [ ] Implement archiving and deleting with two tabs: Planned & Archived, planned has Archive button, Archived has Delete button
 - [ ] Consider a faux context menu using `select` on mobile instead of the item buttons
 - [ ] Allow editing the text inline upon click without the `prompt`
 - [ ] Detect conflicts during import (non-equal) and offer a UI for resolution (keep old, keep new, keep both)
 - [ ] Consider adding support for import from pasted text for iOS Safari import
 - [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
-- [ ] Set up a TypeScript type checking pipelines based on QR channel example
 - [ ] See if adding Fragment as a Git submodule would allow us to drop the local/remote select logic and dep on JsDelivr
   - It comes down to seeing whether GitHub Pages would download Git submodules and would serve their contents
-- [ ] Write Puppeteer UI tests and run them in the CI
-- [ ] Allow dismissing the editor hints
-- [ ] Fix deleting items not updating the item list due to Fragments lack of support for keys
+- [ ] Allow dismissing the editor hints for emoji keyboard and rich editor toggle separately
+- [ ] Do item rendering properly once Fragment supports keys and get rid of the `innerHTML = ''` call
 - [ ] Do some sort of a version call and auto-bust the web worker cache if a new version is found
-- [ ] Implement task hierarchy using net-tree
+- [ ] Implement task hierarchy using `net-tree`
 - [ ] Add support for tags once net-tree is in
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
 - [ ] Render inline images and links from backing objects on the item not using `innerHTML`
 - [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
 - [ ] Support attaching audio/video recordings as attachments / inline elements
-- [ ] Check for attachment size and kick too big attachments
-  - [ ] Consider adding an option for resizing (images, maybe video, too)
-- [ ] Fix offline support not working in Safari
+- [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
