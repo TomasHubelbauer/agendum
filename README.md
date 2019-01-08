@@ -91,3 +91,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
+- [ ] Wrap Puppeteer in Jest for jUnit XML: https://confluence.xpand-it.com/display/XRAY/Headless+testing+web+applications+using+Jest+and+Puppeteer+in+JavaScript
