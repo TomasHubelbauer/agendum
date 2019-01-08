@@ -1,27 +1,19 @@
 steps:
 - task: Npm@1
-  displayName: 'Install Puppeteer & TypeScript'
+  displayName: 'Install Node dependencies'
   inputs:
     command: install
+- powershell: npx tsc -p .
+  displayName: 'Run TypeScript type check'
 - task: Npm@1
-  displayName: 'Run Jest unit tests'
+  displayName: 'Run Jest unit tests & Puppeteer UI tests'
   inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run test-wip'
+    command: test
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: junit.xml
-- powershell: npx tsc -p .
-  displayName: 'Run type check'
-- task: Npm@1
-  displayName: 'Run UI tests'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: test
 - task: PublishBuildArtifacts@1
   displayName: 'Upload screenshots as artifacts'
   inputs:
     pathtoPublish: screenshots
-    artifactName: 'screenshots' 
+    artifactName: screenshots
