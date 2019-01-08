@@ -5,7 +5,7 @@ steps:
     command: install
 - powershell: npx tsc -p .
   displayName: 'Run TypeScript type check'
-  errorActionPreference: continue
+  failOnStderr: false
 - task: Npm@1
   displayName: 'Run Jest unit tests & Puppeteer UI tests'
   inputs:
