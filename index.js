@@ -566,18 +566,26 @@ window.addEventListener('load', async _ => {
     renderDrafts();
     renderItems();
   }
+  
+  // Try to load the local version of Fragment in my local development environment
+  if (location.protocol === 'file:') {
+    const localFragmentScript = document.createElement('script');
+    localFragmentScript.src = '../fragment/lib.js';
 
-  const localFragmentScript = document.createElement('script');
-  localFragmentScript.src = '../fragment/lib.js';
+    localFragmentScript.addEventListener('load', render);
 
-  localFragmentScript.addEventListener('load', render);
+    localFragmentScript.addEventListener('error', _ => {
+      const remoteFragmentScript = document.createElement('script');
+      remoteFragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
+      remoteFragmentScript.addEventListener('load', render);
+      document.body.appendChild(remoteFragmentScript);
+    });
 
-  localFragmentScript.addEventListener('error', _ => {
-    const remoteFragmentScript = document.createElement('script');
-    remoteFragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
-    remoteFragmentScript.addEventListener('load', render);
-    document.body.appendChild(remoteFragmentScript);
-  });
-
-  document.body.appendChild(localFragmentScript);
+    document.body.appendChild(localFragmentScript);
+  } else {
+    const fragmentScript = document.createElement('script');
+    fragmentScript.src = 'https://cdn.jsdelivr.net/gh/TomasHubelbauer/fragment/lib.js';
+    fragmentScript.addEventListener('load', render);
+    document.body.appendChild(fragmentScript);
+  }
 });
