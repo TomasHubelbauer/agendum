@@ -222,7 +222,7 @@ window.addEventListener('load', async _ => {
     const data = {};
     data.timestamp = Date.now();
     for (const id of iterate()) {
-      data[id] = localStorage.getItem(id);
+      data[id] = localStorage.getItem(id.toString());
     }
 
     exportA.download = `Agendum-${new Date().toISOString()}.json`;
@@ -238,7 +238,12 @@ window.addEventListener('load', async _ => {
     const fileReader = new FileReader();
 
     fileReader.addEventListener('load', event => {
-      const { timestamp, ...data } = JSON.parse(event.currentTarget.result);
+      const result = JSON.parse(event.currentTarget.result);
+      if (result === null) {
+        throw new Error('Malformated import file');
+      }
+      
+      const { timestamp, ...data } = result;
       const ids = Object.keys(data).map(Number).filter(Number.isSafeInteger);
       // TODO: Detect conflicts, if equal, skip, if different, offer UI for resolution (keep old, keep new, keep both)
       for (const id of ids) {
@@ -311,6 +316,10 @@ window.addEventListener('load', async _ => {
 
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
     const item = JSON.parse(localStorage.getItem(id));
     if (!confirm(`Delete item '${item.title}'?`)) {
       return;
@@ -325,6 +334,10 @@ window.addEventListener('load', async _ => {
 
   function onMoveUpButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
     const ids = iterate();
     const index = ids.indexOf(Number(id));
     const otherId = ids[index - 1].toString();
@@ -339,6 +352,10 @@ window.addEventListener('load', async _ => {
 
   function onMoveDownButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
     const ids = iterate();
     const index = ids.indexOf(Number(id));
     const otherId = ids[index + 1].toString();
