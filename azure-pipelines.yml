@@ -7,6 +7,7 @@ steps:
   displayName: 'Run Jest unit tests & Puppeteer UI tests'
   inputs:
     command: custom
+    verbose: true
     customCommand: test
 - task: PublishTestResults@2
   inputs:
