@@ -3,6 +3,11 @@
     "test-wip": "jest",
     "test": "node ui-test.js"
   },
+  "jest": {
+    "reporters": [
+      [ "jest-junit", {} ]
+    ]
+  },
   "devDependencies": {
     "puppeteer": "1.11.0",
     "typescript": "3.2.2",
