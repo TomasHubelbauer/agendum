@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "test-wip": "jest",
-    "test": "node ui-test.js"
+    "test": "jest"
   },
   "jest": {
     "reporters": [
@@ -9,9 +8,9 @@
     ]
   },
   "devDependencies": {
-    "puppeteer": "1.11.0",
-    "typescript": "3.2.2",
     "jest": "23.6.0",
-    "jest-junit": "5.2.0"
+    "jest-junit": "^5.2.0",
+    "puppeteer": "^1.11.0",
+    "typescript": "3.2.2"
   }
 }
