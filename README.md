@@ -26,7 +26,7 @@ The badge is red because I am currently working through resolving all the strict
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
-- [ ] Pull in Fragment types using NPM for TypeScript so that we don't get type errors on `reconcile`, `p` etc.
+- [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
 - [ ] Fix TypeScript pipeline errors
 - [ ] Create UI tests for:
   - Creating an item with the basic editor
