@@ -93,3 +93,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Not before date
   - Archival behavior: archive (default), delete (has Delete button immediately), graft (clones for next day if not before date)
 - [ ] Implement a way for showing the future (not before) tasks, maybe a new tab similar to Planned and Archived
+- [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
