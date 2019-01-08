@@ -6,7 +6,8 @@ steps:
 - task: Npm@1
   displayName: 'Run Jest unit tests & Puppeteer UI tests'
   inputs:
-    command: test
+    command: custom
+    customCommand: test
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: junit.xml
