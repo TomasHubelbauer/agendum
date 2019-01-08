@@ -25,7 +25,9 @@ The badge is red because I am currently working through resolving all the strict
 ### Roadmap
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
-
+- [ ] Figure out why the Jest tests hand, they probably pick up `test.js` as well
+- [ ] Add Jest jUnit reporter https://github.com/michaelleeallen/jest-junit-reporter
+- [ ] Move Puppeteer tests to the Jest framework for jUnit reporting
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
 - [ ] Fix TypeScript pipeline errors
 - [ ] Create UI tests for:
