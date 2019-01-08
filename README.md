@@ -92,3 +92,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Add a rich editor section with advanced properties:
   - Not before date
   - Archival behavior: archive (default), delete (has Delete button immediately), graft (clones for next day if not before date)
+- [ ] Implement a way for showing the future (not before) tasks, maybe a new tab similar to Planned and Archived
