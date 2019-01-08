@@ -41,7 +41,7 @@ window.addEventListener('load', async _ => {
       editorTextAreaOrInput = document.querySelector('#editorInput');
     }
     
-    if (editorTextAreaOrInput === undefined) {
+    if (editorTextAreaOrInput === null) {
       throw new Error('Failed to find the editor component');
     }
     
@@ -66,7 +66,7 @@ window.addEventListener('load', async _ => {
   }
 
   function onAttachButtonClick() {
-    /** @type(HTMLInputElement) */
+    /** @type{HTMLInputElement|null} */
     const attachmentInput = document.querySelector('#attachmentInput');
     if (attachmentInput === null) {
       throw new Error('Failed to find the attachment input.');
@@ -115,12 +115,24 @@ window.addEventListener('load', async _ => {
       if (event.ctrlKey || event.metaKey) {
         useRichEditor = true;
         // TODO: Preserve the cursor position as well
-        const value = document.querySelector('#editorInput').value;
+        
+        /** @type{HTMLInputElement|null} */
+        const editorInput = document.querySelector('#editorInput');
+        if (editorInput === null) {
+          throw new Error('No editor input');
+        }
+        
+        const value = editorInput.value;
         renderEditor();
+        
+        /** @type{HTMLInputElement|null} */
         const editorTextArea = document.querySelector('#editorTextArea');
-        editorTextArea.value = value;
+        if (editorTextArea === null) {
+          throw new Error('No editor text area');
+        }
+        
         if (value) {
-          editorTextArea.value += '\n';
+          editorTextArea.value = value + '\n';
         }
 
         editorTextArea.focus();
