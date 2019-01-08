@@ -27,16 +27,11 @@ The badge is red because I am currently working through resolving all the strict
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
 
 - [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
-- [ ] Figure out why the Jest tests hand, they probably pick up `test.js` as well
-- [ ] Add Jest jUnit reporter https://github.com/michaelleeallen/jest-junit-reporter
-- [ ] Move Puppeteer tests to the Jest framework for jUnit reporting
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
 - [ ] Fix TypeScript pipeline errors
 - [ ] Create UI tests for:
-  - Creating an item with the basic editor
   - Switching the basic editor into the rich editor
   - Creating a newline in the rich editor
-  - Creating an item with the rich editor
   - Attaching an image when not in rich editor yet by pasting
   - Attaching an image when already in the rich editor by pasting
   - Preserving text when switching from basic to rich editor
@@ -58,11 +53,9 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Resolving import conflicts
   - Clearing all items
   - Busting the web worker cache
-- [ ] Figure out why the demo failing test doesn't fail the build (maybe need to call `process.exit`?)
-- [ ] Figure out if we can add Puppeteer screenshots to the hTML jUnit report that will come from Jest to combine both into one
-- [ ] Pass artifacts directory path to the `test` script and save screenshots to that and upload that directory not `screenshots`
-- [ ] Add [jPuppeteer jUnit](https://www.eliostruyf.com/setting-up-puppeteer-to-run-on-azure-devops-for-your-automated-ui-tests/)
-- [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports the necessary features (keys)
+- [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
+- [ ] Pass artifacts directory path to the test script and save screenshots to that and upload that directory not `screenshots`
+- [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports keys
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
 - [ ] Implement attaching image or non-image files as attachments, not only inline
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links and storing them as link spans/blocks
@@ -86,7 +79,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Do item rendering properly once Fragment supports keys and get rid of the `innerHTML = ''` call
 - [ ] Do some sort of a version call and auto-bust the web worker cache if a new version is found
 - [ ] Implement task hierarchy using `net-tree`
-- [ ] Add support for tags once net-tree is in
+- [ ] Add support for item tags once net-tree is in
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
 - [ ] Render inline images and links from backing objects on the item not using `innerHTML`
 - [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
@@ -94,5 +87,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
-- [ ] Wrap Puppeteer in Jest for jUnit XML: https://confluence.xpand-it.com/display/XRAY/Headless+testing+web+applications+using+Jest+and+Puppeteer+in+JavaScript
 - [ ] Expand to rich editor if pasting text with line breaks in it
