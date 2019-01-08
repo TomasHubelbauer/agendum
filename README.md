@@ -25,6 +25,8 @@ The badge is red because I am currently working through resolving all the strict
 ### Roadmap
 
 Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=todo) continuously…
+
+- [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
 - [ ] Figure out why the Jest tests hand, they probably pick up `test.js` as well
 - [ ] Add Jest jUnit reporter https://github.com/michaelleeallen/jest-junit-reporter
 - [ ] Move Puppeteer tests to the Jest framework for jUnit reporting
