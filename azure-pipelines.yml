@@ -8,7 +8,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: test-wip
+    customCommand: 'run test-wip'
 - powershell: npx tsc -p .
   displayName: 'Run type check'
 - task: Npm@1
