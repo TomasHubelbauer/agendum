@@ -413,7 +413,7 @@ window.addEventListener('load', async _ => {
     const [title, ...description] = value.trim().split('\n');
     const ids = iterate();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, JSON.stringify({ title, description }));
+    localStorage.setItem(id, JSON.stringify({ title, description, createdAt: Date.now() }));
     renderItems();
   }
 
@@ -529,7 +529,7 @@ window.addEventListener('load', async _ => {
       itemsDiv,
       button({ onclick: onToggleViewButtonClick }, showArchivedItems ? 'Show planned items' : 'Show archived items'),
       ...iterate().map((id, index, { length }) => {
-        const { title, description, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
+        const { title, description, createdDate, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
         if (showArchivedItems ? archivedDate === undefined : archivedDate !== undefined) {
           // TODO: Change to null or undefined once Fragment supports it
           return false;
@@ -554,8 +554,9 @@ window.addEventListener('load', async _ => {
             // TODO: Interpret as raw HTML to correctly render data URI image tags
             return div(line);
           }),
-          p(`ID: ${id}`),
-          archivedDate && p('Archived: ' + new Date(archivedDate).toLocaleString())
+          div(`ID: ${id}`),
+          createdDate && div('Created: ' + new Date(createdDate).toLocaleString()),
+          archivedDate && div('Archived: ' + new Date(archivedDate).toLocaleString()),
         );
       })
     );
