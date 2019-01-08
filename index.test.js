@@ -50,5 +50,16 @@ describe('UI tests', () => {
     const item = await page.$('details');
     await page.screenshot({ path: `screenshots/${createsAnItemUsingRichEditor}.png` });
     expect(item).not.toBeNull();
-  });  
+  });
+  
+  const storesADraftUponTabBlue = 'storesADraftUponTabBlur';
+  test(storesADraftUponTabBlue, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    const tab = await browser.newPage();
+    await tab.close();
+    const draft = await page.$('#draftsDiv > div');
+    await page.screenshot({ path: `screenshots/${storesADraftUponTabBlue}.png` });
+    expect(draft).not.toBeNull();
+  });
 });
