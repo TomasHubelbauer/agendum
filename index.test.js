@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
-const artifactsPath = process.argv[2];
+const artifactsPath = process.env.BUILD_ARTIFACTSSTAGINGDIRECTORY || '.';
 
 describe('unit tests', () => {
   test('adds 1 + 2 to equal 3', () => {
