@@ -75,7 +75,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
   - Maybe https://www.npmjs.com/package/jest-html-reporter
 - [ ] Create UI tests for:
-  - Expanding to rich editor - fix Ctrl+Enter not working in Puppeteer
+  - Expanding to rich editor
+    - [ ] [Fix Ctrl+Enter not working in Puppeteer](https://github.com/TomasHubelbauer/puppeteer-ctrl-enter)
   - Creating a newline in the rich editor
   - Attaching an image when not in rich editor yet by pasting
   - Attaching an image when already in the rich editor by pasting
