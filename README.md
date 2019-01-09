@@ -84,7 +84,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Warning about the loss of images when switching to the basic editor
   - Creating an item through the submit button for both editor types
   - Creating a draft by switching from and back to the page
-  - Deleting an item
   - Moving item up
   - Moving item down
   - Not being able to move an item
