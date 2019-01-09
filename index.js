@@ -1,12 +1,3 @@
-// TODO: Use Fragment types instead because this doesn't work
-/* @function reconcile */
-/* @function p */
-/* @function button */
-/* @function span */
-/* @function summary */
-/* @function details */
-/* @function div */
-
 window.addEventListener('load', async _ => {
   try {
     await navigator.serviceWorker.register('worker.js');
@@ -73,23 +64,7 @@ window.addEventListener('load', async _ => {
   if (bustButton == null) {
     throw new Error('Bust <button> not found');
   }
-  
-  // Migrate from string values to JSON values
-  for (let id of iterate()) {
-    const value = localStorage.getItem(id.toString());
-    if (value === null) {
-      throw new Error(`Item disappeared: ${id}`);
-    }
     
-    if (value.startsWith('{') && value.endsWith('}')) {
-      continue;
-    }
-    
-    const [title, ...description] = value.split('\n');
-    localStorage.setItem(id.toString(), JSON.stringify({ title, description }));
-    console.log('Migrated', title);
-  }
-  
   function onRecallDraftButtonClick(event) {
     /** @type{HTMLTextAreaElement|HTMLInputElement|null} */
     let editorTextAreaOrInput = null;
@@ -169,7 +144,7 @@ window.addEventListener('load', async _ => {
 
   let useRichEditor = false;
   
-  let showArchivedItems = false;
+  let tab = 'queued';
 
   function onEditorInputKeypress(event) {
     if (event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) {
@@ -386,8 +361,13 @@ window.addEventListener('load', async _ => {
     event.preventDefault();
   }
   
-  function onToggleViewButtonClick() {
-    showArchivedItems = !showArchivedItems;
+  function onShowQueuedButtonClick() {
+    tab = 'queued';
+    renderItems();
+  }
+  
+  function onShowArchivedButtonClick() {
+    tab = 'archived';
     renderItems();
   }
 
@@ -558,21 +538,38 @@ window.addEventListener('load', async _ => {
 
     reconcile(
       itemsDiv,
-      button({ onclick: onToggleViewButtonClick }, showArchivedItems ? 'Show planned items' : 'Show archived items'),
+      button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? undefined : '' }, 'Queued'),
+      button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? undefined : '' }, 'Archived'),
       ...iterate().map((id, index, { length }) => {
         const { title, description, createdDate, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
-        if (showArchivedItems ? archivedDate === undefined : archivedDate !== undefined) {
-          // TODO: Change to null or undefined once Fragment supports it
-          return false;
+        
+        // TODO: Change `false` to `null` or `undefined` once Fragment supports it
+        switch (tab) {
+          case 'queued': {
+            if (archivedDate !== undefined) {
+              return false;
+            }
+            
+            break;
+          }
+          case 'archived': {
+            if (archivedDate === undefined) {
+              return false;
+            }
+            
+            break;
+          }
+          default: {
+            throw new Error(`Invalid tab '${tab}'.`);
+          }
         }
         
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
             button({ ['data-id']: id, onclick: onRenameButtonClick }, 'Rename'),
-            showArchivedItems
-              ? button({ ['data-id']: id, onclick: onDeleteButtonClick }, 'Delete')
-              : button({ ['data-id']: id, onclick: onArchiveButtonClick }, 'Archive'),
+            tab === 'queued' && button({ ['data-id']: id, onclick: onArchiveButtonClick }, 'Archive'),
+            tab === 'archived' && button({ ['data-id']: id, onclick: onDeleteButtonClick }, 'Delete'),
             button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined }, '▲'),
             button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined }, '▼'),
           ),
