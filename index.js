@@ -188,12 +188,27 @@ window.addEventListener('load', async _ => {
     }
   }
 
-  function onEditorInputOrTextAreaPaste(event) {
-    attach(event.clipboardData.files);
+  function onEditorInputPaste(event) {
+    if (event.clipboardData.files.length > 0) {
+      attach(event.clipboardData.files);
+    }
+  }
+  
+  function onEditorTextAreaPaste(event) {
+    if (event.clipboardData.files.length > 0) {
+      attach(event.clipboardData.files);
+    }
   }
 
   function onAttachmentInputChange(event) {
-    attach(event.currentTarget.files);
+    if (event.clipboardData.files.length > 0) {
+      attach(event.clipboardData.files);
+    } else if (event.clipboardData.items.length === 1 && event.clipboardData.items[0].type === 'text/plain') {
+      useRichEditor = true;
+      // TODO: Preserve text and cursor position
+      renderEditor();
+      document.querySelector('#editorTextArea').value = event.clipboardData.getData('text/plain');
+    }
   }
 
   exportButton.addEventListener('click', _ => {
@@ -447,7 +462,7 @@ window.addEventListener('load', async _ => {
       editorTextArea.id = 'editorTextArea'; // For styling & `submit`
       editorTextArea.placeholder = 'Do this/that…';
       editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
-      editorTextArea.addEventListener('paste', onEditorInputOrTextAreaPaste);
+      editorTextArea.addEventListener('paste', onEditorTextAreaPaste);
       editorDiv.appendChild(editorTextArea);
 
       hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to submit.`;
@@ -456,7 +471,7 @@ window.addEventListener('load', async _ => {
       editorInput.id = 'editorInput'; // For styling & `submit`
       editorInput.placeholder = 'Do this/that…';
       editorInput.addEventListener('keypress', onEditorInputKeypress);
-      editorInput.addEventListener('paste', onEditorInputOrTextAreaPaste);
+      editorInput.addEventListener('paste', onEditorInputPaste);
       editorDiv.appendChild(editorInput);
 
       hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to use rich editor.`;
