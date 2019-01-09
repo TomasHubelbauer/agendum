@@ -110,6 +110,7 @@ window.addEventListener('load', async _ => {
     }
     
     editorTextAreaOrInput.value = drafts[index].title;
+    editorTextAreaOrInput.focus();
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
     renderDrafts();
