@@ -32,7 +32,7 @@ describe('UI tests', () => {
     await page.waitForSelector('#editorInput');
     await page.type('#editorInput', 'Test creating an item');
     await page.click('#submitButton');
-    const item = await page.$('details');
+    const item = await page.$('.itemSpan');
     await page.screenshot({ path: `screenshots/${createsAnItemUsingBasicEditor}.png` });
     expect(item).not.toBeNull();
   });
@@ -47,7 +47,7 @@ describe('UI tests', () => {
     await page.keyboard.type('Enter');
     await page.keyboard.up('Meta');
     await page.click('#submitButton');
-    const item = await page.$('details');
+    const item = await page.$('.itemSpan');
     await page.screenshot({ path: `screenshots/${createsAnItemUsingRichEditor}.png` });
     expect(item).not.toBeNull();
   });
@@ -96,5 +96,20 @@ describe('UI tests', () => {
     await page.screenshot({ path: `screenshots/${ignoresADraft}.png` });
     const count = await page.evaluate(() => document.querySelector('#draftsDiv').childElementCount);
     expect(count).toEqual(0);
+  });
+  
+  const renamesAnItem = 'renamesAnItem';
+  test(renamesAnItem, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    await page.click('#submitButton');
+    await page.$('.itemSpan');
+    page.on('dialog', dialog => dialog.accept('New name'));
+    await page.click('button[text()=Rename]');
+    const item = await page.$('.itemSpan');
+    const text = await page.evaluate(item => item.textContent, item);
+    await page.screenshot({ path: `screenshots/${renamesAnItem}.png` });
+    expect(item).not.toBeNull();
+    expect(text).toEqual('New name');
   });
 });
