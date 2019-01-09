@@ -90,7 +90,7 @@ describe('UI tests', () => {
   const ignoresADraft = 'ignoresADraft';
   test(ignoresADraft, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', '');
     const tab = await browser.newPage();
     await tab.close();
     await page.screenshot({ path: `screenshots/${ignoresADraft}.png` });
