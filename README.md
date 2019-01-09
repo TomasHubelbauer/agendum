@@ -75,20 +75,20 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
   - Maybe https://www.npmjs.com/package/jest-html-reporter
 - [ ] Create UI tests for:
-  - Switching the basic editor into the rich editor
+  - Expanding to rich editor - fix Ctrl+Enter not working in Puppeteer
   - Creating a newline in the rich editor
   - Attaching an image when not in rich editor yet by pasting
   - Attaching an image when already in the rich editor by pasting
   - Preserving text when switching from basic to rich editor
   - Warning about the loss of images when switching to the basic editor
-  - Creating an item through the submit button for both editor types
-  - Creating a draft by switching from and back to the page
+  - Creating an item through the Enter press (as opposed to Submit button press) in both editors
   - Not being able to move an item
   - Rendering correct raw HTML in item contents
   - Exporting
   - Importing
   - Resolving import conflicts
   - Busting the web worker cache
+
 #### Bugs
 
 - [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
