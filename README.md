@@ -94,3 +94,4 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Fix mobile task label with multiple lines overlapping into the content (by ditching `details` and keeping state in item)
 - [ ] Fix service worker offline serving not working in Firefox & Safari - web worker says `fetch` timed out
 - [ ] Fix TypeScript pipeline errors
+- [ ] Fix Puppeteer not dropping screenshots in CI
