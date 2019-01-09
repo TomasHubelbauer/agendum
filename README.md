@@ -75,7 +75,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
   - Maybe https://www.npmjs.com/package/jest-html-reporter
 - [ ] Create UI tests for:
-  - Focus the editor after recalling a draft
   - Switching the basic editor into the rich editor
   - Creating a newline in the rich editor
   - Attaching an image when not in rich editor yet by pasting

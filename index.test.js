@@ -28,7 +28,7 @@ describe('UI tests', () => {
   const createsAnItemUsingBasicEditor = 'createsAnItemUsingBasicEditor';
   test(createsAnItemUsingBasicEditor, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     await page.click('#submitButton');
     const item = await page.$('.itemSpan');
     await page.screenshot({ path: path.join(artifactsPath, createsAnItemUsingBasicEditor + '.png') });
@@ -38,7 +38,7 @@ describe('UI tests', () => {
   const createsAnItemUsingRichEditor = 'createsAnItemUsingRichEditor';
   test(createsAnItemUsingRichEditor, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     await page.focus('#editorInput');
     // TODO: Figure out why this doesn't work
     await page.keyboard.down('Meta');
@@ -53,7 +53,7 @@ describe('UI tests', () => {
   const storesADraftUponTabBlur = 'storesADraftUponTabBlur';
   test(storesADraftUponTabBlur, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     const tab = await browser.newPage();
     await tab.close();
     const draft = await page.$('#draftsDiv > div');
@@ -64,19 +64,33 @@ describe('UI tests', () => {
   const recallsADraft = 'recallsADraft';
   test(recallsADraft, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     const tab = await browser.newPage();
     await tab.close();
     await (await page.waitForXPath('//button[text()="Recall"]')).click();
     await page.screenshot({ path: path.join(artifactsPath, recallsADraft + '.png') });
     const text = await page.evaluate(() => document.querySelector('#editorInput').value);
-    expect(text).toEqual('Test creating an item');
+    expect(text).toEqual('Item');
+  });
+
+  const focusesAfterRecallingDraft = 'focusesAfterRecallingDraft';
+  test(focusesAfterRecallingDraft, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Item');
+    const tab = await browser.newPage();
+    await tab.close();
+    await page.screenshot({ path: path.join(artifactsPath, focusesAfterRecallingDraft + '.png') });
+    expect(await page.evaluate(() => document.querySelector('#editorInput') === document.activeElement)).toEqual(true);
+    const recallButton = await page.waitForXPath('//button[text()="Recall"]');
+    await recallButton.focus();
+    await recallButton.click();
+    expect(await page.evaluate(() => document.querySelector('#editorInput') === document.activeElement)).toEqual(true);
   });
   
   const dismissesADraft = 'dismissesADraft';
   test(dismissesADraft, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     const tab = await browser.newPage();
     await tab.close();
     await (await page.waitForXPath('//button[text()="Dismiss"]')).click();
@@ -99,7 +113,7 @@ describe('UI tests', () => {
   const renamesAnItem = 'renamesAnItem';
   test(renamesAnItem, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     await page.click('#submitButton');
     await page.$('.itemSpan');
     page.on('dialog', dialog => dialog.accept('New name'));
@@ -114,7 +128,7 @@ describe('UI tests', () => {
   const archivesAnItem = 'archivesAnItem';
   test(archivesAnItem, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     await page.click('#submitButton');
     await (await page.waitForXPath('//button[text()="Archive"]')).click();
     const itemQueued = await page.$('.itemSpan');
@@ -128,7 +142,7 @@ describe('UI tests', () => {
   const deletesAnItem = 'deletesAnItem';
   test(deletesAnItem, async () => {
     await page.waitForSelector('#editorInput');
-    await page.type('#editorInput', 'Test creating an item');
+    await page.type('#editorInput', 'Item');
     await page.click('#submitButton');
     await (await page.waitForXPath('//button[text()="Archive"]')).click();
     await (await page.waitForXPath('//button[text()="Archived"]')).click();
