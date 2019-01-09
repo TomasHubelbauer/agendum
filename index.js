@@ -538,8 +538,8 @@ window.addEventListener('load', async _ => {
 
     reconcile(
       itemsDiv,
-      button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? undefined : '' }, 'Queued'),
-      button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? undefined : '' }, 'Archived'),
+      button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? undefined : 'disabled' }, 'Queued'),
+      button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? undefined : 'disabled' }, 'Archived'),
       ...iterate().map((id, index, { length }) => {
         const { title, description, createdDate, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
         
