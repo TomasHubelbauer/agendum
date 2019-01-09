@@ -502,18 +502,18 @@ window.addEventListener('load', async _ => {
     advancedSummary.textContent = 'Advanced';
     advancedDetails.appendChild(advancedSummary);
     
-    const resolutionSelect = document.querySelector('select');
+    const resolutionSelect = document.createElement('select');
     advancedDetails.appendChild(resolutionSelect);
     
-    const archiveOption = document.querySelector('option');
+    const archiveOption = document.createElement('option');
     archiveOption.textContent = 'Archive';
     resolutionSelect.appendChild(archiveOption);
     
-    const deleteOption = document.querySelector('option');
+    const deleteOption = document.createElement('option');
     deleteOption.textContent = 'Delete';
     resolutionSelect.appendChild(deleteOption);
     
-    const graftOption = document.querySelector('option');
+    const graftOption = document.createElement('option');
     graftOption.textContent = 'Graft';
     resolutionSelect.appendChild(graftOption);
     
