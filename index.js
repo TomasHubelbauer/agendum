@@ -600,7 +600,7 @@ window.addEventListener('load', async _ => {
             tab === 'queued' && button({ ['data-id']: id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
             tab === 'archived' && button({ ['data-id']: id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
             button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
-            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title} down'` }, '▼'),
+            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title}' down` }, '▼'),
           ),
           ...(description || []).map(line => {
             // Recognize lines that are a link as a whole

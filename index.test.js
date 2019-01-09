@@ -132,9 +132,40 @@ describe('UI tests', () => {
     await page.click('#submitButton');
     await (await page.waitForXPath('//button[text()="Archive"]')).click();
     await (await page.waitForXPath('//button[text()="Archived"]')).click();
+    page.on('dialog', dialog => dialog.accept());
     await (await page.waitForXPath('//button[text()="Delete"]')).click();
     await page.screenshot({ path: path.join(artifactsPath, deletesAnItem + '.png') });
-    const count = await page.evaluate(() => document.querySelector('#itemsDiv').childElementCount);
+    const count = await page.evaluate(() => document.querySelectorAll('.itemSpan').length);
     expect(count).toEqual(0);
+  });
+
+  const movesAnItemUp = 'movesAnItemUp';
+  test(movesAnItemUp, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Item #1');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #2');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #3');
+    await page.click('#submitButton');
+    await page.click(`button[title="Move 'Item #3' up"]`);
+    await page.screenshot({ path: path.join(artifactsPath, movesAnItemUp + '.png') });
+    const labels = await page.evaluate(() => [...document.querySelectorAll('.itemSpan')].map(i => i.textContent));
+    expect(labels).toEqual([ 'Item #1', 'Item #3', 'Item #2' ]);
+  });
+
+  const movesAnItemDown = 'movesAnItemDown';
+  test(movesAnItemDown, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Item #1');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #2');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #3');
+    await page.click('#submitButton');
+    await page.click(`button[title="Move 'Item #1' down"]`);
+    await page.screenshot({ path: path.join(artifactsPath, movesAnItemDown + '.png') });
+    const labels = await page.evaluate(() => [...document.querySelectorAll('.itemSpan')].map(i => i.textContent));
+    expect(labels).toEqual([ 'Item #2', 'Item #1', 'Item #3' ]);
   });
 });
