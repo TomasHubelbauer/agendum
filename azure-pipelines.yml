@@ -8,7 +8,7 @@ steps:
   inputs:
     command: custom
     verbose: true
-    customCommand: test
+    customCommand: 'test $(Build.ArtifactStagingDirectory)'
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: junit.xml
