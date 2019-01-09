@@ -30,6 +30,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
 - [ ] Fix TypeScript pipeline errors
 - [ ] Create UI tests for:
+  - Focus the editor after recalling a draft
   - Switching the basic editor into the rich editor
   - Creating a newline in the rich editor
   - Attaching an image when not in rich editor yet by pasting
