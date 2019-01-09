@@ -86,8 +86,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Creating an item through the submit button for both editor types
   - Creating a draft by switching from and back to the page
   - Ignoring a draft when the editor is empty
-  - Recalling a draft
-  - Dismissing a draft
   - Renaming an item
   - Archiving an item
   - Deleting an item
