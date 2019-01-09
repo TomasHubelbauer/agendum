@@ -567,11 +567,11 @@ window.addEventListener('load', async _ => {
         return details(
           summary(
             span({ class: 'itemSpan' }, title),
-            button({ ['data-id']: id, onclick: onRenameButtonClick }, 'Rename'),
-            tab === 'queued' && button({ ['data-id']: id, onclick: onArchiveButtonClick }, 'Archive'),
-            tab === 'archived' && button({ ['data-id']: id, onclick: onDeleteButtonClick }, 'Delete'),
-            button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined }, '▲'),
-            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined }, '▼'),
+            button({ ['data-id']: id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
+            tab === 'queued' && button({ ['data-id']: id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
+            tab === 'archived' && button({ ['data-id']: id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
+            button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
+            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title} down'` }, '▼'),
           ),
           ...(description || []).map(line => {
             // Recognize lines that are a link as a whole
