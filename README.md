@@ -54,6 +54,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Clearing all items
   - Busting the web worker cache
 - [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
+  - Maybe https://www.npmjs.com/package/jest-html-reporter
 - [ ] Pass artifacts directory path to the test script and save screenshots to that and upload that directory not `screenshots`
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports keys
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
