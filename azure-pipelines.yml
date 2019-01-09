@@ -14,8 +14,5 @@ steps:
     testResultsFiles: junit.xml
 - task: PublishBuildArtifacts@1
   displayName: 'Upload screenshots as artifacts'
-  inputs:
-    pathtoPublish: screenshots
-    artifactName: screenshots
 - powershell: npx tsc -p .
   displayName: 'Run TypeScript type check'
