@@ -89,7 +89,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Exporting
   - Importing
   - Resolving import conflicts
-  - Clearing all items
   - Busting the web worker cache
 #### Bugs
 

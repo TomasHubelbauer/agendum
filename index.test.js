@@ -168,4 +168,20 @@ describe('UI tests', () => {
     const labels = await page.evaluate(() => [...document.querySelectorAll('.itemSpan')].map(i => i.textContent));
     expect(labels).toEqual([ 'Item #2', 'Item #1', 'Item #3' ]);
   });
+
+  const clearsAllItems = 'clearsAllItems';
+  test(clearsAllItems, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Item #1');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #2');
+    await page.click('#submitButton');
+    await page.type('#editorInput', 'Item #3');
+    await page.click('#submitButton');
+    await page.screenshot({ path: path.join(artifactsPath, clearsAllItems + '.png') });
+    expect(await page.evaluate(() => document.querySelectorAll('.itemSpan').length)).toEqual(3);
+    page.on('dialog', dialog => dialog.accept());
+    await page.click('#clearButton');
+    expect(await page.evaluate(() => document.querySelectorAll('.itemSpan').length)).toEqual(0);
+  });
 });
