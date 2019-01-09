@@ -112,4 +112,19 @@ describe('UI tests', () => {
     expect(item).not.toBeNull();
     expect(text).toEqual('New name');
   });
+  
+  const archivesAnItem = 'archivesAnItem';
+  test(archivesAnItem, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    await page.click('#submitButton');
+    await page.$('.itemSpan');
+    await page.click('button[text()=Archive]');
+    const itemQueued = await page.$('.itemSpan');
+    await page.screenshot({ path: `screenshots/${archivesAnItem}.png` });
+    expect(itemQueued).toBeNull();
+    await page.click('button[text()=Archived]');
+    const itemArchived = await page.$('.itemSpan');
+    expect(itemArchived).not.toBeNull();
+  });
 });
