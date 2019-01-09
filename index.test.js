@@ -124,4 +124,17 @@ describe('UI tests', () => {
     const itemArchived = await page.$('.itemSpan');
     expect(itemArchived).not.toBeNull();
   });
+  
+  const deletesAnItem = 'deletesAnItem';
+  test(deletesAnItem, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    await page.click('#submitButton');
+    await (await page.waitForXPath('//button[text()="Archive"]')).click();
+    await (await page.waitForXPath('//button[text()="Archived"]')).click();
+    await (await page.waitForXPath('//button[text()="Delete"]')).click();
+    await page.screenshot({ path: path.join(artifactsPath, deletesAnItem + '.png') });
+    const count = await page.evaluate(() => document.querySelector('#itemsDiv').childElementCount);
+    expect(count).toEqual(0);
+  });
 });
