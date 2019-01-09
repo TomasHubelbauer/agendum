@@ -30,7 +30,6 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 - [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
 - [ ] Implement adding a forgotten task to the Archived tab, probably by adding a Add to Archived editor button when in archive
-- [ ] Expand the basic editor to rich editor if pasting text with line breaks in it
 - [ ] Support attaching audio/video recordings as attachments / inline elements
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
