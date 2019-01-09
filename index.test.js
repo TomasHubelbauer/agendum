@@ -52,14 +52,38 @@ describe('UI tests', () => {
     expect(item).not.toBeNull();
   });
   
-  const storesADraftUponTabBlue = 'storesADraftUponTabBlur';
-  test(storesADraftUponTabBlue, async () => {
+  const storesADraftUponTabBlur = 'storesADraftUponTabBlur';
+  test(storesADraftUponTabBlur, async () => {
     await page.waitForSelector('#editorInput');
     await page.type('#editorInput', 'Test creating an item');
     const tab = await browser.newPage();
     await tab.close();
     const draft = await page.$('#draftsDiv > div');
-    await page.screenshot({ path: `screenshots/${storesADraftUponTabBlue}.png` });
+    await page.screenshot({ path: `screenshots/${storesADraftUponTabBlur}.png` });
     expect(draft).not.toBeNull();
+  });
+  
+  const recallsADraft = 'recallsADraft';
+  test(recallsADraft, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    const tab = await browser.newPage();
+    await tab.close();
+    await page.click('#draftsDiv > button[text()=Recall]');
+    await page.screenshot({ path: `screenshots/${recallsADraft}.png` });
+    const text = await page.evaluate(() => document.querySelector('#editorInput').value);
+    expect(text).toEqual('Test creating an item');
+  });
+  
+  const dismissesADraft = 'dismissesADraft';
+  test(dismissesADraft, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    const tab = await browser.newPage();
+    await tab.close();
+    await page.click('#draftsDiv > button[text()=Dismiss]');
+    await page.screenshot({ path: `screenshots/${dismissesADraft}.png` });
+    const count = await page.evaluate(() => document.querySelector('#draftsDiv').childElementCount);
+    expect(count).toEqual(0);
   });
 });
