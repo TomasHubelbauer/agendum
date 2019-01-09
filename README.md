@@ -89,9 +89,9 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
 - [ ] Implement editing item contents - recall item in rich editor?
-- [ ] Expand to rich editor if pasting text with line breaks in it
+- [ ] Expand the basic editor to rich editor if pasting text with line breaks in it
 - [ ] Implement adding a forgotten task to the Archived tab, probably by adding a Add to Archived editor button when in archive
 - [ ] Hook up the advanced options controls underneath the editor
 - [ ] Style the advanced controls section so that it has its own line
-- [ ] Implement a way for showing the future (not before) tasks, maybe a new tab similar to Planned and Archived
+- [ ] Implement time comparison in Scheduled tab as well as the Not Before advanced field in the editor
 - [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
