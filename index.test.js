@@ -86,4 +86,15 @@ describe('UI tests', () => {
     const count = await page.evaluate(() => document.querySelector('#draftsDiv').childElementCount);
     expect(count).toEqual(0);
   });
+  
+  const ignoresADraft = 'ignoresADraft';
+  test(ignoresADraft, async () => {
+    await page.waitForSelector('#editorInput');
+    await page.type('#editorInput', 'Test creating an item');
+    const tab = await browser.newPage();
+    await tab.close();
+    await page.screenshot({ path: `screenshots/${ignoresADraft}.png` });
+    const count = await page.evaluate(() => document.querySelector('#draftsDiv').childElementCount);
+    expect(count).toEqual(0);
+  });
 });
