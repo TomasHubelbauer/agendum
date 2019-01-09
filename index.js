@@ -366,6 +366,11 @@ window.addEventListener('load', async _ => {
     renderItems();
   }
   
+  function onShowScheduledButtonClick() {
+    tab = 'scheduled';
+    renderItems();
+  }
+  
   function onShowArchivedButtonClick() {
     tab = 'archived';
     renderItems();
@@ -539,14 +544,23 @@ window.addEventListener('load', async _ => {
     reconcile(
       itemsDiv,
       button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
+      button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
       button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
       ...iterate().map((id, index, { length }) => {
-        const { title, description, createdDate, archivedDate } = JSON.parse(localStorage.getItem(id.toString()));
+        const { title, description, createdDate, archivedDate, notBeforeDate } = JSON.parse(localStorage.getItem(id.toString()));
         
         // TODO: Change `false` to `null` or `undefined` once Fragment supports it
         switch (tab) {
           case 'queued': {
             if (archivedDate !== undefined) {
+              return false;
+            }
+            
+            break;
+          }
+          case 'scheduled': {
+            // TODO: Add logic for notBefore < now and return `false` for it too
+            if (notBeforeDate === undefined) {
               return false;
             }
             
