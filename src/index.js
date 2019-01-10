@@ -551,48 +551,57 @@ window.addEventListener('load', async _ => {
       })
     );
   }
+  
+  function* getItems() {
+    for (let id of iterate()) {
+      yield JSON.parse(localStorage.getItem(id.toString()));
+    }
+  }
+  
+  function* getQueuedItems() {
+    for (let item of getItems()) {
+      if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
+        yield { id, item };
+      }
+    }
+  }
+  
+  function* getScheduledItems() {
+    for (let item of getItems()) {
+      // TODO: Validate `notBeforeDate`
+      if (item.archivedDate === undefined && item.notBeforeDate !== undefined) {
+        yield { id, item };
+      }
+    }
+  }
+  
+  function* getArchivedItems() {
+    for (let item of getItems()) {
+      if (item.archivedDate !== undefined) {
+        yield { id, item };
+      }
+    }
+  }
 
   function renderItems() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
+    
+    let items = [];
+    switch (tab) {
+      case 'queued': items = getQueuedItems(); break;
+      case 'scheduled': items = getScheduledItems(); break;
+      case 'archived': items = getArchivedItems(); break;
+      default: throw new Error(`Invalid tab '${tab}'.`);
+    }
 
     reconcile(
       itemsDiv,
       button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
       button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
       button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-      ...iterate().map((id, index, { length }) => {
-        const { title, description, createdDate, archivedDate, notBeforeDate } = JSON.parse(localStorage.getItem(id.toString()));
-        
-        // TODO: Change `false` to `null` or `undefined` once Fragment supports it
-        switch (tab) {
-          case 'queued': {
-            if (archivedDate !== undefined) {
-              return false;
-            }
-            
-            break;
-          }
-          case 'scheduled': {
-            // TODO: Add logic for notBefore < now and return `false` for it too
-            if (notBeforeDate === undefined) {
-              return false;
-            }
-            
-            break;
-          }
-          case 'archived': {
-            if (archivedDate === undefined) {
-              return false;
-            }
-            
-            break;
-          }
-          default: {
-            throw new Error(`Invalid tab '${tab}'.`);
-          }
-        }
-        
+      ...[...items].map(({ id, item }, index, { length }) => {
+        const { title, description, createdDate, archivedDate, notBeforeDate } = item;
         return details(
           { class: index % 2 === 0 ? 'even' : 'odd' },
           summary(
