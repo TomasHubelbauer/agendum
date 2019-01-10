@@ -554,14 +554,14 @@ window.addEventListener('load', async _ => {
   
   function* getItems() {
     for (let id of iterate()) {
-      yield JSON.parse(localStorage.getItem(id.toString()));
+      yield { id, item: JSON.parse(localStorage.getItem(id.toString())) };
     }
   }
   
   function* getQueuedItems() {
     for (let item of getItems()) {
       if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
-        yield { id, item };
+        yield item;
       }
     }
   }
@@ -570,7 +570,7 @@ window.addEventListener('load', async _ => {
     for (let item of getItems()) {
       // TODO: Validate `notBeforeDate`
       if (item.archivedDate === undefined && item.notBeforeDate !== undefined) {
-        yield { id, item };
+        yield item;
       }
     }
   }
@@ -578,7 +578,7 @@ window.addEventListener('load', async _ => {
   function* getArchivedItems() {
     for (let item of getItems()) {
       if (item.archivedDate !== undefined) {
-        yield { id, item };
+        yield item;
       }
     }
   }
