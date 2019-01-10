@@ -560,7 +560,7 @@ window.addEventListener('load', async _ => {
   
   function* getQueuedItems() {
     for (let item of getItems()) {
-      if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
+      if (item.item..archivedDate === undefined && item.notBeforeDate === undefined) {
         yield item;
       }
     }
@@ -569,7 +569,7 @@ window.addEventListener('load', async _ => {
   function* getScheduledItems() {
     for (let item of getItems()) {
       // TODO: Validate `notBeforeDate`
-      if (item.archivedDate === undefined && item.notBeforeDate !== undefined) {
+      if (item.item.archivedDate === undefined && item.notBeforeDate !== undefined) {
         yield item;
       }
     }
@@ -577,7 +577,7 @@ window.addEventListener('load', async _ => {
   
   function* getArchivedItems() {
     for (let item of getItems()) {
-      if (item.archivedDate !== undefined) {
+      if (item.item.archivedDate !== undefined) {
         yield item;
       }
     }
@@ -587,7 +587,7 @@ window.addEventListener('load', async _ => {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
     
-    let items = [];
+    let items;
     switch (tab) {
       case 'queued': items = getQueuedItems(); break;
       case 'scheduled': items = getScheduledItems(); break;
