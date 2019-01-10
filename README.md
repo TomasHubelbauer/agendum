@@ -53,6 +53,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
+- [ ] Query the set of items per tab first and then render the set to make sure up/down disables and even/odd backgrounds work okay
 - [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
 - [ ] Style the advanced controls section so that it has its own line
@@ -89,6 +90,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Importing
   - Resolving import conflicts
   - Busting the web worker cache
+  - Up on 1st item is disabled and so is down on last item
 
 #### Bugs
 
