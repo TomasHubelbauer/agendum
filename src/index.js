@@ -560,7 +560,7 @@ window.addEventListener('load', async _ => {
   
   function* getQueuedItems() {
     for (let item of getItems()) {
-      if (item.item..archivedDate === undefined && item.notBeforeDate === undefined) {
+      if (item.item.archivedDate === undefined && item.notBeforeDate === undefined) {
         yield item;
       }
     }
