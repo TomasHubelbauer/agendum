@@ -594,6 +594,7 @@ window.addEventListener('load', async _ => {
         }
         
         return details(
+          { class: index % 2 === 0 ? 'even' : 'odd' },
           summary(
             span({ class: 'itemSpan' }, title),
             button({ ['data-id']: id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
