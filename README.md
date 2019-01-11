@@ -53,7 +53,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
-- [ ] Verify moving within groups works with the introduction of tabs, likely will have to query the right group in the move handlers
+- [ ] Add tests for moving items within tabs when there are items in all tabs to make sure the filtering logic doesn't break
 - [ ] Query the set of items per tab first and then render the set to make sure up/down disables and even/odd backgrounds work okay
 - [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
