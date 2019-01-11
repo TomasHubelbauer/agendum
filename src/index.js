@@ -1,3 +1,5 @@
+import getItems from './getItems.js';
+
 window.addEventListener('load', async _ => {
   try {
     await navigator.serviceWorker.register('worker.js');
@@ -552,14 +554,8 @@ window.addEventListener('load', async _ => {
     );
   }
   
-  function* getItems() {
-    for (let id of iterate()) {
-      yield { id, item: JSON.parse(localStorage.getItem(id.toString())) };
-    }
-  }
-  
   function* getQueuedItems() {
-    for (let item of getItems()) {
+    for (let item of getItems(iterate())) {
       if (item.item.archivedDate === undefined && item.notBeforeDate === undefined) {
         yield item;
       }
@@ -567,7 +563,7 @@ window.addEventListener('load', async _ => {
   }
   
   function* getScheduledItems() {
-    for (let item of getItems()) {
+    for (let item of getItems(iterate())) {
       // TODO: Validate `notBeforeDate`
       if (item.item.archivedDate === undefined && item.notBeforeDate !== undefined) {
         yield item;
@@ -576,7 +572,7 @@ window.addEventListener('load', async _ => {
   }
   
   function* getArchivedItems() {
-    for (let item of getItems()) {
+    for (let item of getItems(iterate())) {
       if (item.item.archivedDate !== undefined) {
         yield item;
       }
