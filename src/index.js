@@ -346,7 +346,7 @@ window.addEventListener('load', async _ => {
       throw new Error('ID was not passed');
     }
     
-    const ids = iterate();
+    const ids = [...getTabItems()].map(i => i.id);
     const index = ids.indexOf(Number(id));
     const otherId = ids[index - 1].toString();
     const other = localStorage.getItem(otherId);
@@ -364,8 +364,8 @@ window.addEventListener('load', async _ => {
       throw new Error('ID was not passed');
     }
     
-    const ids = iterate();
-    const index = ids.indexOf(Number(id));
+    const ids = [...getTabItems()].map(i => i.id);
+    const index = ids.map(i => i.id).indexOf(Number(id));
     const otherId = ids[index + 1].toString();
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
@@ -582,25 +582,26 @@ window.addEventListener('load', async _ => {
       }
     }
   }
+  
+  function getTabItems() {
+    switch (tab) {
+      case 'queued': return getQueuedItems(); break;
+      case 'scheduled': return getScheduledItems(); break;
+      case 'archived': return getArchivedItems(); break;
+      default: throw new Error(`Invalid tab '${tab}'.`);
+    }
+  }
 
   function renderItems() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
     
-    let items;
-    switch (tab) {
-      case 'queued': items = getQueuedItems(); break;
-      case 'scheduled': items = getScheduledItems(); break;
-      case 'archived': items = getArchivedItems(); break;
-      default: throw new Error(`Invalid tab '${tab}'.`);
-    }
-
     reconcile(
       itemsDiv,
       button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
       button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
       button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-      ...[...items].map(({ id, item }, index, { length }) => {
+      ...[...getTabItems()].map(({ id, item }, index, { length }) => {
         const { title, description, createdDate, archivedDate, notBeforeDate } = item;
         return details(
           { class: index % 2 === 0 ? 'even' : 'odd' },
