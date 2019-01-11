@@ -1,4 +1,7 @@
 import getItems from './getItems.js';
+import getQueuedItems from './getQueuedItems.js';
+import getScheduledItems from './getScheduledItems.js';
+import getArchivedItems from './getArchivedItems.js';
 
 window.addEventListener('load', async _ => {
   try {
@@ -553,37 +556,12 @@ window.addEventListener('load', async _ => {
       })
     );
   }
-  
-  function* getQueuedItems() {
-    for (let item of getItems(iterate())) {
-      if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
-        yield item;
-      }
-    }
-  }
-  
-  function* getScheduledItems() {
-    for (let item of getItems(iterate())) {
-      // TODO: Validate `notBeforeDate`
-      if (item.archivedDate === undefined && item.notBeforeDate !== undefined) {
-        yield item;
-      }
-    }
-  }
-  
-  function* getArchivedItems() {
-    for (let item of getItems(iterate())) {
-      if (item.archivedDate !== undefined) {
-        yield item;
-      }
-    }
-  }
-  
+    
   function getTabItems() {
     switch (tab) {
-      case 'queued': return getQueuedItems(); break;
-      case 'scheduled': return getScheduledItems(); break;
-      case 'archived': return getArchivedItems(); break;
+      case 'queued': return getQueuedItems(getItems(iterate())); break;
+      case 'scheduled': return getScheduledItems(getItems(iterate())); break;
+      case 'archived': return getArchivedItems(getItems(iterate())); break;
       default: throw new Error(`Invalid tab '${tab}'.`);
     }
   }
