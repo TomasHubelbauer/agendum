@@ -365,7 +365,7 @@ window.addEventListener('load', async _ => {
     }
     
     const ids = [...getTabItems()].map(i => i.id);
-    const index = ids.map(i => i.id).indexOf(Number(id));
+    const index = ids.indexOf(Number(id));
     const otherId = ids[index + 1].toString();
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
