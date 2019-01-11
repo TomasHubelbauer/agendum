@@ -556,7 +556,7 @@ window.addEventListener('load', async _ => {
   
   function* getQueuedItems() {
     for (let item of getItems(iterate())) {
-      if (item.item.archivedDate === undefined && item.notBeforeDate === undefined) {
+      if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
         yield item;
       }
     }
@@ -565,7 +565,7 @@ window.addEventListener('load', async _ => {
   function* getScheduledItems() {
     for (let item of getItems(iterate())) {
       // TODO: Validate `notBeforeDate`
-      if (item.item.archivedDate === undefined && item.notBeforeDate !== undefined) {
+      if (item.archivedDate === undefined && item.notBeforeDate !== undefined) {
         yield item;
       }
     }
@@ -573,7 +573,7 @@ window.addEventListener('load', async _ => {
   
   function* getArchivedItems() {
     for (let item of getItems(iterate())) {
-      if (item.item.archivedDate !== undefined) {
+      if (item.archivedDate !== undefined) {
         yield item;
       }
     }
@@ -597,17 +597,17 @@ window.addEventListener('load', async _ => {
       button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
       button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
       button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-      ...[...getTabItems()].map(({ id, item }, index, { length }) => {
+      ...[...getTabItems()].map((item, index, { length }) => {
         const { title, description, createdDate, archivedDate, notBeforeDate } = item;
         return details(
           { class: index % 2 === 0 ? 'even' : 'odd' },
           summary(
             span({ class: 'itemSpan' }, title),
-            button({ ['data-id']: id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
-            tab === 'queued' && button({ ['data-id']: id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
-            tab === 'archived' && button({ ['data-id']: id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
-            button({ ['data-id']: id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
-            button({ ['data-id']: id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title}' down` }, '▼'),
+            button({ ['data-id']: item.id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
+            tab === 'queued' && button({ ['data-id']: item.id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
+            tab === 'archived' && button({ ['data-id']: item.id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
+            button({ ['data-id']: item.id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
+            button({ ['data-id']: item.id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title}' down` }, '▼'),
           ),
           ...(description || []).map(line => {
             // Recognize lines that are a link as a whole
@@ -618,7 +618,7 @@ window.addEventListener('load', async _ => {
             // TODO: Interpret as raw HTML to correctly render data URI image tags
             return div(line);
           }),
-          div(`ID: ${id}`),
+          div(`ID: ${item.id}`),
           createdDate && div('Created: ' + new Date(createdDate).toLocaleString()),
           archivedDate && div('Archived: ' + new Date(archivedDate).toLocaleString()),
         );
