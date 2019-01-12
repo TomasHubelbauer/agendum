@@ -419,8 +419,8 @@ window.addEventListener('load', async _ => {
   }
 
   function renderEditorAndHint() {
-    renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
-    renderHint(useRichEditor);
+    renderEditor(editorDiv, useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderHint(hintDiv, useRichEditor);
   }
     
   function renderList() {
