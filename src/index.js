@@ -381,10 +381,6 @@ window.addEventListener('load', async _ => {
     renderItems();
   }
 
-  function iterate() {
-    return Object.keys(localStorage).map(Number).filter(Number.isSafeInteger).sort();
-  }
-
   function submit() {
     const value = editorInputOrTextArea.value;
     editorInputOrTextArea.value = '';
@@ -394,7 +390,7 @@ window.addEventListener('load', async _ => {
     }
     
     const [title, ...description] = value.trim().split('\n');
-    const ids = iterate();
+    const ids = getIds();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
     localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now() }));
     renderItems();
@@ -460,16 +456,7 @@ window.addEventListener('load', async _ => {
       })
     );
   }
-    
-  function getTabItems() {
-    switch (tab) {
-      case 'queued': return getQueuedItems(getItems(iterate())); break;
-      case 'scheduled': return getScheduledItems(getItems(iterate())); break;
-      case 'archived': return getArchivedItems(getItems(iterate())); break;
-      default: throw new Error(`Invalid tab '${tab}'.`);
-    }
-  }
-
+  
   function renderItems() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
