@@ -1,4 +1,4 @@
-import reconcile, { button, details, summary, span, div, a } from '';
+import reconcile, { button, details, summary, span, div, a } from 'https://cdn.jsdelivr.net/npm/fragmentui/lib.js';
 import getQueuedItems from './getQueuedItems.js';
 import getScheduledItems from './getScheduledItems.js';
 import getArchivedItems from './getArchivedItems.js';
