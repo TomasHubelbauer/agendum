@@ -432,7 +432,7 @@ window.addEventListener('load', async _ => {
   function renderList() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
-    renderList(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+    renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
   }
   
   function render() {
