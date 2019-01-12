@@ -72,28 +72,22 @@ window.addEventListener('load', async _ => {
   if (bustButton == null) {
     throw new Error('Bust <button> not found');
   }
-    
-  function onRecallDraftButtonClick(event) {
-    /** @type{HTMLTextAreaElement|HTMLInputElement|null} */
-    let editorTextAreaOrInput = null;
-    if (useRichEditor) {
-      editorTextAreaOrInput = document.querySelector('#editorTextArea');
-    } else {
-      editorTextAreaOrInput = document.querySelector('#editorInput');
-    }
-    
-    if (editorTextAreaOrInput === null) {
-      throw new Error('Failed to find the editor component');
-    }
-    
+
+  let useRichEditor = false;
+  /** @type {HTMLTextAreaElement|HTMLInputElement|undefined} */
+  let editorInputOrTextArea;
+  let draft = '';
+  let tab = 'queued';
+  
+  function onRecallDraftButtonClick(event) {  
     const index = event.currentTarget.dataset['index'];
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-    if (editorTextAreaOrInput.value && !confirm('You have stuff in the editor, do you want to replace it with the draft?')) {
+    if (editorInputOrTextArea.value && !confirm('You have stuff in the editor, do you want to replace it with the draft?')) {
       return;
     }
     
-    editorTextAreaOrInput.value = drafts[index].title;
-    editorTextAreaOrInput.focus();
+    editorInputOrTextArea.value = drafts[index].title;
+    editorInputOrTextArea.focus();
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
     renderDrafts();
@@ -122,20 +116,8 @@ window.addEventListener('load', async _ => {
   }
   
   document.addEventListener('visibilitychange', _ => {
-    /** @type{HTMLTextAreaElement|HTMLInputElement|null} */
-    let editorTextAreaOrInput = null;
-    if (useRichEditor) {
-      editorTextAreaOrInput = document.querySelector('#editorTextArea');
-    } else {
-      editorTextAreaOrInput = document.querySelector('#editorInput');
-    }
-    
-    if (editorTextAreaOrInput === null) {
-      throw new Error('Failed to query the editor textarea of input in the document.');
-    }
-    
     if (document.hidden) {
-      const value = editorTextAreaOrInput.value;
+      const value = editorInputOrTextArea.value;
       if (!value) {
         return;
       }
@@ -144,17 +126,11 @@ window.addEventListener('load', async _ => {
       drafts.push({ title: value });
       localStorage.setItem('drafts', JSON.stringify(drafts));
       renderDrafts();
-      editorTextAreaOrInput.value = '';
+      editorInputOrTextArea.value = '';
     } else {
-      editorTextAreaOrInput.focus();
+      editorInputOrTextArea.focus();
     }
   });
-
-  let useRichEditor = false;
-  /** @type {HTMLTextAreaElement|HTMLInputElement|undefined} */
-  let editorInputOrTextArea;
-  let draft = '';
-  let tab = 'queued';
   
   function onEditorInputMount(currentTarget) {
     editorInputOrTextArea = currentTarget;
