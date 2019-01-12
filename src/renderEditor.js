@@ -1,5 +1,6 @@
 export default function renderEditor(
   useRichEditor,
+  draft,
   onEditorTextAreaInput,
   onEditorTextAreaKeypress,
   onEditorTextAreaPaste,
@@ -13,6 +14,7 @@ export default function renderEditor(
   if (useRichEditor) {
     const editorTextArea = document.createElement('textarea');
     editorTextArea.id = 'editorTextArea'; // For styling & `submit`
+    editorTextArea.value = draft;
     editorTextArea.placeholder = 'Do this/that…';
     editorTextArea.addEventListener('input', onEditorTextAreaInput);
     editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
@@ -21,6 +23,7 @@ export default function renderEditor(
   } else {
     const editorInput = document.createElement('input');
     editorInput.id = 'editorInput'; // For styling & `submit`
+    editorInput.value = draft;
     editorInput.placeholder = 'Do this/that…';
     editorInput.addEventListener('input', onEditorInputInput);
     editorInput.addEventListener('keypress', onEditorInputKeypress);
