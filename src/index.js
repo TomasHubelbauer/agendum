@@ -2,6 +2,8 @@ import getItems from './getItems.js';
 import getQueuedItems from './getQueuedItems.js';
 import getScheduledItems from './getScheduledItems.js';
 import getArchivedItems from './getArchivedItems.js';
+import renderEditor from './renderEditor.js';
+import renderHint from './renderHint.js';
 
 window.addEventListener('load', async _ => {
   try {
@@ -164,7 +166,7 @@ window.addEventListener('load', async _ => {
         }
         
         const value = editorInput.value;
-        renderEditor();
+        renderEditorAndHint();
         
         /** @type{HTMLInputElement|null} */
         const editorTextArea = document.querySelector('#editorTextArea');
@@ -188,7 +190,7 @@ window.addEventListener('load', async _ => {
       if (event.ctrlKey || event.metaKey) {
         submit();
         useRichEditor = false;
-        renderEditor();
+        renderEditorAndHint();
       }
     }
   }
@@ -211,7 +213,7 @@ window.addEventListener('load', async _ => {
     } else if (event.clipboardData.items.length === 1 && event.clipboardData.items[0].type === 'text/plain') {
       useRichEditor = true;
       // TODO: Preserve text and cursor position
-      renderEditor();
+      renderEditorAndHint();
       document.querySelector('#editorTextArea').value = event.clipboardData.getData('text/plain');
     }
   }
@@ -428,7 +430,7 @@ window.addEventListener('load', async _ => {
     if (!useRichEditor) {
       useRichEditor = true;
       // TODO: Preserve text etc., use onChange and keep the text in variable so we don't have to do this in two places
-      renderEditor();
+      renderEditorAndHint();
     }
     
     for (const file of files) {
@@ -452,84 +454,11 @@ window.addEventListener('load', async _ => {
     }
   }
 
-  function renderEditor() {
+  function renderEditorAndHint() {
     editorDiv.innerHTML = '';
     hintDiv.innerHTML = '';
-
-    let meta;
-    switch (navigator.platform) {
-      case 'Win32': meta = 'Win'; hintDiv.innerHTML = 'Press <kbd>Win+.</kbd> for emoji keyboard.'; break;
-      case 'MacIntel': meta = 'Cmd'; hintDiv.innerHTML = 'Press <kbd>Cmd+Ctrl+ </kbd> (space) for emoji keyboard.'; break;
-    }
-
-    if (useRichEditor) {
-      const editorTextArea = document.createElement('textarea');
-      editorTextArea.id = 'editorTextArea'; // For styling & `submit`
-      editorTextArea.placeholder = 'Do this/that…';
-      editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
-      editorTextArea.addEventListener('paste', onEditorTextAreaPaste);
-      editorDiv.appendChild(editorTextArea);
-
-      hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to submit.`;
-    } else {
-      const editorInput = document.createElement('input');
-      editorInput.id = 'editorInput'; // For styling & `submit`
-      editorInput.placeholder = 'Do this/that…';
-      editorInput.addEventListener('keypress', onEditorInputKeypress);
-      editorInput.addEventListener('paste', onEditorInputPaste);
-      editorDiv.appendChild(editorInput);
-
-      hintDiv.innerHTML += ` Press <kbd>Ctrl+Enter</kbd> to use rich editor.`;
-    }
-
-    const attachmentInput = document.createElement('input');
-    attachmentInput.id = 'attachmentInput'; // For calling `click` on it
-    attachmentInput.type = 'file';
-    attachmentInput.multiple = true;
-    attachmentInput.addEventListener('change', onAttachmentInputChange);
-    editorDiv.appendChild(attachmentInput);
-
-    const attachButton = document.createElement('button');
-    attachButton.id = 'attachButton';
-    attachButton.textContent = 'Attach';
-    attachButton.addEventListener('click', onAttachButtonClick);
-    editorDiv.appendChild(attachButton);
-
-    const submitButton = document.createElement('button');
-    submitButton.id = 'submitButton';
-    submitButton.textContent = 'Submit';
-    submitButton.addEventListener('click', onSubmitButtonClick);
-    editorDiv.appendChild(submitButton);
-    
-    const advancedDetails = document.createElement('details');
-    editorDiv.appendChild(advancedDetails);
-    
-    const advancedSummary = document.createElement('summary');
-    advancedSummary.textContent = 'Advanced';
-    advancedDetails.appendChild(advancedSummary);
-    
-    const resolutionSelect = document.createElement('select');
-    advancedDetails.appendChild(resolutionSelect);
-    
-    const archiveOption = document.createElement('option');
-    archiveOption.textContent = 'Archive';
-    resolutionSelect.appendChild(archiveOption);
-    
-    const deleteOption = document.createElement('option');
-    deleteOption.textContent = 'Delete';
-    resolutionSelect.appendChild(deleteOption);
-    
-    const graftOption = document.createElement('option');
-    graftOption.textContent = 'Graft';
-    resolutionSelect.appendChild(graftOption);
-    
-    const notBeforeInput = document.createElement('input');
-    notBeforeInput.type = 'date';
-    advancedDetails.appendChild(notBeforeInput);
-    
-    const notAfterInput = document.createElement('input');
-    notAfterInput.type = 'date';
-    advancedDetails.appendChild(notAfterInput);
+    renderEditor(useRichEditor, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderHint(useRichEditor);
   }
   
   function renderDrafts() {
@@ -605,7 +534,7 @@ window.addEventListener('load', async _ => {
   }
   
   function render() {
-    renderEditor();
+    renderEditorAndHint();
     renderDrafts();
     renderItems();
   }
