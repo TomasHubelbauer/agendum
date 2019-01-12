@@ -12,6 +12,10 @@ export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onSh
     default: throw new Error(`Invalid tab '${tab}'.`);
   }
 
+
+  // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
+  itemsDiv.innerHTML = '';
+  
   reconcile(
     itemsDiv,
     button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
