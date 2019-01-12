@@ -150,8 +150,16 @@ window.addEventListener('load', async _ => {
   });
 
   let useRichEditor = false;
-  
+  let draft = '';
   let tab = 'queued';
+  
+  function onEditorInputInput(event) {
+    draft = event.currentTarget.value;
+  }
+
+  function onEditorTextAreaInput(event) {
+    draft = event.currentTarget.value;
+  }
 
   function onEditorInputKeypress(event) {
     if (event.key === 'Enter' /* Firefox */ || event.key === '\n' /* Chrome */) {
@@ -457,7 +465,7 @@ window.addEventListener('load', async _ => {
   function renderEditorAndHint() {
     editorDiv.innerHTML = '';
     hintDiv.innerHTML = '';
-    renderEditor(useRichEditor, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderEditor(useRichEditor, draft, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
     renderHint(useRichEditor);
   }
   
