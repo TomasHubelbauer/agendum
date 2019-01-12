@@ -1,6 +1,7 @@
 import renderEditor from './renderEditor.js';
 import renderHint from './renderHint.js';
 import renderItems from './renderItems.js';
+import renderDrafts from './renderDrafts.js';
 
 window.addEventListener('load', async _ => {
   try {
@@ -86,7 +87,7 @@ window.addEventListener('load', async _ => {
     editorInputOrTextArea.focus();
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts();
+    renderDrafts(draftsDiv);
   }
   
   function onDismissDraftButtonClick(event) {
@@ -94,7 +95,7 @@ window.addEventListener('load', async _ => {
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts();
+    renderDrafts(draftsDiv);
   }
 
   function onAttachButtonClick() {
@@ -121,7 +122,7 @@ window.addEventListener('load', async _ => {
       const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
       drafts.push({ title: value });
       localStorage.setItem('drafts', JSON.stringify(drafts));
-      renderDrafts();
+      renderDrafts(draftsDiv);
       editorInputOrTextArea.value = '';
     } else {
       editorInputOrTextArea.focus();
@@ -427,32 +428,7 @@ window.addEventListener('load', async _ => {
     renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
     renderHint(useRichEditor);
   }
-  
-  function renderDrafts() {
-    // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
-    draftsDiv.innerHTML = '';
     
-    const value = localStorage.getItem('drafts');
-    
-    // Bail early if no drafts have been saved
-    if (value === null) {
-      return;
-    }
-    
-    const drafts = JSON.parse(value);
-    
-    reconcile(
-      draftsDiv,
-      ...drafts.map((draft, index) => {
-        return div(
-          button({ ['data-index']: index, onclick: onRecallDraftButtonClick }, 'Recall'),
-          button({ ['data-index']: index, onclick: onDismissDraftButtonClick }, 'Dismiss'),
-          span(draft.title),
-        );
-      })
-    );
-  }
-  
   function renderList() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
@@ -461,7 +437,7 @@ window.addEventListener('load', async _ => {
   
   function render() {
     renderEditorAndHint();
-    renderDrafts();
+    renderDrafts(draftsDiv);
     renderList();
   }
   
