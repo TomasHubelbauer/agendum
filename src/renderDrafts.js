@@ -1,6 +1,9 @@
 import reconcile, { div, button, span } from 'https://cdn.jsdelivr.net/npm/fragmentui/lib.js';
 
-export default function renderDrafts(draftsDiv, value, ) {
+export default function renderDrafts(draftsDiv) {
+  // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
+  draftsDiv.innerHTML = '';
+
   const value = localStorage.getItem('drafts');
 
   // Bail early if no drafts have been saved
