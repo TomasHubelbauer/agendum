@@ -150,14 +150,11 @@ window.addEventListener('load', async _ => {
       if (event.ctrlKey || event.metaKey) {
         useRichEditor = true;
         // TODO: Preserve the cursor position as well
-
-        const value = event.currentTarget.value;
-        renderEditorAndHint();
-        
-        if (value) {
-          editorInputOrTextArea.value = value + '\n';
+        if (draft) {
+          draft += draft + '\n';
         }
-
+        
+        renderEditorAndHint();
         editorInputOrTextArea.focus();
       } else {
         submit();
@@ -192,9 +189,9 @@ window.addEventListener('load', async _ => {
       attach(event.clipboardData.files);
     } else if (event.clipboardData.items.length === 1 && event.clipboardData.items[0].type === 'text/plain') {
       useRichEditor = true;
-      // TODO: Preserve text and cursor position
+      // TODO: Preserve cursor position
+      draft = event.clipboardData.getData('text/plain');
       renderEditorAndHint();
-      document.querySelector('#editorTextArea').value = event.clipboardData.getData('text/plain');
     }
   }
 
@@ -264,7 +261,7 @@ window.addEventListener('load', async _ => {
     }
   });
 
-  bustButton.addEventListener('click', async _ => {
+  bustButton.addEventListener('click', _ => {
     navigator.serviceWorker.controller.postMessage('bust');
   });
 
@@ -379,25 +376,24 @@ window.addEventListener('load', async _ => {
   }
 
   function submit() {
-    const value = editorInputOrTextArea.value;
-    editorInputOrTextArea.value = '';
-    
-    if (!value) {
+    if (!draft) {
       return;
     }
     
-    const [title, ...description] = value.trim().split('\n');
+    const [title, ...description] = draft.trim().split('\n');
     const ids = getIds();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
     localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now() }));
     renderList();
+    draft = '';
+    renderEditorAndHint();
   }
 
   // TODO: Split into insertImage and attach, because we want to allow attaching images as well
   function attach(files) {
     if (!useRichEditor) {
       useRichEditor = true;
-      // TODO: Preserve text etc., use onChange and keep the text in variable so we don't have to do this in two places
+      // TODO: Preserve cursor
       renderEditorAndHint();
     }
     
@@ -423,15 +419,11 @@ window.addEventListener('load', async _ => {
   }
 
   function renderEditorAndHint() {
-    editorDiv.innerHTML = '';
-    hintDiv.innerHTML = '';
     renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
     renderHint(useRichEditor);
   }
     
   function renderList() {
-    // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
-    itemsDiv.innerHTML = '';
     renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
   }
   
