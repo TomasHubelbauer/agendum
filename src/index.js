@@ -2,6 +2,7 @@ import renderEditor from './renderEditor.js';
 import renderHint from './renderHint.js';
 import renderItems from './renderItems.js';
 import renderDrafts from './renderDrafts.js';
+import getTabItems from './getTabItems.js';
 
 window.addEventListener('load', async _ => {
   try {
