@@ -1,9 +1,11 @@
 export default function renderEditor(
   useRichEditor,
   draft,
+  onEditorTextAreaMount,
   onEditorTextAreaInput,
   onEditorTextAreaKeypress,
   onEditorTextAreaPaste,
+  onEditorInputMount,
   onEditorInputInput,
   onEditorInputKeypress,
   onEditorInputPaste,
@@ -20,6 +22,7 @@ export default function renderEditor(
     editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
     editorTextArea.addEventListener('paste', onEditorTextAreaPaste);
     editorDiv.appendChild(editorTextArea);
+    onEditorTextAreaMount(editorTextArea);
   } else {
     const editorInput = document.createElement('input');
     editorInput.id = 'editorInput'; // For styling & `submit`
@@ -29,6 +32,7 @@ export default function renderEditor(
     editorInput.addEventListener('keypress', onEditorInputKeypress);
     editorInput.addEventListener('paste', onEditorInputPaste);
     editorDiv.appendChild(editorInput);
+    onEditorInputMount(editorInput);
   }
 
   const attachmentInput = document.createElement('input');
