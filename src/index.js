@@ -331,7 +331,7 @@ window.addEventListener('load', async _ => {
       throw new Error('ID was not passed');
     }
     
-    const ids = [...getTabItems()].map(i => i.id);
+    const ids = [...getTabItems(tab)].map(i => i.id);
     const index = ids.indexOf(Number(id));
     const otherId = ids[index - 1].toString();
     const other = localStorage.getItem(otherId);
@@ -349,7 +349,7 @@ window.addEventListener('load', async _ => {
       throw new Error('ID was not passed');
     }
     
-    const ids = [...getTabItems()].map(i => i.id);
+    const ids = [...getTabItems(tab)].map(i => i.id);
     const index = ids.indexOf(Number(id));
     const otherId = ids[index + 1].toString();
     const other = localStorage.getItem(otherId);
