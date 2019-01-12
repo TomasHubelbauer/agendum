@@ -1,4 +1,5 @@
 export default function renderEditor(
+  editorDiv,
   useRichEditor,
   draft,
   onEditorTextAreaMount,
@@ -13,6 +14,8 @@ export default function renderEditor(
   onAttachButtonClick,
   onSubmitButtonClick,
   ) {
+  // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
+  editorDiv.innerHTML = '';
   if (useRichEditor) {
     const editorTextArea = document.createElement('textarea');
     editorTextArea.id = 'editorTextArea'; // For styling & `submit`
