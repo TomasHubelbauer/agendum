@@ -1,5 +1,7 @@
-export default function* getQueuedItems(items) {
-  for (let item of items) {
+import getItems from './getItems.js';
+
+export default function* getQueuedItems() {
+  for (let item of getItems()) {
     if (item.archivedDate === undefined && item.notBeforeDate === undefined) {
       yield item;
     }
