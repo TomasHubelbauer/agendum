@@ -1,18 +1,7 @@
 import reconcile, { button, details, summary, span, div, a } from 'https://cdn.jsdelivr.net/npm/fragmentui/lib.js';
-import getQueuedItems from './getQueuedItems.js';
-import getScheduledItems from './getScheduledItems.js';
-import getArchivedItems from './getArchivedItems.js';
+import getTabItems from './getTabItems.js';
 
 export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
-  let items;
-  switch (tab) {
-    case 'queued': items = getQueuedItems(); break;
-    case 'scheduled': items = getScheduledItems(); break;
-    case 'archived': items = getArchivedItems(); break;
-    default: throw new Error(`Invalid tab '${tab}'.`);
-  }
-
-
   // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
   itemsDiv.innerHTML = '';
   
@@ -21,7 +10,7 @@ export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onSh
     button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
     button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-    ...[...items].map((item, index, { length }) => {
+    ...[...getTabItems(tab)].map((item, index, { length }) => {
       const { title, description, createdDate, archivedDate, notBeforeDate } = item;
       return details(
         { class: index % 2 === 0 ? 'even' : 'odd' },
