@@ -53,6 +53,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
+- [ ] Add a license file
 - [ ] Add tests for moving items within tabs when there are items in all tabs to make sure the filtering logic doesn't break
 - [ ] Query the set of items per tab first and then render the set to make sure up/down disables and even/odd backgrounds work okay
 - [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
