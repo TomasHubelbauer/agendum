@@ -1,6 +1,6 @@
 import renderEditor from './renderEditor.js';
 import renderHint from './renderHint.js';
-import renderItems as renderList from './renderItems.js';
+import renderItems from './renderItems.js';
 
 window.addEventListener('load', async _ => {
   try {
@@ -235,7 +235,7 @@ window.addEventListener('load', async _ => {
         localStorage.setItem(id.toString(), JSON.stringify(value));
       }
 
-      renderItems();
+      renderList();
     });
 
     fileReader.addEventListener('error', event => {
@@ -259,7 +259,7 @@ window.addEventListener('load', async _ => {
         localStorage.removeItem(id.toString());
       }
 
-      renderItems();
+      renderList();
     }
   });
 
@@ -287,7 +287,7 @@ window.addEventListener('load', async _ => {
 
     item.title = title;
     localStorage.setItem(id, JSON.stringify(item));
-    renderItems();
+    renderList();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -302,7 +302,7 @@ window.addEventListener('load', async _ => {
     const item = JSON.parse(localStorage.getItem(id));
     item.archivedDate = Date.now();
     localStorage.setItem(id, JSON.stringify(item));
-    renderItems();
+    renderList();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -320,7 +320,7 @@ window.addEventListener('load', async _ => {
     }
 
     localStorage.removeItem(id);
-    renderItems();
+    renderList();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -338,7 +338,7 @@ window.addEventListener('load', async _ => {
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
-    renderItems();
+    renderList();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -356,7 +356,7 @@ window.addEventListener('load', async _ => {
     const other = localStorage.getItem(otherId);
     localStorage.setItem(otherId, localStorage.getItem(id));
     localStorage.setItem(id, other);
-    renderItems();
+    renderList();
 
     // Do not toggle the `details` element
     event.preventDefault();
@@ -364,17 +364,17 @@ window.addEventListener('load', async _ => {
   
   function onShowQueuedButtonClick() {
     tab = 'queued';
-    renderItems();
+    renderList();
   }
   
   function onShowScheduledButtonClick() {
     tab = 'scheduled';
-    renderItems();
+    renderList();
   }
   
   function onShowArchivedButtonClick() {
     tab = 'archived';
-    renderItems();
+    renderList();
   }
 
   function submit() {
@@ -389,7 +389,7 @@ window.addEventListener('load', async _ => {
     const ids = getIds();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
     localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now() }));
-    renderItems();
+    renderList();
   }
 
   // TODO: Split into insertImage and attach, because we want to allow attaching images as well
@@ -453,7 +453,7 @@ window.addEventListener('load', async _ => {
     );
   }
   
-  function renderItems() {
+  function renderList() {
     // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
     itemsDiv.innerHTML = '';
     renderList(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
@@ -462,7 +462,7 @@ window.addEventListener('load', async _ => {
   function render() {
     renderEditorAndHint();
     renderDrafts();
-    renderItems();
+    renderList();
   }
   
   render();
