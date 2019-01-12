@@ -6,9 +6,9 @@ import getArchivedItems from './getArchivedItems.js';
 export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
   let items;
   switch (tab) {
-    case 'queued': return getQueuedItems(); break;
-    case 'scheduled': return getScheduledItems(); break;
-    case 'archived': return getArchivedItems(); break;
+    case 'queued': items = getQueuedItems(); break;
+    case 'scheduled': items = getScheduledItems(); break;
+    case 'archived': items = getArchivedItems(); break;
     default: throw new Error(`Invalid tab '${tab}'.`);
   }
 
@@ -17,7 +17,7 @@ export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onSh
     button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
     button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-    ...[...getTabItems()].map((item, index, { length }) => {
+    ...[...items].map((item, index, { length }) => {
       const { title, description, createdDate, archivedDate, notBeforeDate } = item;
       return details(
         { class: index % 2 === 0 ? 'even' : 'odd' },
