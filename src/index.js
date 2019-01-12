@@ -513,4 +513,6 @@ window.addEventListener('load', async _ => {
     renderDrafts();
     renderItems();
   }
+  
+  render();
 });
