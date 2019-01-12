@@ -151,11 +151,21 @@ window.addEventListener('load', async _ => {
   });
 
   let useRichEditor = false;
+  /** @type {HTMLTextAreaElement|HTMLInputElement|undefined} */
+  let editorInputOrTextArea;
   let draft = '';
   let tab = 'queued';
   
+  function onEditorInputMount(currentTarget) {
+    editorInputOrTextArea = currentTarget;
+  }
+  
   function onEditorInputInput(event) {
     draft = event.currentTarget.value;
+  }
+  
+  function onEditorTextAreaMount(currentTarget) {
+    editorInputOrTextArea = currentTarget;
   }
 
   function onEditorTextAreaInput(event) {
@@ -167,27 +177,15 @@ window.addEventListener('load', async _ => {
       if (event.ctrlKey || event.metaKey) {
         useRichEditor = true;
         // TODO: Preserve the cursor position as well
-        
-        /** @type{HTMLInputElement|null} */
-        const editorInput = document.querySelector('#editorInput');
-        if (editorInput === null) {
-          throw new Error('No editor input');
-        }
-        
-        const value = editorInput.value;
+
+        const value = event.currentTarget.value;
         renderEditorAndHint();
         
-        /** @type{HTMLInputElement|null} */
-        const editorTextArea = document.querySelector('#editorTextArea');
-        if (editorTextArea === null) {
-          throw new Error('No editor text area');
-        }
-        
         if (value) {
-          editorTextArea.value = value + '\n';
+          editorInputOrTextArea.value = value + '\n';
         }
 
-        editorTextArea.focus();
+        editorInputOrTextArea.focus();
       } else {
         submit();
       }
@@ -412,17 +410,9 @@ window.addEventListener('load', async _ => {
   }
 
   function submit() {
-    let value;
-    if (useRichEditor) {
-      const editorTextArea = document.querySelector('#editorTextArea');
-      value = editorTextArea.value;
-      editorTextArea.value = '';
-    } else {
-      const editorInput = document.querySelector('#editorInput');
-      value = editorInput.value;
-      editorInput.value = '';
-    }
-
+    const value = editorInputOrTextArea.value;
+    editorInputOrTextArea.value = '';
+    
     if (!value) {
       return;
     }
@@ -452,7 +442,7 @@ window.addEventListener('load', async _ => {
 
       fileReader.addEventListener('load', event => {
         // TODO: Access using the ref
-        document.querySelector('#editorTextArea').value += `\n<img src="${event.currentTarget.result}" />\n`;
+        editorInputOrTextArea.value += `\n<img src="${event.currentTarget.result}" />\n`;
       });
 
       fileReader.addEventListener('error', event => {
@@ -466,7 +456,7 @@ window.addEventListener('load', async _ => {
   function renderEditorAndHint() {
     editorDiv.innerHTML = '';
     hintDiv.innerHTML = '';
-    renderEditor(useRichEditor, draft, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
     renderHint(useRichEditor);
   }
   
