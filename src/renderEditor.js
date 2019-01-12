@@ -1,7 +1,9 @@
 export default function renderEditor(
   useRichEditor,
+  onEditorTextAreaInput,
   onEditorTextAreaKeypress,
   onEditorTextAreaPaste,
+  onEditorInputInput,
   onEditorInputKeypress,
   onEditorInputPaste,
   onAttachmentInputChange,
@@ -12,6 +14,7 @@ export default function renderEditor(
     const editorTextArea = document.createElement('textarea');
     editorTextArea.id = 'editorTextArea'; // For styling & `submit`
     editorTextArea.placeholder = 'Do this/that…';
+    editorTextArea.addEventListener('input', onEditorTextAreaInput);
     editorTextArea.addEventListener('keypress', onEditorTextAreaKeypress);
     editorTextArea.addEventListener('paste', onEditorTextAreaPaste);
     editorDiv.appendChild(editorTextArea);
@@ -19,6 +22,7 @@ export default function renderEditor(
     const editorInput = document.createElement('input');
     editorInput.id = 'editorInput'; // For styling & `submit`
     editorInput.placeholder = 'Do this/that…';
+    editorInput.addEventListener('input', onEditorInputInput);
     editorInput.addEventListener('keypress', onEditorInputKeypress);
     editorInput.addEventListener('paste', onEditorInputPaste);
     editorDiv.appendChild(editorInput);
