@@ -87,7 +87,7 @@ window.addEventListener('load', async _ => {
     editorInputOrTextArea.focus();
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts(draftsDiv);
+    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
   
   function onDismissDraftButtonClick(event) {
@@ -95,7 +95,7 @@ window.addEventListener('load', async _ => {
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts(draftsDiv);
+    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
 
   function onAttachButtonClick() {
@@ -122,7 +122,7 @@ window.addEventListener('load', async _ => {
       const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
       drafts.push({ title: value });
       localStorage.setItem('drafts', JSON.stringify(drafts));
-      renderDrafts(draftsDiv);
+      renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
       editorInputOrTextArea.value = '';
     } else {
       editorInputOrTextArea.focus();
@@ -429,7 +429,7 @@ window.addEventListener('load', async _ => {
   
   function render() {
     renderEditorAndHint();
-    renderDrafts(draftsDiv);
+    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
     renderList();
   }
   
