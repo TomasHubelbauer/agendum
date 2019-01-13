@@ -153,7 +153,7 @@ window.addEventListener('load', async _ => {
         useRichEditor = true;
         // TODO: Preserve the cursor position as well
         if (draft) {
-          draft += draft + '\n';
+          draft += '\n';
         }
         
         renderEditorAndHint();
