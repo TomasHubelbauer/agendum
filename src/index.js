@@ -3,6 +3,7 @@ import renderHint from './renderHint.js';
 import renderItems from './renderItems.js';
 import renderDrafts from './renderDrafts.js';
 import getTabItems from './getTabItems.js';
+import getIds from './getIds.js';
 
 window.addEventListener('load', async _ => {
   try {
