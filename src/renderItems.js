@@ -1,7 +1,13 @@
 import reconcile, { button, details, summary, span, div, a } from 'https://cdn.jsdelivr.net/npm/fragmentui/lib.js';
 import getTabItems from './getTabItems.js';
 
-export default function renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+export default function renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+  /** @type{HTMLDivElement|null} */
+  const itemsDiv = document.querySelector('#itemsDiv');
+  if (itemsDiv == null) {
+    throw new Error('Items <div> not found');
+  }
+  
   // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
   itemsDiv.innerHTML = '';
   
