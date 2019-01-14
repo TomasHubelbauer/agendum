@@ -1,4 +1,4 @@
-export default function renderAdvancedEditor() {
+export default function renderAdvancedEditor(onResolutionChange, onNotBeforeChange, onNotAfterChange) {
   /** @type{HTMLDivElement|null} */
   const advancedEditorDiv = document.querySelector('#advancedEditorDiv');
   if (advancedEditorDiv == null) {
@@ -20,22 +20,22 @@ export default function renderAdvancedEditor() {
   advancedDetails.appendChild(resolutionLabel);
 
   const resolutionSelect = document.createElement('select');
-  resolutionSelect.addEventListener('change', event => console.log(event.currentTarget.value));
+  resolutionSelect.addEventListener('change', onResolutionChange);
   advancedDetails.appendChild(resolutionSelect);
 
   const archiveOption = document.createElement('option');
   archiveOption.textContent = 'Archive';
-  archiveOption.textContent = 'archive';
+  archiveOption.value = 'archive';
   resolutionSelect.appendChild(archiveOption);
 
   const deleteOption = document.createElement('option');
   deleteOption.textContent = 'Delete';
-  deleteOption.textContent = 'delete';
+  deleteOption.value = 'delete';
   resolutionSelect.appendChild(deleteOption);
 
   const graftOption = document.createElement('option');
   graftOption.textContent = 'Graft';
-  graftOption.textContent = 'graft';
+  graftOption.value = 'graft';
   resolutionSelect.appendChild(graftOption);
   
   const notBeforeLabel = document.createElement('label');
@@ -44,7 +44,7 @@ export default function renderAdvancedEditor() {
 
   const notBeforeInput = document.createElement('input');
   notBeforeInput.type = 'date';
-  notBeforeInput.addEventListener('change', event => console.log(event.currentTarget.valueAsDate));
+  notBeforeInput.addEventListener('change', onNotBeforeChange);
   advancedDetails.appendChild(notBeforeInput);
   
   const notAfterLabel = document.createElement('label');
@@ -53,6 +53,6 @@ export default function renderAdvancedEditor() {
 
   const notAfterInput = document.createElement('input');
   notAfterInput.type = 'date';
-  notAfterInput.addEventListener('change', event => console.log(event.currentTarget.valueAsDate));
+  notAfterInput.addEventListener('change', onNotAfterChange);
   advancedDetails.appendChild(notAfterInput);
 }
