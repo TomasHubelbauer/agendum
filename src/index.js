@@ -132,10 +132,11 @@ window.addEventListener('load', async _ => {
         }
         
         renderEditorAndHint();
-        editorInputOrTextArea.focus();
       } else {
         submit();
       }
+      
+      editorInputOrTextArea.focus();
     }
   }
 
