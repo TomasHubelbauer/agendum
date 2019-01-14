@@ -277,8 +277,12 @@ window.addEventListener('load', async _ => {
     
     const item = JSON.parse(localStorage.getItem(id));
     item.archivedDate = Date.now();
-    const resolution = prompt('Resolution:');
-    if (resolution) {
+    const resolution = prompt(`Archiving '${item.title}'.\n\nResolution:`);
+    if (resolution === null) {
+      return;
+    }
+    
+    if (resolution !== '') {
       if (item.description === undefined) {
         item.description = [];
       }
