@@ -5,6 +5,7 @@ import renderItems from './renderItems.js';
 import renderDrafts from './renderDrafts.js';
 import getTabItems from './getTabItems.js';
 import getIds from './getIds.js';
+import { createDraft, removeDraft, deleteDraft } from './data.js';
 
 window.addEventListener('load', async _ => {
   try {
@@ -59,24 +60,20 @@ window.addEventListener('load', async _ => {
   let tab = 'queued';
   
   function onRecallDraftButtonClick(event) {  
-    const index = event.currentTarget.dataset['index'];
-    const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     if (editorInputOrTextArea.value && !confirm('You have stuff in the editor, do you want to replace it with the draft?')) {
       return;
     }
     
-    editorInputOrTextArea.value = drafts[index].title;
+    const index = event.currentTarget.dataset['index'];
+    const title = removeDraft(index);
+    editorInputOrTextArea.value = title;
     editorInputOrTextArea.focus();
-    drafts.splice(index, 1);
-    localStorage.setItem('drafts', JSON.stringify(drafts));
     renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
   
   function onDismissDraftButtonClick(event) {
     const index = event.currentTarget.dataset['index'];
-    const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-    drafts.splice(index, 1);
-    localStorage.setItem('drafts', JSON.stringify(drafts));
+    deleteDraft(index);
     renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
 
@@ -101,9 +98,7 @@ window.addEventListener('load', async _ => {
         return;
       }
       
-      const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-      drafts.push({ title: value });
-      localStorage.setItem('drafts', JSON.stringify(drafts));
+      createDraft(value);
       renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
       editorInputOrTextArea.value = '';
     } else {
