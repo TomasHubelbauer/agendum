@@ -297,6 +297,22 @@ window.addEventListener('load', async _ => {
     event.preventDefault();
   }
   
+  function onReviveButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
+    const item = JSON.parse(localStorage.getItem(id));
+    item.archivedDate = undefined;
+    const resolution = prompt('Resolution:');   
+    localStorage.setItem(id, JSON.stringify(item));
+    renderList();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
+  }
+  
   function onDeleteButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
     if (id === null) {
@@ -437,7 +453,7 @@ window.addEventListener('load', async _ => {
   }
     
   function renderList() {
-    renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+    renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
   }
   
   function render() {
