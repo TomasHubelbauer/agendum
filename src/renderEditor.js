@@ -61,34 +61,4 @@ export default function renderEditor(
   submitButton.textContent = 'Submit';
   submitButton.addEventListener('click', onSubmitButtonClick);
   editorDiv.appendChild(submitButton);
-
-  const advancedDetails = document.createElement('details');
-  editorDiv.appendChild(advancedDetails);
-
-  const advancedSummary = document.createElement('summary');
-  advancedSummary.textContent = 'Advanced';
-  advancedDetails.appendChild(advancedSummary);
-
-  const resolutionSelect = document.createElement('select');
-  advancedDetails.appendChild(resolutionSelect);
-
-  const archiveOption = document.createElement('option');
-  archiveOption.textContent = 'Archive';
-  resolutionSelect.appendChild(archiveOption);
-
-  const deleteOption = document.createElement('option');
-  deleteOption.textContent = 'Delete';
-  resolutionSelect.appendChild(deleteOption);
-
-  const graftOption = document.createElement('option');
-  graftOption.textContent = 'Graft';
-  resolutionSelect.appendChild(graftOption);
-
-  const notBeforeInput = document.createElement('input');
-  notBeforeInput.type = 'date';
-  advancedDetails.appendChild(notBeforeInput);
-
-  const notAfterInput = document.createElement('input');
-  notAfterInput.type = 'date';
-  advancedDetails.appendChild(notAfterInput);
 }
