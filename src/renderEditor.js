@@ -1,5 +1,4 @@
 export default function renderEditor(
-  editorDiv,
   useRichEditor,
   draft,
   onEditorTextAreaMount,
@@ -14,6 +13,12 @@ export default function renderEditor(
   onAttachButtonClick,
   onSubmitButtonClick,
   ) {
+  /** @type{HTMLDivElement|null} */
+  const editorDiv = document.querySelector('#editorDiv');
+  if (editorDiv == null) {
+    throw new Error('Editor <div> not found');
+  }
+  
   // TODO: Get rid of this hack once Fragments has support for keys and can properly reconcile sets
   editorDiv.innerHTML = '';
   if (useRichEditor) {
