@@ -39,7 +39,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Allow dismissing the editor hints for emoji keyboard and rich editor toggle separately
 - [ ] Allow editing the title using an inline input with Enter keypress handler and a Save button
 - [ ] Implement the graft resolution behavior which creates the same task again on the next day (for now)
-- [ ] Group the archived tab by archival date and make sure moving works within the groups and jumps between the groups as well
+- [ ] Make sure moving works within the groups of the archive tab and jumps between the groups as well
 - [ ] Implement attaching image or non-image files as attachments, not only inline
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links and storing them as link spans/blocks
   - [ ] Display preview for image links
