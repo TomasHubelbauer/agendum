@@ -20,6 +20,7 @@ export default function renderAdvancedEditor() {
   advancedDetails.appendChild(resolutionLabel);
 
   const resolutionSelect = document.createElement('select');
+  resolutionSelect.addEventListener('change', event => console.log(event.currentTarget.value));
   advancedDetails.appendChild(resolutionSelect);
 
   const archiveOption = document.createElement('option');
@@ -40,6 +41,7 @@ export default function renderAdvancedEditor() {
 
   const notBeforeInput = document.createElement('input');
   notBeforeInput.type = 'date';
+  notBeforeInput.addEventListener('change', event => console.log(event.currentTarget.value));
   advancedDetails.appendChild(notBeforeInput);
   
   const notAfterLabel = document.createElement('label');
@@ -48,5 +50,6 @@ export default function renderAdvancedEditor() {
 
   const notAfterInput = document.createElement('input');
   notAfterInput.type = 'date';
+  notAfterInput.addEventListener('change', event => console.log(event.currentTarget.value));
   advancedDetails.appendChild(notAfterInput);
 }
