@@ -64,7 +64,7 @@ window.addEventListener('load', async _ => {
       return;
     }
     
-    const index = event.currentTarget.dataset['index'];
+    const index = Number(event.currentTarget.dataset['index']);
     const title = removeDraft(index);
     editorInputOrTextArea.value = title;
     editorInputOrTextArea.focus();
@@ -72,7 +72,7 @@ window.addEventListener('load', async _ => {
   }
   
   function onDismissDraftButtonClick(event) {
-    const index = event.currentTarget.dataset['index'];
+    const index = Number(event.currentTarget.dataset['index']);
     deleteDraft(index);
     renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
