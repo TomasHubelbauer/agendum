@@ -11,31 +11,7 @@ window.addEventListener('load', async _ => {
   } catch (error) {
     // TODO: Handle this at some point
   }
-
-  /** @type{HTMLDivElement|null} */
-  const editorDiv = document.querySelector('#editorDiv');
-  if (editorDiv == null) {
-    throw new Error('Editor <div> not found');
-  }
-  
-  /** @type{HTMLDivElement|null} */
-  const hintDiv = document.querySelector('#hintDiv');
-  if (hintDiv == null) {
-    throw new Error('Hint <div> not found');
-  }
-  
-  /** @type{HTMLDivElement|null} */
-  const draftsDiv = document.querySelector('#draftsDiv');
-  if (draftsDiv == null) {
-    throw new Error('Drafts <div> not found');
-  }
-  
-  /** @type{HTMLDivElement|null} */
-  const itemsDiv = document.querySelector('#itemsDiv');
-  if (itemsDiv == null) {
-    throw new Error('Items <div> not found');
-  }
-  
+    
   /** @type{HTMLAnchorElement|null} */
   const exportA = document.querySelector('#exportA');
   if (exportA == null) {
@@ -89,7 +65,7 @@ window.addEventListener('load', async _ => {
     editorInputOrTextArea.focus();
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
+    renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
   
   function onDismissDraftButtonClick(event) {
@@ -97,7 +73,7 @@ window.addEventListener('load', async _ => {
     const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
     drafts.splice(index, 1);
     localStorage.setItem('drafts', JSON.stringify(drafts));
-    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
+    renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
   }
 
   function onAttachButtonClick() {
@@ -124,7 +100,7 @@ window.addEventListener('load', async _ => {
       const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
       drafts.push({ title: value });
       localStorage.setItem('drafts', JSON.stringify(drafts));
-      renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
+      renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
       editorInputOrTextArea.value = '';
     } else {
       editorInputOrTextArea.focus();
@@ -430,17 +406,17 @@ window.addEventListener('load', async _ => {
   }
 
   function renderEditorAndHint() {
-    renderEditor(editorDiv, useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
-    renderHint(hintDiv, useRichEditor);
+    renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderHint(useRichEditor);
   }
     
   function renderList() {
-    renderItems(itemsDiv, tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+    renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
   }
   
   function render() {
     renderEditorAndHint();
-    renderDrafts(draftsDiv, onRecallDraftButtonClick, onDismissDraftButtonClick);
+    renderDrafts(onRecallDraftButtonClick, onDismissDraftButtonClick);
     renderList();
   }
   
