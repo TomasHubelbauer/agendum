@@ -389,7 +389,7 @@ window.addEventListener('load', async _ => {
     const [title, ...description] = draft.trim().split('\n');
     const ids = getIds();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    const item = { title, description, createdDate: Date.now(), resolution, notBefore: notBefore.valueOf(), notAfter: notAfter.valueOf() };
+    const item = { title, description, createdDate: Date.now(), resolution, notBeforeDate: notBefore.valueOf(), notAfterDate: notAfter.valueOf() };
     localStorage.setItem(id, JSON.stringify(item));
     renderList();
     draft = '';
