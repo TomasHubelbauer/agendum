@@ -1,5 +1,6 @@
 export default function renderEditor(
   useRichEditor,
+  isInArchive,
   draft,
   onEditorTextAreaMount,
   onEditorTextAreaInput,
@@ -55,6 +56,14 @@ export default function renderEditor(
   attachButton.textContent = 'Attach';
   attachButton.addEventListener('click', onAttachButtonClick);
   editorDiv.appendChild(attachButton);
+  
+  if (isInArchive) {
+    const archiveButton = document.createElement('button');
+    archiveButton.id = 'archiveButton';
+    archiveButton.textContent = 'Archive';
+    archiveButton.addEventListener('click', alert);
+    editorDiv.appendChild(archiveButton);
+  }
 
   const submitButton = document.createElement('button');
   submitButton.id = 'submitButton';
