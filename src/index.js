@@ -1,4 +1,5 @@
 import renderEditor from './renderEditor.js';
+import renderAdvancedEditor from './renderAdvancedEditor.js';
 import renderHint from './renderHint.js';
 import renderItems from './renderItems.js';
 import renderDrafts from './renderDrafts.js';
@@ -407,6 +408,7 @@ window.addEventListener('load', async _ => {
 
   function renderEditorAndHint() {
     renderEditor(useRichEditor, draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
+    renderAdvancedEditor();
     renderHint(useRichEditor);
   }
     
