@@ -53,6 +53,11 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
+- [ ] Handle resolution notes with a custom modal:
+  - These is an input which adds a line to the description for just attaching a resolution (maybe keep in a different field than desc?)
+  - There is a button which allows to recall the item for editing, but then archives it including the changes made
+  - There is a button for just archiving as-is
+  - If the modal is blurred / dismissed or the tab is switched away (blurred), then archive item and show edtior hint informing it saved
 - [ ] Do not read the editor value from the elements but instead send it up on change and keep it in the state
 - [ ] Add a license file
 - [ ] Add tests for moving items within tabs when there are items in all tabs to make sure the filtering logic doesn't break
