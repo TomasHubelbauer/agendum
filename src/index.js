@@ -54,8 +54,8 @@ window.addEventListener('load', async _ => {
   let editorInputOrTextArea;
   let draft = '';
   let resolution = 'archive';
-  let notBefore;
-  let notAfter;
+  let notBefore = null;
+  let notAfter = null;
   let tab = 'queued';
   
   function onRecallDraftButtonClick(event) {  
@@ -393,8 +393,8 @@ window.addEventListener('load', async _ => {
     renderList();
     draft = '';
     resolution = 'archive';
-    notBefore = undefined;
-    notAfter = undefined;
+    notBefore = null;
+    notAfter = null;
     renderEditorAndHint();
   }
 
