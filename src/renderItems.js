@@ -46,6 +46,7 @@ function getGroupedItems(tab) {
     }
     
     accumulator[group].push(current);
+    return accumulator;
   }, {});
   
   return Object.keys(groups).map(group => ({ title: group, items: groups[group] }));
