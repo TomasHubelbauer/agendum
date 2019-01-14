@@ -14,6 +14,10 @@ export default function renderAdvancedEditor() {
   const advancedSummary = document.createElement('summary');
   advancedSummary.textContent = 'Advanced';
   advancedDetails.appendChild(advancedSummary);
+  
+  const resolutionLabel = document.createElement('label');
+  resolutionLabel.textContent = 'Resolution:';
+  advancedDetails.appendChild(resolutionLabel);
 
   const resolutionSelect = document.createElement('select');
   advancedDetails.appendChild(resolutionSelect);
@@ -29,10 +33,18 @@ export default function renderAdvancedEditor() {
   const graftOption = document.createElement('option');
   graftOption.textContent = 'Graft';
   resolutionSelect.appendChild(graftOption);
+  
+  const notBeforeLabel = document.createElement('label');
+  notBeforeLabel.textContent = 'Not before:';
+  advancedDetails.appendChild(notBeforeLabel);
 
   const notBeforeInput = document.createElement('input');
   notBeforeInput.type = 'date';
   advancedDetails.appendChild(notBeforeInput);
+  
+  const notAfterLabel = document.createElement('label');
+  notAfterLabel.textContent = 'Not after:';
+  advancedDetails.appendChild(notAfterLabel);
 
   const notAfterInput = document.createElement('input');
   notAfterInput.type = 'date';
