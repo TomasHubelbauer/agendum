@@ -18,14 +18,20 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
     ...tab === 'archived'
-      ? getGroupedItems(tab).map(group => renderGroup('TODO: Grouping…', group))
-      : [],
-    ...tab !== 'archived'
-      ? [...getUngroupedItems(tab)].map((item, index, { length }) => {
-          return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+      ? getGroupedItems(tab).map(group => {
+          return renderGroup('TODO: Grouping…', renderPreparedItems([...group], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick));
         })
       : [],
+    ...tab !== 'archived'
+      ? renderPreparedItems([...getUngroupedItems(tab)], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick)
+      : [],
   );
+}
+
+function renderPreparedItems(items, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+  return items.map((item, index, { length }) => {
+    return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+  });
 }
 
 function getUngroupedItems(tab) {
