@@ -17,10 +17,24 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
-    ...[...getTabItems(tab)].map((item, index, { length }) => {
-      return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
-    })
+    ...tab === 'archived'
+      ? getGroupedItems().map(group => renderGroup('TODO: Grouping…', group))
+      : []
+    ...tab !== 'archived'
+      ? [...getUngroupedItems()].map((item, index, { length }) => {
+          return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+        })
+      : []
   );
+}
+
+function getUngroupedItems() {
+  return getTabItems(tab);
+}
+
+// TODO: Finalize this
+function getGroupedItems() {
+  return [getTabItems(tab)];
 }
 
 function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
