@@ -1,4 +1,4 @@
-export default function renderAdvancedEditor(onResolutionChange, onNotBeforeChange, onNotAfterChange) {
+export default function renderAdvancedEditor(resolution, notBefore, notAfter, onResolutionChange, onNotBeforeChange, onNotAfterChange) {
   /** @type{HTMLDivElement|null} */
   const advancedEditorDiv = document.querySelector('#advancedEditorDiv');
   if (advancedEditorDiv == null) {
@@ -38,6 +38,9 @@ export default function renderAdvancedEditor(onResolutionChange, onNotBeforeChan
   graftOption.value = 'graft';
   resolutionSelect.appendChild(graftOption);
   
+  // TODO: See if this can be done before the options are set and added
+  resolutionSelect.value = resolution;
+  
   const notBeforeLabel = document.createElement('label');
   notBeforeLabel.textContent = 'Not before:';
   advancedDetails.appendChild(notBeforeLabel);
@@ -45,10 +48,12 @@ export default function renderAdvancedEditor(onResolutionChange, onNotBeforeChan
   const notBeforeInput = document.createElement('input');
   notBeforeInput.type = 'date';
   notBeforeInput.addEventListener('change', onNotBeforeChange);
+  notBeforeInput.valueAsDate = notBefore;
   advancedDetails.appendChild(notBeforeInput);
   
   const notAfterLabel = document.createElement('label');
   notAfterLabel.textContent = 'Not after:';
+  notAfterLabel.valueAsDate = notAfter;
   advancedDetails.appendChild(notAfterLabel);
 
   const notAfterInput = document.createElement('input');
