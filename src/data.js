@@ -4,7 +4,7 @@ export function createDraft(title) {
   localStorage.setItem('drafts', JSON.stringify(drafts));
 }
 
-export function removeDraft(id) {
+export function removeDraft(index) {
   const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
   const draft = drafts[index].title;
   drafts.splice(index, 1);
