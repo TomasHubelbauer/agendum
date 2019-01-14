@@ -53,6 +53,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
+- [ ] Add checkboxen alongside the items for bulk operations (archive, delete)
 - [ ] Remember the expanded archive tab group title and preserve expansion state after item button action (move etc.)
 - [ ] Display item count on each tab button
 - [ ] Handle resolution notes with a custom modal:
