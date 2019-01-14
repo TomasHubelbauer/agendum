@@ -1,7 +1,7 @@
 import reconcile, { button, details, summary, span, div, a } from 'https://cdn.jsdelivr.net/npm/fragmentui/lib.js';
 import getTabItems from './getTabItems.js';
 
-export default function renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+export default function renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
   /** @type{HTMLDivElement|null} */
   const itemsDiv = document.querySelector('#itemsDiv');
   if (itemsDiv == null) {
@@ -24,6 +24,7 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
           span({ class: 'itemSpan' }, title),
           button({ ['data-id']: item.id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
           tab === 'queued' && button({ ['data-id']: item.id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
+          tab === 'archived' && button({ ['data-id']: item.id, onclick: onReviveButtonClick, title: `Revive '${title}'` }, 'Revive'),
           tab === 'archived' && button({ ['data-id']: item.id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
           button({ ['data-id']: item.id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
           button({ ['data-id']: item.id, onclick: onMoveDownButtonClick, disabled: index === length - 1 ? 'disabled' : undefined, title: `Move '${title}' down` }, '▼'),
