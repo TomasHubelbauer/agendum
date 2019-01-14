@@ -53,6 +53,9 @@ window.addEventListener('load', async _ => {
   /** @type {HTMLTextAreaElement|HTMLInputElement|undefined} */
   let editorInputOrTextArea;
   let draft = '';
+  let resolution = 'archive';
+  let notBefore;
+  let notAfter;
   let tab = 'queued';
   
   function onRecallDraftButtonClick(event) {  
@@ -365,6 +368,18 @@ window.addEventListener('load', async _ => {
     renderEditorAndHint();
     renderList();
   }
+  
+  function onResolutionSelectChange(event) {
+    resolution = event.currentTarget.value;
+  }
+  
+  function onNotBeforeInputChange(event) {
+    notBefore = event.currentTarget.valueAsDate;
+  }
+  
+  function onNotAfterInputChange(event) {
+    notAfter = event.currentTarget.valueAsDate;
+  }
 
   function submit() {
     if (!draft) {
@@ -374,9 +389,12 @@ window.addEventListener('load', async _ => {
     const [title, ...description] = draft.trim().split('\n');
     const ids = getIds();
     const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
-    localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now() }));
+    localStorage.setItem(id, JSON.stringify({ title, description, createdDate: Date.now(), resolution, notBefore, notAfter }));
     renderList();
     draft = '';
+    resolution = 'archive';
+    notBefore = undefined;
+    notAfter = undefined;
     renderEditorAndHint();
   }
 
@@ -411,7 +429,7 @@ window.addEventListener('load', async _ => {
 
   function renderEditorAndHint() {
     renderEditor(useRichEditor, tab == 'archived', draft, onEditorTextAreaMount, onEditorTextAreaInput, onEditorTextAreaKeypress, onEditorTextAreaPaste, onEditorInputMount, onEditorInputInput, onEditorInputKeypress, onEditorInputPaste, onAttachmentInputChange, onAttachButtonClick, onSubmitButtonClick);
-    renderAdvancedEditor();
+    renderAdvancedEditor(resolution, notBefore, notAfter, onResolutionSelectChange, onNotBeforeInputChange, onNotAfterInputChange);
     renderHint(useRichEditor);
   }
     
