@@ -49,6 +49,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 #### In Progress
 
 - [ ] Hook up the Archive button in the editor when in the Archived tab
+- [ ] Pull out more data related functions to `data.js` and include `getIds` in it, too
 
 #### Improvements
 
