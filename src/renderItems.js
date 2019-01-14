@@ -18,12 +18,12 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
     ...[...getTabItems(tab)].map((item, index, { length }) => {
-      return renderItem(item, index, length, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+      return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
     })
   );
 }
 
-function renderItem(item, index, length, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
   const { title, description, createdDate, archivedDate, resolution, notBeforeDate, notAfterDate } = item;
   return details(
     { class: index % 2 === 0 ? 'even' : 'odd' },
