@@ -350,16 +350,19 @@ window.addEventListener('load', async _ => {
   
   function onShowQueuedButtonClick() {
     tab = 'queued';
+    renderEditorAndHint();
     renderList();
   }
   
   function onShowScheduledButtonClick() {
     tab = 'scheduled';
+    renderEditorAndHint();
     renderList();
   }
   
   function onShowArchivedButtonClick() {
     tab = 'archived';
+    renderEditorAndHint();
     renderList();
   }
 
