@@ -52,6 +52,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Improvements
 
+- [ ] Remember the expanded archive tab group title and preserve expansion state after item button action (move etc.)
+- [ ] Display item count on each tab button
 - [ ] Handle resolution notes with a custom modal:
   - These is an input which adds a line to the description for just attaching a resolution (maybe keep in a different field than desc?)
   - There is a button which allows to recall the item for editing, but then archives it including the changes made
