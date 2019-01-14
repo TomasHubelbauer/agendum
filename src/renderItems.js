@@ -18,22 +18,22 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
     ...tab === 'archived'
-      ? getGroupedItems().map(group => renderGroup('TODO: Grouping…', group))
+      ? getGroupedItems(tab).map(group => renderGroup('TODO: Grouping…', group))
       : [],
     ...tab !== 'archived'
-      ? [...getUngroupedItems()].map((item, index, { length }) => {
+      ? [...getUngroupedItems(tab)].map((item, index, { length }) => {
           return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
         })
       : [],
   );
 }
 
-function getUngroupedItems() {
+function getUngroupedItems(tab) {
   return getTabItems(tab);
 }
 
 // TODO: Finalize this
-function getGroupedItems() {
+function getGroupedItems(tab) {
   return [getTabItems(tab)];
 }
 
