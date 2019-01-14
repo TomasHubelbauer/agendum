@@ -29,27 +29,26 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 #### Features
 
 - [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
-- [ ] Implement adding a forgotten task to the Archived tab, probably by adding a Add to Archived editor button when in archive
 - [ ] Support attaching audio/video recordings as attachments / inline elements
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
 - [ ] Implement drag & drop on the items
-- [ ] Implement editing item contents - recall item in rich editor?
+- [ ] Implement editing item contents - modal with the editor
 - [ ] Implement task hierarchy using `net-tree`
-- [ ] Add support for item tags once net-tree is in
+- [ ] Add support for item tags
 - [ ] Add support for reminders using desktop notifications for upcoming tasks
 - [ ] Allow dismissing the editor hints for emoji keyboard and rich editor toggle separately
-- [ ] Implement sharing a task or multiple by constructing a URL with pre-seeded database - warn on URL length limit
-- [ ] Allow editing the text inline upon click without the `prompt`
-- [ ] Consider support for recurrent tasks by "archival behavior": delete, archive, clone (with bump for the not-before date)
-- [ ] Group the archived tab by archival date & reconsider ordering of items on it - drop or support?
+- [ ] Allow editing the title using an inline input with Enter keypress handler and a Save button
+- [ ] Implement the graft resolution behavior which creates the same task again on the next day (for now)
+- [ ] Group the archived tab by archival date and make sure moving works within the groups and jumps between the groups as well
 - [ ] Implement attaching image or non-image files as attachments, not only inline
 - [ ] Implement recognizing links anywhere in the description plain text not only whole-line links and storing them as link spans/blocks
   - [ ] Display preview for image links
+- [ ] Allow sourcing tasks from other places than storage (e.g.: GitHub issues) but mark references as resolved etc. in the storage
+- [ ] Implement moving the items with Not After into its own tab, something like Expired or Missed
 
 #### In Progress
 
-- [ ] Implement time comparison in Scheduled tab as well as the Not Before advanced field in the editor
-- [ ] Hook up the advanced options controls underneath the editor
+- [ ] Hook up the Archive button in the editor when in the Archived tab
 
 #### Improvements
 
@@ -58,16 +57,12 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - There is a button which allows to recall the item for editing, but then archives it including the changes made
   - There is a button for just archiving as-is
   - If the modal is blurred / dismissed or the tab is switched away (blurred), then archive item and show edtior hint informing it saved
-- [ ] Do not read the editor value from the elements but instead send it up on change and keep it in the state
-- [ ] Add a license file
 - [ ] Add tests for moving items within tabs when there are items in all tabs to make sure the filtering logic doesn't break
 - [ ] Query the set of items per tab first and then render the set to make sure up/down disables and even/odd backgrounds work okay
 - [ ] Implement [Net Tree](https://github.com/TomasHubelbauer/net-tree) for hierarchical items
 - [ ] Pull in Fragment types using NPM for TypeScript and use it as a ES module after changing it so
-- [ ] Style the advanced controls section so that it has its own line
 - [ ] Render inline images and links from backing objects on the item not using `innerHTML`
 - [ ] Do some sort of a version call and auto-bust the web worker cache if a new version is found
-- [ ] Do item rendering properly once Fragment supports keys and get rid of the `innerHTML = ''` call
 - [ ] See if adding Fragment as a Git submodule would allow us to drop the local/remote select logic and dep on JsDelivr
   - It comes down to seeing whether GitHub Pages would download Git submodules and would serve their contents
 - [ ] Consider adding support for import from pasted text for iOS Safari import
@@ -80,7 +75,7 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 - [ ] Utilize [Progressive Web Apps on iOS are here](https://medium.com/@firt/progressive-web-apps-on-ios-are-here-d00430dee3a7)
 - [ ] Display a button for toggling the rich editor when in portrait mode (can't do shortcuts)
 - [ ] Rewrite the editor in [Fragment](https://github.com/TomasHubelbauer/fragment) once it supports keys
-- [ ] Pass artifacts directory path to the test script and save screenshots to that and upload that directory not `screenshots`
+  - [ ] Get rid of the `innerHTML = ''` call
 - [ ] Figure out how to make jUnit produce a HTML report and how to attach Puppeteer screenshots to it
   - Maybe https://www.npmjs.com/package/jest-html-reporter
 - [ ] Create UI tests for:
@@ -99,6 +94,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
   - Resolving import conflicts
   - Busting the web worker cache
   - Up on 1st item is disabled and so is down on last item
+  - Reviving
+  - Not Before
 
 #### Bugs
 
