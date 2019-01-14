@@ -38,11 +38,11 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
           return div(line);
         }),
         div(`ID: ${item.id}`),
-        createdDate && div('Created: ' + new Date(createdDate).toLocaleString()),
-        archivedDate && div('Archived: ' + new Date(archivedDate).toLocaleString()),
+        createdDate && div('Created: ' + createdDate.toLocaleString()),
+        archivedDate && div('Archived: ' + archivedDate.toLocaleString()),
         resolution && div('Resolution: ' + resolution),
-        notBeforeDate && div('Not before: ' + new Date(notBeforeDate).toLocaleString()),
-        notAfterDate && div('Not after: ' + new Date(notAfterDate).toLocaleString()),
+        notBeforeDate && div('Not before: ' + notBeforeDate.toLocaleString()),
+        notAfterDate && div('Not after: ' + notAfterDate.toLocaleString()),
       );
     })
   );
