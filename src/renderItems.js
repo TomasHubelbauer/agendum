@@ -17,7 +17,7 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     ...[...getTabItems(tab)].map((item, index, { length }) => {
-      const { title, description, createdDate, archivedDate, notBeforeDate } = item;
+      const { title, description, createdDate, archivedDate, resolution, notBeforeDate, notAfterDate } = item;
       return details(
         { class: index % 2 === 0 ? 'even' : 'odd' },
         summary(
@@ -40,6 +40,9 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
         div(`ID: ${item.id}`),
         createdDate && div('Created: ' + new Date(createdDate).toLocaleString()),
         archivedDate && div('Archived: ' + new Date(archivedDate).toLocaleString()),
+        resolution && div('Resolution: ' + resolution),
+        notBeforeDate && div('Not before: ' + new Date(notBeforeDate).toLocaleString()),
+        notAfterDate && div('Not after: ' + new Date(notAfterDate).toLocaleString()),
       );
     })
   );
