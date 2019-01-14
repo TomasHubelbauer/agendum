@@ -19,12 +19,12 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
     ...tab === 'archived'
       ? getGroupedItems().map(group => renderGroup('TODO: Grouping…', group))
-      : []
+      : [],
     ...tab !== 'archived'
       ? [...getUngroupedItems()].map((item, index, { length }) => {
           return renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
         })
-      : []
+      : [],
   );
 }
 
