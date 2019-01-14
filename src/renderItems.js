@@ -18,7 +18,7 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
     ...tab === 'archived'
       ? getGroupedItems(tab).map(group => {
-          return renderGroup(group.title, renderPreparedItems([...group.items], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick));
+          return renderGroup(group.title, group.open, renderPreparedItems([...group.items], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick));
         })
       : [],
     ...tab !== 'archived'
@@ -49,7 +49,7 @@ function getGroupedItems(tab) {
     return accumulator;
   }, {});
   
-  return Object.keys(groups).map(group => ({ title: group, items: groups[group] }));
+  return Object.keys(groups).map(group => ({ title: group, items: groups[group], open: true }));
 }
 
 function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
@@ -83,8 +83,9 @@ function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButt
   );
 }
 
-function renderGroup(title, items) {
+function renderGroup(title, open, items) {
   return details(
+    { open: open ? 'open' : undefined },
     summary(title),
     ...items,
   );
