@@ -301,6 +301,15 @@ window.addEventListener('load', async _ => {
     
     const item = JSON.parse(localStorage.getItem(id));
     item.archivedDate = Date.now();
+    const resolution = prompt('Resolution:');
+    if (resolution) {
+      if (item.description === undefined) {
+        item.description = [];
+      }
+      
+      item.description.push(resolution);
+    }
+    
     localStorage.setItem(id, JSON.stringify(item));
     renderList();
 
