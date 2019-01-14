@@ -39,7 +39,16 @@ function getUngroupedItems(tab) {
 
 // TODO: Finalize this
 function getGroupedItems(tab) {
-  return [{ title: 'Group', items: getTabItems(tab) }];
+  const groups = [...getTabItems(tab)].reduce((accumulator, current) => {
+    const group = current.archivedDate.toLocaleDateString();
+    if (accumulator[group] === undefined) {
+      accumulator[group] = [];
+    }
+    
+    accumulator[group].push(current);
+  }, {});
+  
+  return Object.keys(groups).map(group => ({ title: group, items: groups[group] }));
 }
 
 function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
