@@ -25,14 +25,17 @@ export default function renderAdvancedEditor() {
 
   const archiveOption = document.createElement('option');
   archiveOption.textContent = 'Archive';
+  archiveOption.textContent = 'archive';
   resolutionSelect.appendChild(archiveOption);
 
   const deleteOption = document.createElement('option');
   deleteOption.textContent = 'Delete';
+  deleteOption.textContent = 'delete';
   resolutionSelect.appendChild(deleteOption);
 
   const graftOption = document.createElement('option');
   graftOption.textContent = 'Graft';
+  graftOption.textContent = 'graft';
   resolutionSelect.appendChild(graftOption);
   
   const notBeforeLabel = document.createElement('label');
@@ -41,7 +44,7 @@ export default function renderAdvancedEditor() {
 
   const notBeforeInput = document.createElement('input');
   notBeforeInput.type = 'date';
-  notBeforeInput.addEventListener('change', event => console.log(event.currentTarget.value));
+  notBeforeInput.addEventListener('change', event => console.log(event.currentTarget.valueAsDate));
   advancedDetails.appendChild(notBeforeInput);
   
   const notAfterLabel = document.createElement('label');
@@ -50,6 +53,6 @@ export default function renderAdvancedEditor() {
 
   const notAfterInput = document.createElement('input');
   notAfterInput.type = 'date';
-  notAfterInput.addEventListener('change', event => console.log(event.currentTarget.value));
+  notAfterInput.addEventListener('change', event => console.log(event.currentTarget.valueAsDate));
   advancedDetails.appendChild(notAfterInput);
 }
