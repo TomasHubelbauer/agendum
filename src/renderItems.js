@@ -16,10 +16,9 @@ export default function renderItems(tab, onShowQueuedButtonClick, onShowSchedule
     button({ onclick: onShowQueuedButtonClick, disabled: tab === 'queued' ? 'disabled' : undefined }, 'Queued'),
     button({ onclick: onShowScheduledButtonClick, disabled: tab === 'scheduled' ? 'disabled' : undefined }, 'Scheduled'),
     button({ onclick: onShowArchivedButtonClick, disabled: tab === 'archived' ? 'disabled' : undefined }, 'Archived'),
-    tab === 'archived' && renderGroup('TODO: Group archived items by date', []),
     ...tab === 'archived'
       ? getGroupedItems(tab).map(group => {
-          return renderGroup('TODO: Grouping…', renderPreparedItems([...group], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick));
+          return renderGroup(group.title, renderPreparedItems([...group.items], tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick));
         })
       : [],
     ...tab !== 'archived'
@@ -40,7 +39,7 @@ function getUngroupedItems(tab) {
 
 // TODO: Finalize this
 function getGroupedItems(tab) {
-  return [getTabItems(tab)];
+  return [{ title: 'Group', items: getTabItems(tab) }];
 }
 
 function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
