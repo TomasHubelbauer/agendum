@@ -485,7 +485,7 @@ window.addEventListener('load', async _ => {
   }
     
   function renderList() {
-    renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
+    renderItems(tab, onShowQueuedButtonClick, onShowScheduledButtonClick, onShowArchivedButtonClick, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onGraftButtonClick, onMoveUpButtonClick, onMoveDownButtonClick);
   }
   
   function render() {
