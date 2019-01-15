@@ -18,6 +18,16 @@
   display: none;
 }
 
+#advancedEditorDiv input {
+  /* Prevent mobile input zoom by setting the font size large enough (16px+) */
+  font-size: 16px;
+}
+
+#advancedEditorDiv select {
+  /* Prevent mobile input zoom by setting the font size large enough (16px+) */
+  font-size: 16px;
+}
+
 #itemsDiv img {
   max-height: 100%;
   max-width: 100%;
