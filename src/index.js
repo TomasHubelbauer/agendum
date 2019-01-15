@@ -329,6 +329,35 @@ window.addEventListener('load', async _ => {
     // Do not toggle the `details` element
     event.preventDefault();
   }
+  
+
+  function onGraftButtonClick(event) {
+    const id = event.currentTarget.dataset['id'];
+    if (id === null) {
+      throw new Error('ID was not passed');
+    }
+    
+    const item = JSON.parse(localStorage.getItem(id));
+    item.archivedDate = Date.now();    
+    if (resolution !== '') {
+      if (item.description === undefined) {
+        item.description = [];
+      }
+      
+      item.description.push('Grafted');
+    }
+    
+    localStorage.setItem(id, JSON.stringify(item));
+    item.archivedDate = undefined;
+    item.notBeforeDate = new Date();
+    // Postpone the clone by one day into the future
+    item.notBeforeDate.setDate(item.notBeforeDate.getDate() + 1);
+    localStorage.setItem(getId().toString(), JSON.stringify(item));
+    renderList();
+
+    // Do not toggle the `details` element
+    event.preventDefault();
+  }
 
   function onMoveUpButtonClick(event) {
     const id = event.currentTarget.dataset['id'];
@@ -358,7 +387,7 @@ window.addEventListener('load', async _ => {
     const index = ids.indexOf(Number(id));
     const otherId = ids[index + 1].toString();
     const other = localStorage.getItem(otherId);
-    localStorage.setItem(otherId, localStorage.getItem(id));
+    localStorage.setItem(otherId, localStorage.getItem(id)); 
     localStorage.setItem(id, other);
     renderList();
 
@@ -395,6 +424,11 @@ window.addEventListener('load', async _ => {
   function onNotAfterInputChange(event) {
     notAfter = event.currentTarget.valueAsDate;
   }
+  
+  function getId() {
+    const ids = getIds();
+    return ids.length === 0 ? 1 : Math.max(...ids) + 1;
+  }
 
   function submit() {
     if (!draft) {
@@ -402,8 +436,7 @@ window.addEventListener('load', async _ => {
     }
     
     const [title, ...description] = draft.trim().split('\n');
-    const ids = getIds();
-    const id = ids.length === 0 ? 1 : Math.max(...ids) + 1;
+    const id = getId();
     const notBeforeDate = notBefore ? notBefore.valueOf() : undefined;
     const notAfterDate = notAfter ? notAfter.valueOf() : undefined;
     const item = { title, description, createdDate: Date.now(), resolution, notBeforeDate, notAfterDate };
