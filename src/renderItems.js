@@ -52,14 +52,16 @@ function getGroupedItems(tab, key, open) {
   return Object.keys(groups).map(group => ({ title: group, items: groups[group], open: group === open }));
 }
 
-function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
+function renderItem(item, index, length, tab, onRenameButtonClick, onArchiveButtonClick, onReviveButtonClick, onDeleteButtonClick, onGraftButtonClick, onMoveUpButtonClick, onMoveDownButtonClick) {
   const { title, description, createdDate, archivedDate, resolution, notBeforeDate, notAfterDate } = item;
   return details(
     { class: index % 2 === 0 ? 'even' : 'odd' },
     summary(
       span({ class: 'itemSpan' }, title),
       button({ ['data-id']: item.id, onclick: onRenameButtonClick, title: `Rename '${title}'` }, 'Rename'),
-      tab === 'queued' && button({ ['data-id']: item.id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
+      tab === 'queued' && resolution === 'archive' && button({ ['data-id']: item.id, onclick: onArchiveButtonClick, title: `Archive '${title}'` }, 'Archive'),
+      tab === 'queued' && resolution === 'delete' && button({ ['data-id']: item.id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
+      tab === 'queued' && resolution === 'graft' && button({ ['data-id']: item.id, onclick: onGraftButtonClick, title: `Graft '${title}'` }, 'Graft'),
       tab === 'archived' && button({ ['data-id']: item.id, onclick: onReviveButtonClick, title: `Revive '${title}'` }, 'Revive'),
       tab === 'archived' && button({ ['data-id']: item.id, onclick: onDeleteButtonClick, title: `Delete '${title}'` }, 'Delete'),
       button({ ['data-id']: item.id, onclick: onMoveUpButtonClick, disabled: index === 0 ? 'disabled' : undefined, title: `Move '${title}' up` }, '▲'),
