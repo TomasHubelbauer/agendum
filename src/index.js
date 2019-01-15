@@ -231,7 +231,7 @@ window.addEventListener('load', async _ => {
 
   clearButton.addEventListener('click', _ => {
     if (confirm('This will remove all your to-do items. Really continue?')) {
-      for (const id of iterate()) {
+      for (const id of getIds()) {
         localStorage.removeItem(id.toString());
       }
 
