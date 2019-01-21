@@ -28,6 +28,8 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Features
 
+- [ ] Use file system API when available (Chrome, Firefox, Edge) and local storage when not (Safari)
+  - Ask on Stack Overflow where are the storage files stored on disk to provide backup instructions
 - [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
 - [ ] Support attaching audio/video recordings as attachments / inline elements
 - [ ] Check for attachment size and kick or resize (image, video?) attachments that are too big
