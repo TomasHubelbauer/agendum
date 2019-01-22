@@ -28,6 +28,9 @@ Addressing [TODO comments](https://github.com/TomasHubelbauer/agenda/search?q=to
 
 #### Features
 
+- [ ] Provide tabs or something for playing around with "generators" and flows
+  - Generators are task "templates", they give you a set of tasks for the given time range and you can find which already exist or not
+  - Flows are diagrams displaying which state the task goes through
 - [ ] Use file system API when available (Chrome, Firefox, Edge) and local storage when not (Safari)
   - Ask on Stack Overflow where are the storage files stored on disk to provide backup instructions
 - [ ] Add support for syncing with custom BE instances - locally encrypted using the crypto API and sent
