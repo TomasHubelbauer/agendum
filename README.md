@@ -6,7 +6,7 @@ Agendum is a to-do list which uses local storage on the device it runs on to sto
 
 ## Running
 
-Run `index.html`.
+Run `index.html`
 
 See [**online demo**](https://agendum.today) here.
 
