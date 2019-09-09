@@ -4,6 +4,10 @@
 
 Agendum is a to-do list which uses local storage on the device it runs on to store its data. No backup.
 
+## To-Do
+
+Add the GitHub Actions workflow badge.
+
 ## Running
 
 Run `index.html`
@@ -13,10 +17,6 @@ See [**online demo**](https://agendum.today) here.
 ## Testing
 
 Puppeteer UI tests & TypeScript type check run in Azure Pipelines:
-
-[
-  ![](https://tomashubelbauer.visualstudio.com/agendum/_apis/build/status/agendum-CI?branchName=master)
-](https://tomashubelbauer.visualstudio.com/agendum/_build/latest?definitionId=12?branchName=master)
 
 The badge is red because I am currently working through resolving all the strict mode TypeScript errors and warnings.
 
