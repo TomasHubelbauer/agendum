@@ -1,0 +1,18 @@
+name: github-pages
+on: push
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate GitHub Pages
+      run: |
+        # Configure Git for the push from the workflow to the repository
+        git config --global user.email "tomas@hubelbauer.net"
+        git config --global user.name "Tomas Hubelbauer"
+        # Check out the `master` branch because by default GitHub Actions checks out detached HEAD
+        git checkout master
+        # Run the type check
+        npm install
+        npm run test
+        npx tsc -p .
