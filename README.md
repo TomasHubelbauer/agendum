@@ -6,7 +6,7 @@ Agendum is a to-do list which uses local storage on the device it runs on to sto
 
 ## To-Do
 
-Add the GitHub Actions workflow badge.
+### Add the GitHub Actions workflow badge
 
 ## Running
 
