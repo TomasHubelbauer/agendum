@@ -154,3 +154,5 @@ It comes down to seeing whether GitHub Pages would download Git submodules and w
 ### Fix TypeScript pipeline errors
 
 ### Fix Puppeteer not dropping screenshots in CI
+
+### Redo in CRA using GitHub Actions for the CRA CD
