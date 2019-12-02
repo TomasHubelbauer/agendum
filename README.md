@@ -1,5 +1,7 @@
 # [Agendum](https://agendum.today)
 
+![](https://github.com/tomashubelbauer/agendum/workflows/github-pages/badge.svg)
+
 > A to-do list
 
 Agendum is a to-do list which uses local storage on the device it runs on to store its data. No backup.
