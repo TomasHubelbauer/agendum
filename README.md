@@ -20,8 +20,6 @@ The badge is red because I am currently working through resolving all the strict
 
 ## To-Do
 
-### Add the GitHub Actions workflow badge
-
 ### Provide tabs or something for playing around with "generators" and flows
 
 Generators are task "templates", they give you a set of tasks for the given time range and you can find which already exist or not.
