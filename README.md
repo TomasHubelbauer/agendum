@@ -156,3 +156,5 @@ It comes down to seeing whether GitHub Pages would download Git submodules and w
 ### Fix Puppeteer not dropping screenshots in CI
 
 ### Redo in CRA using GitHub Actions for the CRA CD
+
+### Fix the `agendum.today` domain name misconfiguration breaking GitHub Pages
